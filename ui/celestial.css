@@ -1,0 +1,292 @@
+/* ========================================================
+   AFTERGLOW CELESTIAL LIVING UI (Next-Gen Spatial Glass)
+   ======================================================== */
+
+:root {
+  --celestial-cyan: #9bd9dc;
+  --celestial-purple: #c5b1e7;
+  --celestial-blue: #8399ff;
+  --celestial-gradient: linear-gradient(135deg, #8399ff 0%, #c5b1e7 50%, #9bd9dc 100%);
+  --celestial-gradient-text: linear-gradient(135deg, #ffffff 20%, #c5b1e7 65%, #9bd9dc 100%);
+  --celestial-glow: rgba(155, 217, 220, 0.25);
+  --celestial-dock-bg: rgba(14, 16, 28, 0.74);
+  --celestial-glass-panel: rgba(13, 15, 26, 0.82);
+  --celestial-border: rgba(255, 255, 255, 0.13);
+  --celestial-border-glow: rgba(155, 217, 220, 0.35);
+}
+
+/* 1. Celestial Stardust Canvas */
+#celestial-stardust {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.65;
+}
+
+/* 2. Topbar Overhaul */
+.topbar {
+  background: linear-gradient(180deg, rgba(8, 9, 15, 0.75) 0%, rgba(8, 9, 15, 0) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0 20px;
+  height: 56px;
+}
+.wordmark {
+  gap: 9px;
+  opacity: 0.95;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.wordmark:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+.brand-symbol {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 800 !important;
+  font-style: normal !important;
+  font-size: 20px !important;
+  background: var(--celestial-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(155, 217, 220, 0.45));
+}
+.source-label {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  padding: 4px 12px;
+  backdrop-filter: blur(10px);
+  letter-spacing: 0.04em;
+  font-size: 10.5px;
+  opacity: 0.85;
+}
+.source-dot {
+  background: #4ade80 !important;
+  box-shadow: 0 0 8px #4ade80;
+  animation: liveDotPulse 2s infinite ease-in-out;
+}
+@keyframes liveDotPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.65; }
+}
+
+/* 3. Celestial Player Dock */
+.player-dock {
+  background: var(--celestial-dock-bg) !important;
+  backdrop-filter: blur(48px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(48px) saturate(200%) !important;
+  border: 1px solid var(--celestial-border) !important;
+  border-radius: 28px !important;
+  height: 80px !important;
+  padding: 0 22px !important;
+  box-shadow: 
+    0 24px 80px rgba(0, 0, 0, 0.72),
+    0 0 50px rgba(155, 217, 220, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.28) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  isolation: isolate;
+  overflow: visible;
+}
+
+/* Specular cursor light sheen on dock border */
+.player-dock::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 28px;
+  padding: 1px;
+  background: radial-gradient(
+    480px circle at var(--dock-x, 50%) var(--dock-y, 50%),
+    rgba(155, 217, 220, 0.45),
+    rgba(197, 177, 231, 0.25) 35%,
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Play button as living core orb */
+.play-button {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: var(--celestial-gradient) !important;
+  color: #08090c !important;
+  border: none !important;
+  box-shadow: 0 4px 20px rgba(131, 153, 255, 0.45) !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease !important;
+  position: relative;
+  z-index: 2;
+}
+.play-button svg {
+  fill: #08090c !important;
+  width: 20px !important;
+  height: 20px !important;
+  margin-left: 2px;
+}
+.play-button:hover {
+  transform: scale(1.08) !important;
+  box-shadow: 0 6px 28px rgba(155, 217, 220, 0.65) !important;
+}
+body.playing .play-button {
+  animation: coreAuraPulse 3s infinite ease-in-out alternate;
+}
+@keyframes coreAuraPulse {
+  0% { box-shadow: 0 4px 20px rgba(131, 153, 255, 0.45), 0 0 10px rgba(155, 217, 220, 0.3); }
+  100% { box-shadow: 0 6px 30px rgba(155, 217, 220, 0.6), 0 0 25px rgba(197, 177, 231, 0.4); }
+}
+
+/* Dock track thumbnail and text */
+.dock-track {
+  gap: 12px !important;
+}
+.dock-track img {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 9px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+  object-fit: cover;
+}
+.dock-track strong {
+  font-size: 11.5px !important;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+.dock-track small {
+  color: var(--celestial-cyan) !important;
+  font-size: 9.5px !important;
+  opacity: 0.85;
+}
+
+/* Glowing Seekbar */
+#seek {
+  background: linear-gradient(to right, #9bd9dc 0%, #c5b1e7 var(--fill, 0%), rgba(255, 255, 255, 0.12) var(--fill, 0%)) !important;
+  height: 4px !important;
+  border-radius: 999px !important;
+}
+#seek::-webkit-slider-thumb {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 12px var(--celestial-cyan), 0 0 20px rgba(131, 153, 255, 0.5) !important;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease !important;
+}
+#seek:hover::-webkit-slider-thumb {
+  opacity: 1 !important;
+  transform: scale(1.15);
+}
+
+/* Icon Buttons in dock */
+.icon-button {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border-radius: 10px !important;
+}
+.icon-button:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--celestial-cyan) !important;
+  transform: translateY(-2px);
+}
+.favorite-button[aria-pressed=true] svg {
+  fill: #f43f5e !important;
+  stroke: #f43f5e !important;
+  filter: drop-shadow(0 0 8px rgba(244, 63, 94, 0.5));
+}
+
+/* 4. 3D Album Card Cover Flow */
+.album-card {
+  border-radius: 24px !important;
+  background: rgba(18, 20, 32, 0.65) !important;
+  backdrop-filter: blur(35px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(35px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 
+    0 30px 90px rgba(0, 0, 0, 0.72),
+    0 0 50px rgba(131, 153, 255, 0.16),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+  transition: transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.4s ease !important;
+}
+.album-card:hover {
+  box-shadow: 
+    0 35px 100px rgba(0, 0, 0, 0.8),
+    0 0 60px rgba(155, 217, 220, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
+}
+.album-image-wrap {
+  border-radius: 16px !important;
+}
+
+/* 5. Synced Lyrics Enhancement */
+.lyric-current {
+  background: var(--celestial-gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 35px rgba(155, 217, 220, 0.25));
+  font-weight: 800 !important;
+}
+.lyric-before, .lyric-after {
+  color: rgba(220, 225, 240, 0.45) !important;
+  filter: blur(0.7px);
+}
+
+/* 6. Floating Glass Panels (Library, Queue, Settings) */
+.glass-panel {
+  background: var(--celestial-glass-panel) !important;
+  backdrop-filter: blur(55px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(55px) saturate(190%) !important;
+  border: 1px solid var(--celestial-border) !important;
+  border-radius: 26px !important;
+  box-shadow: 
+    0 35px 120px rgba(0, 0, 0, 0.75),
+    0 0 60px rgba(155, 217, 220, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
+}
+
+/* Search Row in Library */
+.search-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+.search-row input {
+  color: #ffffff !important;
+  font-family: inherit;
+}
+.search-row input::placeholder {
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Active tabs */
+.library-tabs > button.active:after {
+  background: var(--celestial-gradient) !important;
+  box-shadow: 0 0 10px rgba(155, 217, 220, 0.5);
+}
+
+/* Track rows */
+.track-row:hover, .track-row.current {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-radius: 12px !important;
+}
+.track-row.current strong {
+  color: var(--celestial-cyan) !important;
+}
+
+/* Clock block */
+#clock {
+  filter: drop-shadow(0 4px 40px rgba(131, 153, 255, 0.25));
+}
+#date {
+  color: var(--celestial-purple) !important;
+  letter-spacing: 3px !important;
+  opacity: 0.85;
+}
+
+/* Subtle magnetic class for smooth spring physics */
+.celestial-magnetic {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
