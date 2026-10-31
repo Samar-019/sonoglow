@@ -1,4 +1,4 @@
-# Velvanoct — Official Site & Subdomain Architecture Guide
+# Sonoglow — Official Site & Subdomain Architecture Guide
 
 This guide details how your **Apex Domain** (Official Site), **Subdomain Site** (Interactive Web Player), and **GitHub Pages** are configured and mapped.
 
@@ -8,15 +8,15 @@ This guide details how your **Apex Domain** (Official Site), **Subdomain Site** 
 
 | Domain / Subdomain | Target Location | Purpose |
 | :--- | :--- | :--- |
-| **`velvanoct.io`** (or `www.velvanoct.io`) | `docs/index.html` | **Official Landing Page** (Showcase, Downloads, Features) |
-| **`play.velvanoct.io`** (or `app.velvanoct.io`) | `docs/play/index.html` | **Interactive Web Player Demo** (In-browser atmospheric player) |
+| **`sonoglow.io`** (or `www.sonoglow.io`) | `docs/index.html` | **Official Landing Page** (Showcase, Downloads, Features) |
+| **`play.sonoglow.io`** (or `app.sonoglow.io`) | `docs/play/index.html` | **Interactive Web Player Demo** (In-browser atmospheric player) |
 | **`samar-019.github.io/sonoglow/`** | `docs/` | Default GitHub Pages URL |
 
 ---
 
 ## 2. DNS Settings (Cloudflare, Namecheap, GoDaddy, Hostinger)
 
-### For the Apex / Official Site (`velvanoct.io`):
+### For the Apex / Official Site (`sonoglow.io`):
 Add the 4 GitHub Pages A records to your DNS:
 
 ```dns
@@ -27,20 +27,20 @@ Type: A     Name: @     Value: 185.199.111.153     TTL: Auto
 Type: CNAME Name: www   Value: samar-019.github.io. TTL: Auto
 ```
 
-### For the Subdomain (`play.velvanoct.io`):
+### For the Subdomain (`play.sonoglow.io`):
 
 #### Option A: Cloudflare Redirect / Worker (Recommended):
-Point `play.velvanoct.io` to forward directly to:
+Point `play.sonoglow.io` to forward directly to:
 ```
-https://velvanoct.io/play/
+https://sonoglow.io/play/
 ```
 
 #### Option B: Dedicated Subdomain GitHub Pages Repo:
-If you want `play.velvanoct.io` hosted completely separately:
-1. Create a repo `velvanoct-web` with the contents of `docs/play/`.
+If you want `play.sonoglow.io` hosted completely separately:
+1. Create a repo `sonoglow-web` with the contents of `docs/play/`.
 2. Add a `CNAME` file containing:
    ```
-   play.velvanoct.io
+   play.sonoglow.io
    ```
 3. Add a DNS CNAME record:
    ```dns
@@ -56,4 +56,4 @@ If you want `play.velvanoct.io` hosted completely separately:
    * **Source:** Select `Deploy from a branch`
    * **Branch:** `main` $\rightarrow$ Folder `/docs`
    * Save.
-2. In **Custom domain**, enter `velvanoct.io` (if you own the domain) and check **Enforce HTTPS**.
+2. In **Custom domain**, enter `sonoglow.io` (if you own the domain) and check **Enforce HTTPS**.

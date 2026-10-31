@@ -3,9 +3,9 @@ const path=require('node:path');const fs=require('node:fs');const crypto=require
 const {Store,cleanTrack,nextQueueIndex}=require('./model.cjs');const {createServer}=require('./server.cjs');
 const {reconcilePlayback}=require('./playback.cjs');
 const {enableAdBlocking}=require('./adblock.cjs');
-app.setName('Velvanoct');
+app.setName('Sonoglow');
 const root=path.resolve(__dirname,'..');
-const dataDir=app.isPackaged?path.join(app.getPath('appData'),'Afterglow'):path.join(root,'.afterglow-data');
+const dataDir=app.isPackaged?path.join(app.getPath('appData'),'Sonoglow'):path.join(root,'.afterglow-data');
 fs.mkdirSync(dataDir,{recursive:true});
 if(!app.isPackaged)app.setPath('userData',dataDir);
 app.setPath('sessionData',path.join(dataDir,'session'));app.setPath('crashDumps',path.join(dataDir,'crashes'));
@@ -208,7 +208,7 @@ async function start(){
   service=await createServer({store,controller,port:Number(process.env.AFTERGLOW_PORT)||0});
   fs.writeFileSync(stateFile,JSON.stringify({origin:service.origin,pid:process.pid,started:new Date().toISOString()}));
   const icon=path.join(root,'ui/assets/icon.png');
-  win=new BaseWindow({width:1360,height:880,minWidth:900,minHeight:620,frame:false,show:false,backgroundColor:'#08090c',title:'Velvanoct',icon});
+  win=new BaseWindow({width:1360,height:880,minWidth:900,minHeight:620,frame:false,show:false,backgroundColor:'#08090c',title:'Sonoglow',icon});
   const remoteSession=session.fromPartition('persist:youtube');
   adProtection=enableAdBlocking(remoteSession,dataDir);adProtection.ready.then(()=>log('Ad protection enabled')).catch(error=>log('Ad protection failed',error));
   remoteSession.setPermissionRequestHandler((_w,_p,callback)=>callback(false));
@@ -239,8 +239,8 @@ async function start(){
   win.on('resize',layout);win.on('close',()=>log('Window close requested'));win.on('closed',()=>{log('Window closed');quitting=true;engine.webContents.close();ui.webContents.close();service.close();app.quit();});
   ui.webContents.on('render-process-gone',(_e,details)=>log('UI process gone',JSON.stringify(details)));engine.webContents.on('render-process-gone',(_e,details)=>log('YouTube process gone',JSON.stringify(details)));
   win.on('enter-full-screen',()=>emit('fullscreen',true));win.on('leave-full-screen',()=>emit('fullscreen',false));
-  tray=new Tray(nativeImage.createFromPath(icon));tray.setToolTip('Velvanoct');
-  tray.setContextMenu(Menu.buildFromTemplate([{label:'Show Velvanoct',click:()=>{win.setSkipTaskbar(false);win.show();win.focus();}}, {label:'Play / pause',click:()=>controller.action('toggle')},{label:'Next track',click:()=>navigateQueue()}, {type:'separator'}, {label:'Open YouTube Music',click:()=>showSource(true)}, {label:'Quit',click:()=>{quitting=true;app.quit();}}]));tray.on('double-click',()=>{win.show();win.focus();});
+  tray=new Tray(nativeImage.createFromPath(icon));tray.setToolTip('Sonoglow');
+  tray.setContextMenu(Menu.buildFromTemplate([{label:'Show Sonoglow',click:()=>{win.setSkipTaskbar(false);win.show();win.focus();}}, {label:'Play / pause',click:()=>controller.action('toggle')},{label:'Next track',click:()=>navigateQueue()}, {type:'separator'}, {label:'Open YouTube Music',click:()=>showSource(true)}, {label:'Quit',click:()=>{quitting=true;app.quit();}}]));tray.on('double-click',()=>{win.show();win.focus();});
   for(const [key,action] of [['MediaPlayPause','toggle'],['MediaNextTrack','next'],['MediaPreviousTrack','previous']])globalShortcut.register(key,()=>controller.action(action).catch(log));
   globalShortcut.register('CommandOrControl+Shift+Space',()=>{win.setSkipTaskbar(false);win.show();win.focus();});
   setInterval(poll,700).unref();
@@ -248,7 +248,7 @@ async function start(){
 }
 if(!app.requestSingleInstanceLock()){app.quit();}else{
   app.on('second-instance',()=>{if(win){if(win.isMinimized())win.restore();win.show();win.focus();}});
-  app.whenReady().then(start).catch(error=>{log(error);dialog.showErrorBox('Velvanoct could not start',error.message);app.quit();});
+  app.whenReady().then(start).catch(error=>{log(error);dialog.showErrorBox('Sonoglow could not start',error.message);app.quit();});
   app.on('before-quit',()=>{log('Before quit');quitting=true;globalShortcut.unregisterAll();service?.close();});
   app.on('will-quit',()=>log('Will quit'));
   app.on('window-all-closed',()=>app.quit());

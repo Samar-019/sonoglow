@@ -1,6 +1,6 @@
 {
-  "name": "velvanoct-player",
-  "productName": "Velvanoct",
+  "name": "sonoglow-player",
+  "productName": "Sonoglow",
   "version": "0.1.0",
   "private": true,
   "description": "An unpacked Windows YouTube music player with an immersive desktop view.",
@@ -14,8 +14,8 @@
     "dist": "electron-builder --win nsis --publish never"
   },
   "build": {
-    "appId": "com.smithcooks.velvanoct",
-    "productName": "Velvanoct",
+    "appId": "com.samar019.sonoglow",
+    "productName": "Sonoglow",
     "directories": {
       "output": "dist"
     },
@@ -33,8 +33,8 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "Velvanoct",
-      "artifactName": "Velvanoct-Setup.${ext}"
+      "shortcutName": "Sonoglow",
+      "artifactName": "Sonoglow-Setup.${ext}"
     }
   },
   "dependencies": {

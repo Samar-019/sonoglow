@@ -1,3 +1,3 @@
 @echo off
 cd /d "%~dp0"
-call "Start Velvanoct.cmd"
+call "Start Sonoglow.cmd"

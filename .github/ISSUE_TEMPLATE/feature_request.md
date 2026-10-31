@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Suggest an idea or new feature for Afterglow
+about: Suggest an idea or new feature for Sonoglow
 title: '[FEATURE] '
 labels: enhancement
 assignees: Samar-019
