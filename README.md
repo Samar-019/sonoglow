@@ -12,7 +12,7 @@ Cinematic backgrounds · Synced lyrics · Floating controls · A glass album car
 ![Version](https://img.shields.io/badge/version-0.1.0-e9af9d?style=flat-square)
 ![Runtime](https://img.shields.io/badge/runtime-Electron_45-9bd9dc?style=flat-square)
 ![Status](https://img.shields.io/badge/status-in_development-c5b1e7?style=flat-square)
-[![Download Windows Installer](https://img.shields.io/badge/Download-Windows_Installer_(setup.exe)-success?style=flat-square&logo=windows)](https://github.com/Samar-019/afterglow-/releases/latest)
+[![Download Windows Installer](https://img.shields.io/badge/Download-Windows_Installer_(setup.exe)-success?style=flat-square&logo=windows)](https://github.com/Samar-019/sonoglow/releases/latest)
 
 [Website](https://velvanoct.io) · [Live Web Demo](https://velvanoct.io/play/) · [Get started](#get-started) · [Explore the views](#explore-the-views) · [Controls](#controls) · [Development](#development)
 
@@ -22,7 +22,7 @@ Cinematic backgrounds · Synced lyrics · Floating controls · A glass album car
 
 Velvanoct is a Windows desktop music player built around atmosphere: full-window music videos, translucent floating controls, a dimensional album carousel, and lyrics that move with the song. Search YouTube Music, build a queue, save favorites, organize playlists, or import your own audio.
 
-The project can be run directly from source, or downloaded as a ready-to-use **Windows Installer (`setup.exe`)** and **portable package** from **[Releases](https://github.com/Samar-019/afterglow-/releases/latest)**.
+The project can be run directly from source, or downloaded as a ready-to-use **Windows Installer (`setup.exe`)** and **portable package** from **[Releases](https://github.com/Samar-019/sonoglow/releases/latest)**.
 
 ## Explore the views
 
@@ -65,8 +65,8 @@ A layered cover fan, a tilted Continue Playing queue, and a compact search and p
 You need Windows, Node.js 22.12 or newer (a current LTS release is recommended) with npm, and an internet connection for online search and playback. Git is optional if you download the source ZIP.
 
 ```powershell
-git clone https://github.com/Samar-019/afterglow-.git
-cd afterglow
+git clone https://github.com/Samar-019/sonoglow.git
+cd sonoglow
 npm ci
 npm start
 ```

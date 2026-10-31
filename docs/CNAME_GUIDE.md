@@ -10,7 +10,7 @@ This guide details how your **Apex Domain** (Official Site), **Subdomain Site** 
 | :--- | :--- | :--- |
 | **`velvanoct.io`** (or `www.velvanoct.io`) | `docs/index.html` | **Official Landing Page** (Showcase, Downloads, Features) |
 | **`play.velvanoct.io`** (or `app.velvanoct.io`) | `docs/play/index.html` | **Interactive Web Player Demo** (In-browser atmospheric player) |
-| **`samar-019.github.io/afterglow-/`** | `docs/` | Default GitHub Pages URL |
+| **`samar-019.github.io/sonoglow/`** | `docs/` | Default GitHub Pages URL |
 
 ---
 
