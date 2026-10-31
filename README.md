@@ -133,7 +133,7 @@ docs/images/     README banner and development screenshots
 
 ### Live verification
 
-Launch the app with `AFTERGLOW_VERIFY_UI=1` to enable development-only inspection and screenshot actions, then run:
+Launch the app with `SONOGLOW_VERIFY_UI=1` to enable development-only inspection and screenshot actions, then run:
 
 ```powershell
 node scripts/live-check.cjs

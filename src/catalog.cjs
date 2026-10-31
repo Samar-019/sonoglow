@@ -60,7 +60,7 @@ class Catalog {
     const params = new URLSearchParams({artist_name:artist,track_name:title});
     if (track.duration > 0) params.set('duration',String(Math.round(track.duration)));
     let match;
-    try { const res = await fetch(`https://lrclib.net/api/get?${params}`,{signal:AbortSignal.timeout(12000),headers:{'User-Agent':'Afterglow/0.1.0 (desktop music player)'}}); if(res.ok) match=await res.json(); } catch {}
+    try { const res = await fetch(`https://lrclib.net/api/get?${params}`,{signal:AbortSignal.timeout(12000),headers:{'User-Agent':'Sonoglow/0.1.0 (desktop music player)'}}); if(res.ok) match=await res.json(); } catch {}
     if (!match?.syncedLyrics) {
       try { const res=await fetch(`https://lrclib.net/api/search?${new URLSearchParams({track_name:title,artist_name:artist})}`,{signal:AbortSignal.timeout(12000)}); if(res.ok) { const items=await res.json(); match=items.filter(i=>i.syncedLyrics).sort((a,b)=>Math.abs(a.duration-(track.duration||a.duration))-Math.abs(b.duration-(track.duration||b.duration)))[0] || match; } } catch {}
     }
