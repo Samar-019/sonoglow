@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .afterglow-data/
+.sonoglow-data/
 .preview-data/
 .setup-cache/
 screenshots/
