@@ -12,9 +12,16 @@ Cinematic backgrounds · Synced lyrics · Floating controls · A glass album car
 ![Version](https://img.shields.io/badge/version-0.1.0-e9af9d?style=flat-square)
 ![Runtime](https://img.shields.io/badge/runtime-Electron_45-9bd9dc?style=flat-square)
 ![Status](https://img.shields.io/badge/status-in_development-c5b1e7?style=flat-square)
+[![Website](https://img.shields.io/badge/website-samar--019.github.io%2Fsonoglow-8399ff?style=flat-square&logo=google-chrome&logoColor=white)](https://samar-019.github.io/sonoglow/)
+[![Live Demo](https://img.shields.io/badge/live_demo-web_player-ff7597?style=flat-square&logo=safari&logoColor=white)](https://samar-019.github.io/sonoglow/play/)
 [![Download Windows Installer](https://img.shields.io/badge/Download-Windows_Installer_(setup.exe)-success?style=flat-square&logo=windows)](https://github.com/Samar-019/sonoglow/releases/latest)
 
-[Website](https://samar-019.github.io/sonoglow/) · [Live Web Demo](https://samar-019.github.io/sonoglow/play/) · [Get started](#get-started) · [Explore the views](#explore-the-views) · [Controls](#controls) · [Development](#development)
+<br />
+
+[![Visit Official Website](https://img.shields.io/badge/🌐_Official_Website-samar--019.github.io%2Fsonoglow-4f46e5?style=for-the-badge)](https://samar-019.github.io/sonoglow/)
+[![Try Live Demo](https://img.shields.io/badge/✨_Live_Web_Demo-Try_Online-e11d48?style=for-the-badge)](https://samar-019.github.io/sonoglow/play/)
+
+[🌐 Website](https://samar-019.github.io/sonoglow/) · [✨ Live Web Demo](https://samar-019.github.io/sonoglow/play/) · [🚀 Get started](#get-started) · [🎨 Explore the views](#explore-the-views) · [⌨️ Controls](#controls) · [🛠️ Development](#development)
 
 </div>
 
@@ -159,6 +166,14 @@ Lyrics use source line timestamps. Long lines are split proportionally into shor
 ## Your local data
 
 Favorites, playlists, queue, history, settings and the playback profile live in `.afterglow-data/`. Imported audio and custom backgrounds remain in their original locations; Sonoglow stores their file paths. Keep that folder when updating your local copy. It is excluded from the repository along with dependencies, caches, logs and temporary verification output.
+
+## Links & Resources
+
+- 🌐 **Official Website:** [https://samar-019.github.io/sonoglow/](https://samar-019.github.io/sonoglow/)
+- ✨ **Live Web Player:** [https://samar-019.github.io/sonoglow/play/](https://samar-019.github.io/sonoglow/play/)
+- 💻 **GitHub Repository:** [https://github.com/Samar-019/sonoglow](https://github.com/Samar-019/sonoglow)
+- 📦 **Latest Release:** [GitHub Releases](https://github.com/Samar-019/sonoglow/releases/latest)
+- 🐛 **Report Issues:** [GitHub Issues](https://github.com/Samar-019/sonoglow/issues)
 
 ## Credits
 

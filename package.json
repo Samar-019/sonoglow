@@ -4,7 +4,15 @@
   "version": "0.1.0",
   "private": true,
   "description": "An unpacked Windows YouTube music player with an immersive desktop view.",
-  "author": "smithcooks",
+  "homepage": "https://samar-019.github.io/sonoglow/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Samar-019/sonoglow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Samar-019/sonoglow/issues"
+  },
+  "author": "Samar-019 <i.axis.019@gmail.com>",
   "main": "src/main.cjs",
   "scripts": {
     "start": "electron .",

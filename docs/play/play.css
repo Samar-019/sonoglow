@@ -92,6 +92,36 @@ body {
 
 .view-btn svg { width: 14px; height: 14px; }
 
+
+.github-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #fff;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.2s, background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.github-cta-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: var(--accent-cyan);
+}
+
+.github-cta-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
 .download-cta-btn {
   display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 12px;
   font-size: 12px; font-weight: 600; background: linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan));
