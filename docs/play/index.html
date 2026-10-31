@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonogloam Web Player — Live Interactive Demo</title>
+  <meta name="description" content="Experience Sonogloam directly in your browser. Modern atmospheric music player with ambient visualizer, synced lyrics, and floating glass controls.">
+  <link rel="icon" type="image/png" href="../icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="play.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body data-layout="split">
+  <!-- Dynamic Ambient Backdrop -->
+  <div id="ambient-backdrop">
+    <div class="ambient-sphere sphere-1"></div>
+    <div class="ambient-sphere sphere-2"></div>
+    <div class="ambient-sphere sphere-3"></div>
+    <div class="ambient-noise"></div>
+  </div>
+
+  <!-- Topbar -->
+  <header class="web-topbar">
+    <a href="../" class="web-brand">
+      <span class="brand-badge">S</span>
+      <span class="brand-name">sonogloam</span>
+      <span class="subdomain-badge">web preview</span>
+    </a>
+    <div class="subdomain-nav">
+      <div class="view-switchers">
+        <button class="view-btn" data-view="albums" title="Album Carousel View"><i data-lucide="gallery-horizontal-end"></i><span>Albums</span></button>
+        <button class="view-btn active" data-view="split" title="Split Cover + Lyrics View"><i data-lucide="panels-top-left"></i><span>Split</span></button>
+        <button class="view-btn" data-view="cinema" title="Cinema Lyrics View"><i data-lucide="captions"></i><span>Cinema</span></button>
+      </div>
+      <a href="../#download" class="download-cta-btn">
+        <i data-lucide="download"></i>
+        <span>Get Desktop App</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Interactive Demo Stage -->
+  <main class="demo-stage">
+    <!-- Desktop Clock -->
+    <div class="stage-clock">
+      <time id="live-clock">23:45</time>
+      <div id="live-date">SUNDAY · NOV 1</div>
+    </div>
+
+    <!-- Active Player Scene -->
+    <section class="stage-scene" id="player-scene">
+      <!-- Cover Section -->
+      <div class="stage-cover-wrap">
+        <div class="vinyl-disc" id="vinyl-disc"></div>
+        <div class="stage-album-card" id="album-card">
+          <img id="track-art" src="../images/albums.jpg" alt="Album Cover">
+          <div class="card-caption">
+            <strong id="track-title">Midnight Resonance</strong>
+            <span id="track-artist">Sonogloam Atmosphere · Lofi Synth</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Synced Lyrics Section -->
+      <div class="stage-lyrics-wrap" id="lyrics-wrap">
+        <div class="lyrics-header">
+          <span class="lyrics-tag"><i data-lucide="audio-lines"></i> Synced Lyrics</span>
+          <span class="lyrics-timing" id="lyrics-timing">01:24 / 03:42</span>
+        </div>
+        <div class="lyrics-stream">
+          <p class="lyric-p passed">Floating through neon rain and quiet city lights</p>
+          <p class="lyric-p active" id="current-lyric">Where the sound meets twilight and stays with you</p>
+          <p class="lyric-p upcoming">Lost in the frequency, suspended in the glow</p>
+          <p class="lyric-p upcoming">Every heartbeat in time with the tape delay</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating Capsule Player Dock -->
+    <footer class="stage-dock">
+      <div class="dock-left">
+        <button class="dock-btn-source" title="Streaming Engine: YouTube Music"><i data-lucide="youtube"></i></button>
+        <div class="dock-track-info">
+          <strong id="dock-title">Midnight Resonance</strong>
+          <span id="dock-artist">Sonogloam Lo-Fi Mix</span>
+        </div>
+        <button class="dock-btn-icon" id="dock-fav-btn" title="Add to Favorites"><i data-lucide="heart"></i></button>
+      </div>
+
+      <div class="dock-center">
+        <div class="transport-controls">
+          <button class="transport-btn" id="prev-btn" title="Previous Track"><i data-lucide="skip-back"></i></button>
+          <button class="transport-btn play-btn" id="play-btn" title="Play / Pause"><i data-lucide="play" id="play-icon"></i></button>
+          <button class="transport-btn" id="next-btn" title="Next Track"><i data-lucide="skip-forward"></i></button>
+        </div>
+        <div class="progress-bar-wrap">
+          <span class="time-label" id="time-current">0:45</span>
+          <div class="seek-track" id="seek-track">
+            <div class="seek-fill" id="seek-fill" style="width: 38%;"></div>
+          </div>
+          <span class="time-label" id="time-total">3:42</span>
+        </div>
+      </div>
+
+      <div class="dock-right">
+        <div class="volume-container">
+          <i data-lucide="volume-2"></i>
+          <input type="range" min="0" max="100" value="75" id="volume-slider">
+        </div>
+        <button class="dock-btn-icon" id="glow-toggle" title="Atmospheric Lighting: ON"><i data-lucide="sparkles"></i></button>
+        <button class="dock-btn-icon" id="fullscreen-btn" title="Toggle Fullscreen"><i data-lucide="maximize"></i></button>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    lucide.createIcons();
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('live-clock').textContent = `${hours}:${minutes}`;
+      const options = { weekday: 'long', month: 'short', day: 'numeric' };
+      document.getElementById('live-date').textContent = now.toLocaleDateString('en-US', options).toUpperCase();
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    const viewButtons = document.querySelectorAll('.view-btn');
+    viewButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        viewButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.body.setAttribute('data-layout', btn.dataset.view);
+      });
+    });
+
+    let isPlaying = false;
+    let progress = 38;
+    const playBtn = document.getElementById('play-btn');
+    const playIcon = document.getElementById('play-icon');
+    const vinyl = document.getElementById('vinyl-disc');
+    const seekFill = document.getElementById('seek-fill');
+
+    playBtn.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        playIcon.setAttribute('data-lucide', 'pause');
+        vinyl.classList.add('spinning');
+      } else {
+        playIcon.setAttribute('data-lucide', 'play');
+        vinyl.classList.remove('spinning');
+      }
+      lucide.createIcons();
+    });
+
+    setInterval(() => {
+      if (isPlaying) {
+        progress = (progress + 0.5) % 100;
+        seekFill.style.width = progress + '%';
+        const currentSec = Math.floor((progress / 100) * 222);
+        const mins = Math.floor(currentSec / 60);
+        const secs = String(currentSec % 60).padStart(2, '0');
+        document.getElementById('time-current').textContent = `${mins}:${secs}`;
+      }
+    }, 1000);
+
+    const glowToggle = document.getElementById('glow-toggle');
+    let glowOn = true;
+    glowToggle.addEventListener('click', () => {
+      glowOn = !glowOn;
+      document.body.classList.toggle('no-glow', !glowOn);
+      glowToggle.style.color = glowOn ? 'var(--accent-cyan)' : 'inherit';
+    });
+
+    document.getElementById('fullscreen-btn').addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    });
+  </script>
+</body>
+</html>

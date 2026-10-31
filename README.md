@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/images/banner.svg" alt="Afterglow — your music, your atmosphere" width="100%" />
+<img src="docs/images/banner.svg" alt="Sonogloam — your music, your atmosphere" width="100%" />
 
 <br />
 
@@ -20,7 +20,7 @@ Cinematic backgrounds · Synced lyrics · Floating controls · A glass album car
 
 ---
 
-Afterglow is a Windows desktop music player built around atmosphere: full-window music videos, translucent floating controls, a dimensional album carousel, and lyrics that move with the song. Search YouTube Music, build a queue, save favorites, organize playlists, or import your own audio.
+Sonogloam is a Windows desktop music player built around atmosphere: full-window music videos, translucent floating controls, a dimensional album carousel, and lyrics that move with the song. Search YouTube Music, build a queue, save favorites, organize playlists, or import your own audio.
 
 The project can be run directly from source, or downloaded as a ready-to-use **Windows Installer (`setup.exe`)** and **portable package** from **[Releases](https://github.com/Samar-019/afterglow-/releases/latest)**.
 
@@ -30,7 +30,7 @@ The project can be run directly from source, or downloaded as a ready-to-use **W
 
 A layered cover fan, a tilted Continue Playing queue, and a compact search and playback bar.
 
-![Afterglow album carousel](docs/images/albums.jpg)
+![Sonogloam album carousel](docs/images/albums.jpg)
 
 <table>
 <tr><th width="50%">Cinema lyrics</th><th width="50%">Cover + lyrics</th></tr>
@@ -41,7 +41,7 @@ A layered cover fan, a tilted Continue Playing queue, and a compact search and p
 <details>
 <summary><strong>See the search interface</strong></summary>
 
-![Search results in Afterglow](docs/images/search.png)
+![Search results in Sonogloam](docs/images/search.png)
 
 </details>
 
@@ -57,7 +57,7 @@ A layered cover fan, a tilted Continue Playing queue, and a compact search and p
 | **Read along** | Synced lyric lookup, short phrase presentation, lyric size and timing adjustment |
 | **Move naturally** | Swipe the main cover to change songs; click to play or pause |
 | **Tune the desktop** | Clock, full screen, always on top, brightness, blur and glow settings |
-| **Choose the motion** | Follow Windows reduced motion or enable full animations within Afterglow |
+| **Choose the motion** | Follow Windows reduced motion or enable full animations within Sonogloam |
 | **Reduce interruptions** | Ghostery network filtering plus detection, muting and skipping of in-stream ads |
 
 ## Get started
@@ -71,7 +71,7 @@ npm ci
 npm start
 ```
 
-Prefer double-click launchers? Run **Setup Afterglow.cmd** once, then open **Start Afterglow.cmd**. Setup downloads the dependencies and Electron runtime into the project folder.
+Prefer double-click launchers? Run **Setup Sonogloam.cmd** once, then open **Start Sonogloam.cmd**. Setup downloads the dependencies and Electron runtime into the project folder.
 
 1. Open the library or search field and find a song.
 2. Select a result to begin playback.
@@ -145,7 +145,7 @@ These checks exercise playback, pause / resume, seeking, the three player layout
 
 ## Current status
 
-Afterglow is an active development project. Core playback and the three layouts are implemented; layout details and smooth animation remain under review. The clock font, text proportions, glass treatment and frame pacing still need polish.
+Sonogloam is an active development project. Core playback and the three layouts are implemented; layout details and smooth animation remain under review. The clock font, text proportions, glass treatment and frame pacing still need polish.
 
 Lyrics use source line timestamps. Long lines are split proportionally into short phrases, so this is **not word-level lyric alignment**. Online playback and lyrics depend on third-party service availability.
 
@@ -158,7 +158,7 @@ Lyrics use source line timestamps. Long lines are split proportionally into shor
 
 ## Your local data
 
-Favorites, playlists, queue, history, settings and the playback profile live in `.afterglow-data/`. Imported audio and custom backgrounds remain in their original locations; Afterglow stores their file paths. Keep that folder when updating your local copy. It is excluded from the repository along with dependencies, caches, logs and temporary verification output.
+Favorites, playlists, queue, history, settings and the playback profile live in `.afterglow-data/`. Imported audio and custom backgrounds remain in their original locations; Sonogloam stores their file paths. Keep that folder when updating your local copy. It is excluded from the repository along with dependencies, caches, logs and temporary verification output.
 
 ## Credits
 
@@ -171,7 +171,7 @@ Favorites, playlists, queue, history, settings and the playback profile live in 
 | Fonts | Tulpen One, Caprasimo, Bebas Neue | Bundled OFL notices in `ui/assets/` |
 | Synced lyrics | [LRCLIB](https://lrclib.net) | Third-party lyric service |
 
-Afterglow is an independent music player and is not affiliated with YouTube or Google. Music, video, album artwork and lyrics belong to their respective owners.
+Sonogloam is an independent music player and is not affiliated with YouTube or Google. Music, video, album artwork and lyrics belong to their respective owners.
 
 ---
 

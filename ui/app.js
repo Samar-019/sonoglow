@@ -18,7 +18,7 @@ let lyricFrame=null;
 const media=$('#local-audio');let localTrackId=null;
 function icons(root=document){window.lucide?.createIcons({root,attrs:{'stroke-width':1.65,'aria-hidden':'true'}});}
 function toast(message){clearTimeout(toastTimer);$('#toast').textContent=message;$('#toast').hidden=false;toastTimer=setTimeout(()=>$('#toast').hidden=true,3200);}
-async function request(url,options){const res=await fetch(url,options);let data;try{data=await res.json();}catch{throw new Error('The app service could not respond. Restart Afterglow.');}if(!res.ok)throw new Error(data.error||'Request failed');return data;}
+async function request(url,options){const res=await fetch(url,options);let data;try{data=await res.json();}catch{throw new Error('The app service could not respond. Restart Sonogloam.');}if(!res.ok)throw new Error(data.error||'Request failed');return data;}
 async function action(action,payload){return request('/api/action',{method:'POST',headers:{'Content-Type':'application/json','X-Afterglow-Request':'1'},body:JSON.stringify({action,payload})});}
 async function run(actionName,payload){try{return await action(actionName,payload);}catch(error){toast(error.message);return null;}}
 async function windowAction(command,value){if(window.afterglowDesktop)return window.afterglowDesktop.window(command,value);if(!desktop){if(command==='fullscreen'){if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();return;}toast('This control is available in the Windows app.');return;}return run('window',{command,value});}
@@ -55,7 +55,7 @@ function updateArtwork(track){
 function selectTrack(track){
   if(!track)return;const changed=current?.id!==track.id||current?.image!==track.image;current={...track};
   $('#album-title').textContent=library.settings.layout==='albums'?(track.album||track.title):track.title;$('#album-artist').textContent=track.artist;$('#dock-title').textContent=track.title;$('#dock-artist').textContent=track.artist;$('#compact-title').textContent=track.title;$('#compact-artist').textContent=track.artist;
-  if(changed){updateArtwork(track);loadLyrics(track);}if(changed||!railArtist)loadArtistRail(track);updateFavorite();document.title=`${track.title} · Afterglow`;
+  if(changed){updateArtwork(track);loadLyrics(track);}if(changed||!railArtist)loadArtistRail(track);updateFavorite();document.title=`${track.title} · Sonogloam`;
   if('mediaSession' in navigator){try{navigator.mediaSession.metadata=new MediaMetadata({title:track.title,artist:track.artist,album:track.album,artwork:track.image?[{src:art(track.image),sizes:'800x800',type:'image/jpeg'}]:[]});}catch{}}
 }
 function paintPlayback(state){
@@ -131,7 +131,7 @@ function renderCoverFlow(tracks){
 }
 async function play(track,fromQueue=false){
   if(!track)return;
-  if(!desktop){toast('Use Start Afterglow.cmd to play music in the Windows app.');return;}
+  if(!desktop){toast('Use Start Sonogloam.cmd to play music in the Windows app.');return;}
   if(!fromQueue){const list=tab==='favorites'?library.favorites:tab==='local'?library.localTracks:selectedPlaylist?library.playlists.find(p=>p.id===selectedPlaylist)?.tracks:results.some(t=>t.id===track.id)?results:homeTracks.some(t=>t.id===track.id)?homeTracks:railTracks;let queue=list?.some(t=>t.id===track.id)?list:[track,...library.queue.filter(t=>t.id!==track.id)];const updated=await run('queue',queue);if(updated)setLibrary(updated);}
   selectTrack(track);closePanels();paintPlayback({track,position:0,duration:track.duration,status:'loading',playing:false,error:''});
   await run('play',track);
@@ -256,7 +256,7 @@ async function boot(){
     if(library.settings.audioReactive){library.settings.audioReactive=false;applySettings();action('settings',{audioReactive:false}).catch(()=>{});}
     const events=new EventSource('/events');events.addEventListener('playback',e=>paintPlayback(JSON.parse(e.data)));events.addEventListener('library',e=>setLibrary(JSON.parse(e.data)));events.addEventListener('settings',e=>{library.settings=JSON.parse(e.data);applySettings();});events.addEventListener('notice',e=>toast(JSON.parse(e.data).message));events.addEventListener('window-mode',e=>{const mode=JSON.parse(e.data);document.body.classList.toggle('compact',!!mode.compact);document.body.classList.toggle('source-mode',!!mode.source);if(mode.compact||mode.source)closePanels();syncLyricClock();});events.addEventListener('wallpaper',e=>setWallpaper(JSON.parse(e.data)));events.addEventListener('play-local',e=>startLocal(JSON.parse(e.data)));events.addEventListener('stop-local',()=>{localTrackId=null;media.pause();media.removeAttribute('src');media.load();});events.addEventListener('local-control',e=>{const p=JSON.parse(e.data);if(p.command==='toggle'){if(media.paused)media.play().catch(error=>toast(error.message));else media.pause();}if(p.command==='play')media.play().catch(error=>toast(error.message));if(p.command==='pause')media.pause();if(p.command==='seek')media.currentTime=Math.min(p.value,media.duration||p.value);});events.onerror=()=>{$('#source-label').textContent='Reconnecting…';};
     if(!desktop){$('#minimize-button').hidden=true;$('#close-button').hidden=true;$('#source-label').textContent='Preview · open the Windows app for playback';}
-  }catch(error){toast(error.message);$('#lyric-current').textContent='Afterglow';$('#lyric-credit').textContent='Restart the app to reconnect';}
+  }catch(error){toast(error.message);$('#lyric-current').textContent='Sonogloam';$('#lyric-credit').textContent='Restart the app to reconnect';}
   setInterval(updateClock,1000);setInterval(()=>{if(playback.playing||seeking)updateProgress();},200);
   const bins=new Uint8Array(256);let lastDraw=0;
   setInterval(()=>{if(analyser&&library.settings.audioReactive){analyser.getByteFrequencyData(bins);let sum=0;for(let i=1;i<40;i++)sum+=bins[i];document.body.style.setProperty('--pulse',Math.min(1,sum/(39*175)));}},50);

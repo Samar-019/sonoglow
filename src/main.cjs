@@ -3,7 +3,7 @@ const path=require('node:path');const fs=require('node:fs');const crypto=require
 const {Store,cleanTrack,nextQueueIndex}=require('./model.cjs');const {createServer}=require('./server.cjs');
 const {reconcilePlayback}=require('./playback.cjs');
 const {enableAdBlocking}=require('./adblock.cjs');
-app.setName('Afterglow');
+app.setName('Sonogloam');
 const root=path.resolve(__dirname,'..');
 const dataDir=app.isPackaged?path.join(app.getPath('appData'),'Afterglow'):path.join(root,'.afterglow-data');
 fs.mkdirSync(dataDir,{recursive:true});
@@ -208,12 +208,12 @@ async function start(){
   service=await createServer({store,controller,port:Number(process.env.AFTERGLOW_PORT)||0});
   fs.writeFileSync(stateFile,JSON.stringify({origin:service.origin,pid:process.pid,started:new Date().toISOString()}));
   const icon=path.join(root,'ui/assets/icon.png');
-  win=new BaseWindow({width:1360,height:880,minWidth:900,minHeight:620,frame:false,show:false,backgroundColor:'#08090c',title:'Afterglow',icon});
+  win=new BaseWindow({width:1360,height:880,minWidth:900,minHeight:620,frame:false,show:false,backgroundColor:'#08090c',title:'Sonogloam',icon});
   const remoteSession=session.fromPartition('persist:youtube');
   adProtection=enableAdBlocking(remoteSession,dataDir);adProtection.ready.then(()=>log('Ad protection enabled')).catch(error=>log('Ad protection failed',error));
   remoteSession.setPermissionRequestHandler((_w,_p,callback)=>callback(false));
   remoteSession.setPermissionCheckHandler(()=>false);
-  const agent=remoteSession.getUserAgent().replace(/\s(?:Electron|Afterglow|afterglow-player)\/[^\s]+/g,'');remoteSession.setUserAgent(agent);
+  const agent=remoteSession.getUserAgent().replace(/\s(?:Electron|Afterglow|Sonogloam|afterglow-player|sonogloam-player)\/[^\s]+/g,'');remoteSession.setUserAgent(agent);
   engine=new WebContentsView({webPreferences:{partition:'persist:youtube',preload:path.join(__dirname,'engine-preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,backgroundThrottling:false}});
   engine.setBackgroundColor('#08090c');
   ui=new WebContentsView({webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,backgroundThrottling:false}});ui.setBackgroundColor('#00000000');
@@ -239,8 +239,8 @@ async function start(){
   win.on('resize',layout);win.on('close',()=>log('Window close requested'));win.on('closed',()=>{log('Window closed');quitting=true;engine.webContents.close();ui.webContents.close();service.close();app.quit();});
   ui.webContents.on('render-process-gone',(_e,details)=>log('UI process gone',JSON.stringify(details)));engine.webContents.on('render-process-gone',(_e,details)=>log('YouTube process gone',JSON.stringify(details)));
   win.on('enter-full-screen',()=>emit('fullscreen',true));win.on('leave-full-screen',()=>emit('fullscreen',false));
-  tray=new Tray(nativeImage.createFromPath(icon));tray.setToolTip('Afterglow');
-  tray.setContextMenu(Menu.buildFromTemplate([{label:'Show Afterglow',click:()=>{win.setSkipTaskbar(false);win.show();win.focus();}}, {label:'Play / pause',click:()=>controller.action('toggle')},{label:'Next track',click:()=>navigateQueue()}, {type:'separator'}, {label:'Open YouTube Music',click:()=>showSource(true)}, {label:'Quit',click:()=>{quitting=true;app.quit();}}]));tray.on('double-click',()=>{win.show();win.focus();});
+  tray=new Tray(nativeImage.createFromPath(icon));tray.setToolTip('Sonogloam');
+  tray.setContextMenu(Menu.buildFromTemplate([{label:'Show Sonogloam',click:()=>{win.setSkipTaskbar(false);win.show();win.focus();}}, {label:'Play / pause',click:()=>controller.action('toggle')},{label:'Next track',click:()=>navigateQueue()}, {type:'separator'}, {label:'Open YouTube Music',click:()=>showSource(true)}, {label:'Quit',click:()=>{quitting=true;app.quit();}}]));tray.on('double-click',()=>{win.show();win.focus();});
   for(const [key,action] of [['MediaPlayPause','toggle'],['MediaNextTrack','next'],['MediaPreviousTrack','previous']])globalShortcut.register(key,()=>controller.action(action).catch(log));
   globalShortcut.register('CommandOrControl+Shift+Space',()=>{win.setSkipTaskbar(false);win.show();win.focus();});
   setInterval(poll,700).unref();
@@ -248,7 +248,7 @@ async function start(){
 }
 if(!app.requestSingleInstanceLock()){app.quit();}else{
   app.on('second-instance',()=>{if(win){if(win.isMinimized())win.restore();win.show();win.focus();}});
-  app.whenReady().then(start).catch(error=>{log(error);dialog.showErrorBox('Afterglow could not start',error.message);app.quit();});
+  app.whenReady().then(start).catch(error=>{log(error);dialog.showErrorBox('Sonogloam could not start',error.message);app.quit();});
   app.on('before-quit',()=>{log('Before quit');quitting=true;globalShortcut.unregisterAll();service?.close();});
   app.on('will-quit',()=>log('Will quit'));
   app.on('window-all-closed',()=>app.quit());
