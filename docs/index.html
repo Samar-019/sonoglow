@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afterglow — Modern Desktop YouTube Music Player</title>
+  <meta name="description" content="An unpacked, atmospheric desktop YouTube Music client with synced moving lyrics, a glass album carousel, and uninterrupted ad-protected playback.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg: #07080b;
+      --card-bg: rgba(18, 21, 30, 0.65);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-hover: rgba(131, 153, 255, 0.35);
+      --accent-blue: #8399ff;
+      --accent-peach: #e9af9d;
+      --accent-cyan: #9bd9dc;
+      --accent-purple: #c5b1e7;
+      --text-main: #f3f5fb;
+      --text-muted: #9ba3b8;
+      --glow: radial-gradient(circle at 50% -20%, rgba(131, 153, 255, 0.18), transparent 70%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Background Glow */
+    .ambient-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.35;
+      animation: float 20s infinite alternate ease-in-out;
+    }
+    .blob-1 {
+      width: 600px;
+      height: 600px;
+      background: #4f46e5;
+      top: -150px;
+      left: 20%;
+    }
+    .blob-2 {
+      width: 500px;
+      height: 500px;
+      background: #d97706;
+      bottom: 10%;
+      right: 5%;
+      animation-duration: 25s;
+      opacity: 0.2;
+    }
+    .blob-3 {
+      width: 450px;
+      height: 450px;
+      background: #0284c7;
+      bottom: -100px;
+      left: 10%;
+      animation-duration: 18s;
+      opacity: 0.25;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg) scale(1); }
+      50% { transform: translateY(80px) translateX(40px) scale(1.1); }
+      100% { transform: translateY(-50px) translateX(-30px) scale(0.95); }
+    }
+
+    /* Content Wrapper */
+    .page-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navbar */
+    nav {
+      position: sticky;
+      top: 20px;
+      z-index: 100;
+      background: rgba(13, 16, 23, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 9999px;
+      padding: 12px 28px;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      padding: 8px 18px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: var(--accent-blue);
+      transform: translateY(-1px);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 90px 0 60px;
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(131, 153, 255, 0.12);
+      border: 1px solid rgba(131, 153, 255, 0.28);
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-blue);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.25rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      background: linear-gradient(180deg, #ffffff 60%, rgba(255, 255, 255, 0.65));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero h1 span.gradient-text {
+      background: linear-gradient(120deg, var(--accent-blue) 0%, var(--accent-peach) 50%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      max-width: 680px;
+      margin: 0 auto 36px;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      transition: all 0.25s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px -5px rgba(79, 70, 229, 0.65);
+      background: linear-gradient(135deg, #4338ca, #4f46e5);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-main);
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      transition: all 0.25s ease;
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.24);
+      transform: translateY(-2px);
+    }
+    .meta-tag {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 14px;
+    }
+
+    /* Showcase Preview */
+    .showcase-container {
+      margin-top: 50px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 12px;
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8), 0 0 50px rgba(131, 153, 255, 0.12);
+      backdrop-filter: blur(25px);
+    }
+    .window-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+    }
+    .window-dots {
+      display: flex;
+      gap: 8px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+    .window-title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    
+    /* View Switcher Tabs */
+    .view-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 20px 0 16px;
+      flex-wrap: wrap;
+    }
+    .view-tab {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .view-tab.active {
+      background: rgba(131, 153, 255, 0.2);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+    }
+    .view-tab:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+    .preview-frame {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 16 / 10;
+      background: #000;
+    }
+    .preview-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Bento Features */
+    .section-title {
+      text-align: center;
+      margin: 110px 0 50px;
+    }
+    .section-title h2 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .bento-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      backdrop-filter: blur(15px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .bento-card:hover {
+      border-color: var(--card-border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 30px rgba(131, 153, 255, 0.08);
+    }
+    .bento-card.span-2 {
+      grid-column: span 2;
+    }
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+    .icon-blue { background: rgba(131, 153, 255, 0.15); color: var(--accent-blue); }
+    .icon-peach { background: rgba(233, 175, 157, 0.15); color: var(--accent-peach); }
+    .icon-cyan { background: rgba(155, 217, 220, 0.15); color: var(--accent-cyan); }
+    .icon-purple { background: rgba(197, 177, 231, 0.15); color: var(--accent-purple); }
+
+    .bento-card h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .bento-card p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    /* Synced Lyrics Simulation */
+    .lyrics-simulator {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 14px;
+      padding: 20px;
+      margin-top: 20px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .lyric-line {
+      font-size: 1.25rem;
+      padding: 6px 0;
+      color: rgba(255, 255, 255, 0.3);
+      transition: all 0.4s ease;
+    }
+    .lyric-line.active {
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px var(--accent-blue);
+      transform: scale(1.02);
+    }
+
+    /* Shortcuts Grid */
+    .shortcuts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .shortcut-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .shortcut-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    kbd {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 0.8rem;
+      font-family: monospace;
+      color: #ffffff;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    /* CTA Section */
+    .cta-banner {
+      margin: 120px 0 80px;
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.18), rgba(131, 153, 255, 0.08));
+      border: 1px solid rgba(131, 153, 255, 0.3);
+      border-radius: 28px;
+      padding: 70px 40px;
+      text-align: center;
+      backdrop-filter: blur(25px);
+      box-shadow: 0 30px 80px -20px rgba(79, 70, 229, 0.2);
+    }
+    .cta-banner h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .cta-banner p {
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 32px;
+      font-size: 1.1rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 40px 0 60px;
+      margin-top: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--text-main);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 900px) {
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+      .bento-card.span-2 {
+        grid-column: span 1;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Aura -->
+  <div class="ambient-glow">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- Top Navigation -->
+    <nav>
+      <a href="#" class="brand">
+        <img src="favicon.png" alt="Afterglow icon">
+        <span class="brand-title">Afterglow</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#views">Interface</a></li>
+        <li><a href="#shortcuts">Controls</a></li>
+        <li><a href="https://github.com/Axis-019/afterglow-" target="_blank">GitHub</a></li>
+      </ul>
+      <a href="https://github.com/Axis-019/afterglow-/releases/latest" class="nav-btn">
+        <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+        Download v0.1.0
+      </a>
+    </nav>
+
+    <!-- Hero Header -->
+    <section class="hero">
+      <div class="badge-pill">
+        <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
+        Windows 64-bit Official Release v0.1.0
+      </div>
+      <h1>
+        Music that becomes part of <br />
+        <span class="gradient-text">your Windows desktop.</span>
+      </h1>
+      <p>
+        An immersive, translucent desktop YouTube Music client with full-window cinematic backgrounds, synced moving lyrics, a glass album carousel, and zero ad interruptions.
+      </p>
+      
+      <div class="hero-actions">
+        <a href="https://github.com/Axis-019/afterglow-/releases/download/v0.1.0/Afterglow-Setup.exe" class="btn-primary">
+          <i data-lucide="download" style="width: 20px; height: 20px;"></i>
+          Download Setup.exe
+        </a>
+        <a href="https://github.com/Axis-019/afterglow-/releases/download/v0.1.0/Afterglow-v0.1.0-win-x64-portable.zip" class="btn-secondary">
+          <i data-lucide="archive" style="width: 18px; height: 18px;"></i>
+          Portable (.zip)
+        </a>
+        <a href="https://github.com/Axis-019/afterglow-" target="_blank" class="btn-secondary">
+          <i data-lucide="github" style="width: 18px; height: 18px;"></i>
+          Star on GitHub
+        </a>
+      </div>
+      <div class="meta-tag">
+        Windows 10 / 11 · 64-bit installer · Free & Open Source (MIT License)
+      </div>
+
+      <!-- App Interactive Showcase -->
+      <div class="showcase-container" id="views">
+        <div class="window-header">
+          <div class="window-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <div class="window-title">Afterglow Player — Visual Views</div>
+          <div style="width: 50px;"></div>
+        </div>
+
+        <!-- View Switcher -->
+        <div class="view-tabs">
+          <button class="view-tab active" onclick="switchView('albums', this)">
+            <i data-lucide="disc" style="width: 16px; height: 16px;"></i>
+            Album Carousel
+          </button>
+          <button class="view-tab" onclick="switchView('lyrics', this)">
+            <i data-lucide="mic-2" style="width: 16px; height: 16px;"></i>
+            Cinema Lyrics
+          </button>
+          <button class="view-tab" onclick="switchView('split', this)">
+            <i data-lucide="columns-2" style="width: 16px; height: 16px;"></i>
+            Cover + Lyrics Split
+          </button>
+          <button class="view-tab" onclick="switchView('search', this)">
+            <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+            Instant Search
+          </button>
+        </div>
+
+        <div class="preview-frame">
+          <img id="view-image" src="images/albums.jpg" alt="Afterglow view preview">
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento Features Section -->
+    <section id="features">
+      <div class="section-title">
+        <h2>Designed for Presence & Atmosphere</h2>
+        <p>A player built from the ground up for modern monitors and desktop workflows.</p>
+      </div>
+
+      <div class="bento-grid">
+        
+        <!-- Feature 1: Synced Lyrics (Span 2) -->
+        <div class="bento-card span-2">
+          <div class="card-icon icon-peach">
+            <i data-lucide="align-left" style="width: 24px; height: 24px;"></i>
+          </div>
+          <h3>Synced Moving Lyrics</h3>
+          <p>
+            Powered by LRCLIB integration, lyric phrases move seamlessly with high-contrast glowing typography. Enjoy reading along in full-screen Cinema view or docked alongside the cover art.
+          </p>
+          <div class="lyrics-simulator">
+            <div class="lyric-line" id="l1">Somewhere down the line, we found our way</div>
+            <div class="lyric-line active" id="l2">Living in the afterglow of yesterday</div>
+            <div class="lyric-line" id="l3">Watching all the colors fade into the blue</div>
+          </div>
+        </div>
+
+        <!-- Feature 2: Ad-Shield -->
+        <div class="bento-card">
+          <div class="card-icon icon-cyan">
+            <i data-lucide="shield-check" style="width: 24px; height: 24px;"></i>
+          </div>
+          <h3>Ghostery Ad Protection</h3>
+          <p>
+            Double-layer suppression: Ghostery network filtering blocks tracking requests upfront, while our in-stream detection segment mutes and skips ad segments smoothly.
+          </p>
+        </div>
+
+        <!-- Feature 3: Fullscreen Video & Canvas -->
+        <div class="bento-card">
+          <div class="card-icon icon-purple">
+            <i data-lucide="film" style="width: 24px; height: 24px;"></i>
+          </div>
+          <h3>Full-Window Video Canvas</h3>
+          <p>
+            YouTube Music's video stream expands across the entire canvas with custom ambient contrast tuning, blur controls, and glowing backlight highlights.
+          </p>
+        </div>
+
+        <!-- Feature 4: Glass Carousel (Span 2) -->
+        <div class="bento-card span-2">
+          <div class="card-icon icon-blue">
+            <i data-lucide="layers" style="width: 24px; height: 24px;"></i>
+          </div>
+          <h3>Dimensional Album Fan & Swiping</h3>
+          <p>
+            Experience intuitive physical interaction. Swipe across the 3D cover fan to effortlessly navigate neighboring tracks, browse your queue, or tap to play.
+          </p>
+        </div>
+
+        <!-- Feature 5: Local + Cloud -->
+        <div class="bento-card">
+          <div class="card-icon icon-peach">
+            <i data-lucide="folder-heart" style="width: 24px; height: 24px;"></i>
+          </div>
+          <h3>Local Audio & Custom Wallpapers</h3>
+          <p>
+            Import your personal audio files (.mp3, .flac, .wav) and set custom animated video or picture wallpapers for custom ambiance.
+          </p>
+        </div>
+
+        <!-- Feature 6: Pure Lightweight Performance -->
+        <div class="bento-card span-2">
+          <div class="card-icon icon-cyan">
+            <i data-lucide="cpu" style="width: 24px; height: 24px;"></i>
+          </div>
+          <h3>Electron 45 & Native Desktop Integration</h3>
+          <p>
+            Minimalist system tray integration, system media transport controls, single-instance lock, custom window framing, and hardware-accelerated fluid motion.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Keyboard Shortcuts -->
+    <section id="shortcuts" style="margin-top: 100px;">
+      <div class="section-title">
+        <h2>Effortless Keyboard Controls</h2>
+        <p>Control everything without lifting your hands from the keyboard.</p>
+      </div>
+
+      <div class="shortcuts-grid">
+        <div class="shortcut-pill">
+          <span class="shortcut-desc">Play / Pause</span>
+          <kbd>Space</kbd>
+        </div>
+        <div class="shortcut-pill">
+          <span class="shortcut-desc">Seek ±5 seconds</span>
+          <div><kbd>←</kbd> <kbd>→</kbd></div>
+        </div>
+        <div class="shortcut-pill">
+          <span class="shortcut-desc">Next / Previous track</span>
+          <div><kbd>Ctrl</kbd> + <kbd>→</kbd></div>
+        </div>
+        <div class="shortcut-pill">
+          <span class="shortcut-desc">Open Search</span>
+          <div><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
+        </div>
+        <div class="shortcut-pill">
+          <span class="shortcut-desc">Toggle Lyrics View</span>
+          <kbd>L</kbd>
+        </div>
+        <div class="shortcut-pill">
+          <span class="shortcut-desc">Toggle Fullscreen</span>
+          <kbd>F</kbd>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Download CTA -->
+    <section class="cta-banner">
+      <h2>Ready to elevate your music experience?</h2>
+      <p>
+        Download Afterglow today for Windows. Completely free, open source, and packed with immersive desktop features.
+      </p>
+      <div class="hero-actions">
+        <a href="https://github.com/Axis-019/afterglow-/releases/download/v0.1.0/Afterglow-Setup.exe" class="btn-primary">
+          <i data-lucide="download" style="width: 20px; height: 20px;"></i>
+          Download Setup.exe (~128 MB)
+        </a>
+        <a href="https://github.com/Axis-019/afterglow-/releases/download/v0.1.0/Afterglow-v0.1.0-win-x64-portable.zip" class="btn-secondary">
+          <i data-lucide="archive" style="width: 18px; height: 18px;"></i>
+          Download Portable .zip
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div>
+        <strong>Afterglow</strong> · Crafted by <a href="https://github.com/Axis-019" style="color: #fff; text-decoration: none;">Axis-019</a>. Licensed under MIT.
+      </div>
+      <ul class="footer-links">
+        <li><a href="https://github.com/Axis-019/afterglow-">GitHub Repository</a></li>
+        <li><a href="https://github.com/Axis-019/afterglow-/releases">Releases</a></li>
+        <li><a href="https://github.com/Axis-019/afterglow-/blob/main/LICENSE">License</a></li>
+        <li><a href="https://github.com/Axis-019/afterglow-/issues">Report Issue</a></li>
+      </ul>
+    </footer>
+
+  </div>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // View Switcher logic
+    function switchView(viewName, element) {
+      document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+      element.classList.add('active');
+      
+      const img = document.getElementById('view-image');
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = `images/${viewName}.jpg`;
+        if (viewName === 'search') img.src = `images/search.png`;
+        img.style.opacity = '1';
+      }, 150);
+    }
+
+    // Dynamic Lyrics Simulator
+    const lyrics = [
+      "Somewhere down the line, we found our way",
+      "Living in the afterglow of yesterday",
+      "Watching all the colors fade into the blue",
+      "Every rhythm leads me right back to you"
+    ];
+    let lyricIndex = 0;
+    setInterval(() => {
+      lyricIndex = (lyricIndex + 1) % lyrics.length;
+      const l1 = document.getElementById('l1');
+      const l2 = document.getElementById('l2');
+      const l3 = document.getElementById('l3');
+      
+      l1.textContent = lyrics[(lyricIndex) % lyrics.length];
+      l2.textContent = lyrics[(lyricIndex + 1) % lyrics.length];
+      l3.textContent = lyrics[(lyricIndex + 2) % lyrics.length];
+    }, 3500);
+  </script>
+</body>
+</html>
