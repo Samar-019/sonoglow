@@ -600,6 +600,356 @@
       to { opacity: 1; transform: scale(1); }
     }
 
+    /* Live Interactive Player Showcase */
+    .tab-live-pulse {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+      margin-right: 6px;
+      animation: livePulse 1.8s infinite ease-in-out;
+    }
+    .live-player-stage {
+      position: relative;
+      width: 100%;
+      min-height: 560px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px 24px 22px;
+      background: #08090f url('images/midnight.jpg') center/cover no-repeat;
+      overflow: hidden;
+      user-select: none;
+      isolation: isolate;
+    }
+    .live-player-stage::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(8, 9, 16, 0.45) 0%, rgba(8, 9, 16, 0.88) 100%),
+                  linear-gradient(180deg, rgba(8, 9, 16, 0.6) 0%, rgba(8, 9, 16, 0.2) 40%, rgba(8, 9, 16, 0.85) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    #live-player-stardust {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.65;
+    }
+
+    .preview-topbar {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 38px;
+    }
+    .preview-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #fff;
+    }
+    .preview-wordmark span:first-child {
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+    .preview-source-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 3px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      backdrop-filter: blur(10px);
+    }
+    .preview-clock {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent-purple);
+      opacity: 0.9;
+    }
+
+    .preview-scene {
+      position: relative;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 36px;
+      align-items: center;
+      justify-content: center;
+      max-width: 800px;
+      margin: auto;
+      width: 100%;
+      padding: 12px 0;
+    }
+
+    .preview-cover-section {
+      display: flex;
+      justify-content: center;
+      perspective: 1000px;
+      position: relative;
+    }
+    .preview-ghost-card {
+      position: absolute;
+      top: 10px;
+      width: 180px;
+      height: 220px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      z-index: 1;
+    }
+    .preview-ghost-left {
+      transform: translateX(-32px) rotateY(22deg) rotate(-6deg) scale(0.9);
+      opacity: 0.4;
+    }
+    .preview-ghost-right {
+      transform: translateX(32px) rotateY(-22deg) rotate(6deg) scale(0.9);
+      opacity: 0.4;
+    }
+    .preview-album-card {
+      position: relative;
+      z-index: 2;
+      width: 200px;
+      padding: 10px 10px 12px;
+      border-radius: 20px;
+      background: rgba(18, 20, 32, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(131, 153, 255, 0.2);
+      backdrop-filter: blur(28px) saturate(180%);
+      transform: rotate(-2deg);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .preview-album-card:hover {
+      transform: rotate(0deg) translateY(-4px) scale(1.03);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 45px rgba(155, 217, 220, 0.35);
+    }
+    .preview-album-art {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 13px;
+      object-fit: cover;
+      display: block;
+      background: #141624;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+    }
+    .preview-album-meta {
+      margin-top: 8px;
+      text-align: center;
+    }
+    .preview-album-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .preview-album-artist {
+      font-size: 0.73rem;
+      color: var(--accent-cyan);
+      margin-top: 2px;
+    }
+
+    .preview-lyrics-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
+    }
+    .preview-lyric-before, .preview-lyric-after {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: rgba(220, 225, 245, 0.4);
+      filter: blur(0.7px);
+      line-height: 1.35;
+      transition: all 0.4s ease;
+    }
+    .preview-lyric-current {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      background: linear-gradient(135deg, #ffffff 10%, #e0d4fc 60%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 25px rgba(155, 217, 220, 0.35));
+      transition: all 0.4s ease;
+    }
+    .preview-lyric-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-purple);
+      margin-top: 4px;
+    }
+
+    .preview-dock {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      max-width: 740px;
+      margin: 0 auto;
+      height: 66px;
+      padding: 0 16px;
+      border-radius: 22px;
+      background: rgba(14, 16, 28, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.65), 0 0 35px rgba(155, 217, 220, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(35px) saturate(180%);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .preview-dock-transport {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .preview-dock-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    .preview-dock-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
+    }
+    .preview-play-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--gradient-main);
+      color: #08090c;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(131, 153, 255, 0.45);
+      transition: all 0.25s ease;
+    }
+    .preview-play-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 24px rgba(155, 217, 220, 0.65);
+    }
+    .preview-play-btn.playing {
+      animation: coreAuraPulse 2.8s infinite ease-in-out alternate;
+    }
+    .preview-dock-track {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 150px;
+      overflow: hidden;
+      text-align: left;
+    }
+    .preview-dock-track img {
+      width: 34px;
+      height: 34px;
+      border-radius: 7px;
+      object-fit: cover;
+    }
+    .preview-dock-track-meta {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .preview-dock-track-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .preview-dock-track-artist {
+      font-size: 0.68rem;
+      color: var(--accent-cyan);
+    }
+    .preview-dock-seek {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 90px;
+    }
+    .preview-seek-bar-track {
+      width: 100%;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .preview-seek-bar-fill {
+      height: 100%;
+      width: 25%;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-cyan));
+      border-radius: 999px;
+      transition: width 0.25s linear;
+    }
+    .preview-seek-times {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+    .preview-dock-tools {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .preview-fav-btn.active svg {
+      fill: #f43f5e;
+      stroke: #f43f5e;
+      filter: drop-shadow(0 0 6px rgba(244, 63, 94, 0.6));
+    }
+
+    @media (max-width: 768px) {
+      .preview-scene {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .preview-lyrics-section {
+        text-align: center;
+      }
+      .preview-dock-track {
+        display: none;
+      }
+    }
+
     /* Feature Grid */
     .section-title {
       text-align: center;
@@ -1335,7 +1685,10 @@
           <span class="window-dot dot-green"></span>
         </div>
         <div class="view-tabs">
-          <button class="view-tab active" onclick="switchView('albums', this)">Album Carousel</button>
+          <button class="view-tab active" onclick="switchView('live', this)">
+            <span class="tab-live-pulse"></span> Live Interactive Player
+          </button>
+          <button class="view-tab" onclick="switchView('albums', this)">Album Carousel</button>
           <button class="view-tab" onclick="switchView('lyrics', this)">Cinema Lyrics</button>
           <button class="view-tab" onclick="switchView('split', this)">Cover + Lyrics</button>
           <button class="view-tab" onclick="switchView('search', this)">Music Discovery</button>
@@ -1343,7 +1696,99 @@
         <div style="width: 50px;"></div>
       </div>
       <div class="window-content">
-        <img id="view-albums" src="images/albums.jpg" alt="Afterglow Album Carousel View" class="view-frame active">
+        <!-- Live Player Stage (Default Active) -->
+        <div id="view-live" class="view-frame live-player-stage active">
+          <canvas id="live-player-stardust"></canvas>
+
+          <!-- Topbar inside preview -->
+          <div class="preview-topbar">
+            <div class="preview-wordmark">
+              <span>a</span>
+              <span>Afterglow</span>
+            </div>
+            <div class="preview-source-badge">
+              <span class="preview-source-dot"></span>
+              <span>YouTube Music · Lossless Stream</span>
+            </div>
+            <div class="preview-clock" id="preview-clock-display">10:42 PM</div>
+          </div>
+
+          <!-- Scene inside preview -->
+          <div class="preview-scene">
+            <!-- 3D Cover Flow -->
+            <div class="preview-cover-section">
+              <div class="preview-ghost-card preview-ghost-left"></div>
+              <div class="preview-ghost-card preview-ghost-right"></div>
+              <div class="preview-album-card" id="preview-album-card-trigger">
+                <img src="icon.png" alt="Cover Artwork" class="preview-album-art" id="preview-album-art-img">
+                <div class="preview-album-meta">
+                  <div class="preview-album-title" id="preview-song-title">Afterglow (Celestial Atmosphere)</div>
+                  <div class="preview-album-artist" id="preview-song-artist">Chvrches · Spatial Audio</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Synced Lyrics -->
+            <div class="preview-lyrics-section">
+              <div class="preview-lyric-before" id="preview-lyric-1">Held in the gravity of forgotten skies...</div>
+              <div class="preview-lyric-current" id="preview-lyric-2">We chase the afterglow into the deep night...</div>
+              <div class="preview-lyric-after" id="preview-lyric-3">Echoes of soundwaves resonating forever...</div>
+              <div class="preview-lyric-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                <span>Live Synced LRCLIB Stream</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Preview Celestial Dock -->
+          <div class="preview-dock">
+            <div class="preview-dock-transport">
+              <button class="preview-dock-btn" id="preview-prev-btn" title="Previous Track">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+              </button>
+              <button class="preview-play-btn" id="preview-play-btn" title="Play / Pause Live Preview">
+                <svg id="preview-play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+              <button class="preview-dock-btn" id="preview-next-btn" title="Next Track">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+              </button>
+            </div>
+
+            <div class="preview-dock-track">
+              <img src="icon.png" alt="Mini Art" id="preview-mini-art">
+              <div class="preview-dock-track-meta">
+                <div class="preview-dock-track-title" id="preview-mini-title">Afterglow</div>
+                <div class="preview-dock-track-artist">YouTube Music</div>
+              </div>
+            </div>
+
+            <button class="preview-dock-btn preview-fav-btn" id="preview-fav-btn" title="Add to Favorites">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            </button>
+
+            <div class="preview-dock-seek">
+              <div class="preview-seek-bar-track" id="preview-seek-track">
+                <div class="preview-seek-bar-fill" id="preview-seek-fill"></div>
+              </div>
+              <div class="preview-seek-times">
+                <span id="preview-time-elapsed">1:12</span>
+                <span id="preview-time-duration">3:45</span>
+              </div>
+            </div>
+
+            <div class="preview-dock-tools">
+              <button class="preview-dock-btn" title="Audio Quality: High 320kbps">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5v14M7 9v6M22 10v4M2 10v4"></path></svg>
+              </button>
+              <button class="preview-dock-btn" title="Cinema Lyrics View" onclick="switchView('lyrics', document.querySelectorAll('.view-tab')[2])">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Static screenshot tabs preserved -->
+        <img id="view-albums" src="images/albums.jpg" alt="Afterglow Album Carousel View" class="view-frame">
         <img id="view-lyrics" src="images/lyrics.jpg" alt="Cinema Lyrics View" class="view-frame">
         <img id="view-split" src="images/split.jpg" alt="Split Cover & Lyrics View" class="view-frame">
         <img id="view-search" src="images/search.png" alt="Search & Discovery View" class="view-frame">
@@ -1974,6 +2419,237 @@ npm start
     };
 
     CoreAudioEngine.init();
+
+    // 6. Live Interactive Showcase Player Controller
+    const LiveShowcasePlayer = {
+      isPlaying: false,
+      progress: 32,
+      durationSec: 225, // 3:45
+      currentSec: 72,   // 1:12
+      timer: null,
+      lyricsIndex: 0,
+      tracks: [
+        {
+          title: 'Afterglow (Celestial Atmosphere)',
+          artist: 'Chvrches · Spatial Audio',
+          lyrics: [
+            ['Held in the gravity of forgotten skies...', 'We chase the afterglow into the deep night...', 'Echoes of soundwaves resonating forever...'],
+            ['We chase the afterglow into the deep night...', 'Echoes of soundwaves resonating forever...', 'Lost in the rhythm where time stands still...'],
+            ['Echoes of soundwaves resonating forever...', 'Lost in the rhythm where time stands still...', 'Atmosphere breathing with every heartbeat...'],
+            ['Lost in the rhythm where time stands still...', 'Atmosphere breathing with every heartbeat...', 'Held in the gravity of forgotten skies...']
+          ]
+        },
+        {
+          title: 'Midnight City (Spatial Dream)',
+          artist: 'M83 · Ethereal Synth',
+          lyrics: [
+            ['Waiting in a car, waiting for a ride in the dark...', 'The city is my church, it wraps in the blinding twilight...', 'The night is on my mind...'],
+            ['The city is my church, it wraps in the blinding twilight...', 'The night is on my mind...', 'Looking at the shells of buildings passing by...']
+          ]
+        },
+        {
+          title: 'Resonance (Neon Odyssey)',
+          artist: 'HOME · Ambient Canvas',
+          lyrics: [
+            ['Distant horizon glowing in neon violet...', 'Sound waves drifting through the empty spaces...', 'A quiet pulse across the digital sky...'],
+            ['Sound waves drifting through the empty spaces...', 'A quiet pulse across the digital sky...', 'Distant horizon glowing in neon violet...']
+          ]
+        }
+      ],
+      currentTrackIndex: 0,
+
+      init() {
+        const playBtn = document.getElementById('preview-play-btn');
+        const prevBtn = document.getElementById('preview-prev-btn');
+        const nextBtn = document.getElementById('preview-next-btn');
+        const favBtn = document.getElementById('preview-fav-btn');
+        const seekTrack = document.getElementById('preview-seek-track');
+        const albumCard = document.getElementById('preview-album-card-trigger');
+
+        if (!playBtn) return;
+
+        playBtn.addEventListener('click', () => this.toggle());
+        if (albumCard) albumCard.addEventListener('click', () => this.toggle());
+
+        if (prevBtn) prevBtn.addEventListener('click', () => this.prevTrack());
+        if (nextBtn) nextBtn.addEventListener('click', () => this.nextTrack());
+        if (favBtn) favBtn.addEventListener('click', () => favBtn.classList.toggle('active'));
+
+        if (seekTrack) {
+          seekTrack.addEventListener('click', (e) => {
+            const rect = seekTrack.getBoundingClientRect();
+            const pct = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+            this.progress = pct;
+            this.currentSec = Math.floor((pct / 100) * this.durationSec);
+            this.updateSeekUI();
+          });
+        }
+
+        // Live preview clock
+        const clockEl = document.getElementById('preview-clock-display');
+        const updateClock = () => {
+          if (clockEl) {
+            const now = new Date();
+            clockEl.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          }
+        };
+        updateClock();
+        setInterval(updateClock, 30000);
+
+        // Preview stardust canvas
+        this.initPreviewStardust();
+      },
+
+      initPreviewStardust() {
+        const canvas = document.getElementById('live-player-stardust');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let w = canvas.width = canvas.offsetWidth;
+        let h = canvas.height = canvas.offsetHeight;
+
+        window.addEventListener('resize', () => {
+          w = canvas.width = canvas.offsetWidth;
+          h = canvas.height = canvas.offsetHeight;
+        });
+
+        const particles = Array.from({ length: 32 }, () => ({
+          x: Math.random() * (w || 600),
+          y: Math.random() * (h || 400),
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: -0.2 - Math.random() * 0.2,
+          radius: Math.random() * 1.5 + 0.5,
+          alpha: Math.random() * 0.5 + 0.2
+        }));
+
+        const loop = () => {
+          ctx.clearRect(0, 0, w, h);
+          const speed = this.isPlaying ? 1.5 : 0.8;
+          particles.forEach(p => {
+            p.x += p.vx * speed;
+            p.y += p.vy * speed;
+            if (p.y < 0) { p.y = h; p.x = Math.random() * w; }
+            if (p.x < 0) p.x = w;
+            if (p.x > w) p.x = 0;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(155, 217, 220, ${p.alpha * 0.75})`;
+            ctx.fill();
+          });
+          requestAnimationFrame(loop);
+        };
+        loop();
+      },
+
+      toggle() {
+        if (!this.isPlaying) {
+          this.start();
+        } else {
+          this.pause();
+        }
+      },
+
+      start() {
+        this.isPlaying = true;
+        const playBtn = document.getElementById('preview-play-btn');
+        const playIcon = document.getElementById('preview-play-icon');
+        if (playBtn) playBtn.classList.add('playing');
+        if (playIcon) playIcon.innerHTML = '<rect x="6" y="4" width="4" height="16" fill="currentColor"/><rect x="14" y="4" width="4" height="16" fill="currentColor"/>';
+
+        // Also trigger CoreAudioEngine smoothly if not already playing
+        if (!CoreAudioEngine.isPlaying) {
+          CoreAudioEngine.start();
+        }
+
+        if (this.timer) clearInterval(this.timer);
+        this.timer = setInterval(() => {
+          this.currentSec++;
+          if (this.currentSec >= this.durationSec) {
+            this.nextTrack();
+            return;
+          }
+          this.progress = (this.currentSec / this.durationSec) * 100;
+          this.updateSeekUI();
+
+          // Step lyrics every 4 seconds
+          if (this.currentSec % 4 === 0) {
+            this.stepLyrics();
+          }
+        }, 1000);
+      },
+
+      pause() {
+        this.isPlaying = false;
+        const playBtn = document.getElementById('preview-play-btn');
+        const playIcon = document.getElementById('preview-play-icon');
+        if (playBtn) playBtn.classList.remove('playing');
+        if (playIcon) playIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
+
+        if (this.timer) clearInterval(this.timer);
+      },
+
+      updateSeekUI() {
+        const fill = document.getElementById('preview-seek-fill');
+        const elapsed = document.getElementById('preview-time-elapsed');
+        if (fill) fill.style.width = `${this.progress}%`;
+        if (elapsed) {
+          const m = Math.floor(this.currentSec / 60);
+          const s = String(this.currentSec % 60).padStart(2, '0');
+          elapsed.textContent = `${m}:${s}`;
+        }
+      },
+
+      stepLyrics() {
+        const track = this.tracks[this.currentTrackIndex];
+        this.lyricsIndex = (this.lyricsIndex + 1) % track.lyrics.length;
+        const group = track.lyrics[this.lyricsIndex];
+        const l1 = document.getElementById('preview-lyric-1');
+        const l2 = document.getElementById('preview-lyric-2');
+        const l3 = document.getElementById('preview-lyric-3');
+        if (l1 && l2 && l3 && group) {
+          l1.textContent = group[0];
+          l2.textContent = group[1];
+          l3.textContent = group[2];
+        }
+      },
+
+      prevTrack() {
+        this.currentTrackIndex = (this.currentTrackIndex - 1 + this.tracks.length) % this.tracks.length;
+        this.loadTrack();
+      },
+
+      nextTrack() {
+        this.currentTrackIndex = (this.currentTrackIndex + 1) % this.tracks.length;
+        this.loadTrack();
+      },
+
+      loadTrack() {
+        const t = this.tracks[this.currentTrackIndex];
+        this.currentSec = 0;
+        this.progress = 0;
+        this.lyricsIndex = 0;
+        this.updateSeekUI();
+
+        const titleEl = document.getElementById('preview-song-title');
+        const artistEl = document.getElementById('preview-song-artist');
+        const miniTitle = document.getElementById('preview-mini-title');
+        if (titleEl) titleEl.textContent = t.title;
+        if (artistEl) artistEl.textContent = t.artist;
+        if (miniTitle) miniTitle.textContent = t.title.split(' ')[0];
+
+        const group = t.lyrics[0];
+        const l1 = document.getElementById('preview-lyric-1');
+        const l2 = document.getElementById('preview-lyric-2');
+        const l3 = document.getElementById('preview-lyric-3');
+        if (l1 && l2 && l3 && group) {
+          l1.textContent = group[0];
+          l2.textContent = group[1];
+          l3.textContent = group[2];
+        }
+      }
+    };
+
+    LiveShowcasePlayer.init();
   </script>
 </body>
 </html>
