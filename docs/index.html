@@ -9,8 +9,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('afterglow-theme') || 'system';
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const resolved = saved === 'system' ? (prefersDark ? 'dark' : 'light') : saved;
+      document.documentElement.setAttribute('data-theme', resolved);
+      document.documentElement.setAttribute('data-theme-preference', saved);
+      document.documentElement.style.colorScheme = resolved;
+    })();
+  </script>
   <style>
-    :root {
+    :root, [data-theme="dark"] {
       --bg: #08090c;
       --bg-card: rgba(18, 20, 29, 0.65);
       --bg-card-hover: rgba(28, 32, 48, 0.75);
@@ -23,8 +33,197 @@
       --accent-blue: #8399ff;
       --accent-peach: #e9af9d;
       --gradient-main: linear-gradient(135deg, #8399ff 0%, #c5b1e7 50%, #9bd9dc 100%);
+      --gradient-text: linear-gradient(135deg, #8399ff 0%, #c5b1e7 50%, #9bd9dc 100%);
       --glow-cyan: rgba(155, 217, 220, 0.15);
       --glow-purple: rgba(197, 177, 231, 0.15);
+
+      --navbar-bg: rgba(12, 14, 20, 0.75);
+      --navbar-border: rgba(255, 255, 255, 0.08);
+      --navbar-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      --brand-text: #ffffff;
+
+      --btn-primary-bg: linear-gradient(135deg, #8399ff 0%, #c5b1e7 50%, #9bd9dc 100%);
+      --btn-primary-text: #08090c;
+      --btn-primary-shadow: 0 4px 20px rgba(131, 153, 255, 0.35);
+      --btn-primary-hover-shadow: 0 8px 30px rgba(155, 217, 220, 0.5);
+
+      --btn-secondary-bg: rgba(255, 255, 255, 0.05);
+      --btn-secondary-border: rgba(255, 255, 255, 0.1);
+      --btn-secondary-text: #ffffff;
+      --btn-secondary-hover-bg: rgba(255, 255, 255, 0.12);
+      --btn-secondary-hover-border: rgba(255, 255, 255, 0.25);
+
+      --badge-bg: rgba(131, 153, 255, 0.1);
+      --badge-border: rgba(131, 153, 255, 0.25);
+      --badge-text: var(--accent-cyan);
+
+      --sphere-1: radial-gradient(circle, #8399ff, transparent 70%);
+      --sphere-2: radial-gradient(circle, #c5b1e7, transparent 70%);
+      --sphere-3: radial-gradient(circle, #9bd9dc, transparent 70%);
+      --sphere-opacity: 0.35;
+
+      --noise-pattern: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+
+      --window-bg: #0f1118;
+      --window-border: rgba(255, 255, 255, 0.08);
+      --window-header-bg: rgba(18, 20, 28, 0.9);
+      --window-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(131, 153, 255, 0.1);
+      --window-content-bg: #08090c;
+
+      --view-tabs-bg: rgba(0, 0, 0, 0.35);
+      --view-tabs-border: rgba(255, 255, 255, 0.05);
+      --view-tab-text: var(--text-muted);
+      --view-tab-active-bg: rgba(255, 255, 255, 0.12);
+      --view-tab-active-text: #ffffff;
+      --view-tab-active-shadow: none;
+
+      --card-bg: var(--bg-card);
+      --card-border: var(--border);
+      --card-hover-border: rgba(157, 217, 220, 0.3);
+      --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      --card-icon-bg: rgba(131, 153, 255, 0.12);
+      --card-icon-border: rgba(131, 153, 255, 0.25);
+      --card-icon-color: var(--accent-cyan);
+
+      --controls-bg: linear-gradient(180deg, rgba(18, 20, 30, 0.8) 0%, rgba(12, 14, 20, 0.95) 100%);
+      --controls-border: var(--border);
+      --controls-item-bg: rgba(0, 0, 0, 0.3);
+      --controls-item-border: var(--border);
+      --kbd-color: var(--accent-cyan);
+      --kbd-bg: rgba(155, 217, 220, 0.1);
+      --kbd-border: rgba(155, 217, 220, 0.25);
+      --kbd-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+
+      --terminal-bg: #0d0f17;
+      --terminal-border: var(--border);
+      --terminal-header-bg: #141722;
+      --terminal-code-color: #9bd9dc;
+      --copy-btn-bg: rgba(255, 255, 255, 0.08);
+      --copy-btn-hover: rgba(255, 255, 255, 0.16);
+      --copy-btn-text: #ffffff;
+
+      --cta-bg: radial-gradient(circle at 50% 0%, rgba(131, 153, 255, 0.2) 0%, rgba(12, 14, 20, 0.8) 70%);
+      --cta-border: rgba(131, 153, 255, 0.3);
+      --cta-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+      --footer-border: var(--border);
+      --footer-text: var(--text-muted);
+      --social-bg: rgba(255, 255, 255, 0.04);
+      --social-border: var(--border);
+      --social-color: var(--text-muted);
+      --social-hover-bg: rgba(155, 217, 220, 0.12);
+      --social-hover-border: var(--border-glow);
+      --social-hover-color: var(--accent-cyan);
+      --social-hover-shadow: 0 4px 16px rgba(155, 217, 220, 0.2);
+
+      --theme-switch-bg: rgba(255, 255, 255, 0.06);
+      --theme-switch-border: rgba(255, 255, 255, 0.1);
+      --theme-switch-active-bg: rgba(255, 255, 255, 0.18);
+      --theme-switch-active-text: #ffffff;
+      --theme-switch-active-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --bg-card-hover: rgba(255, 255, 255, 0.98);
+      --border: rgba(0, 0, 0, 0.08);
+      --border-glow: rgba(99, 102, 241, 0.35);
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --accent-cyan: #0284c7;
+      --accent-purple: #7c3aed;
+      --accent-blue: #4f46e5;
+      --accent-peach: #ea580c;
+      --gradient-main: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #0284c7 100%);
+      --gradient-text: linear-gradient(135deg, #4338ca 0%, #7c3aed 50%, #0891b2 100%);
+      --glow-cyan: rgba(2, 132, 199, 0.12);
+      --glow-purple: rgba(124, 58, 237, 0.12);
+
+      --navbar-bg: rgba(255, 255, 255, 0.82);
+      --navbar-border: rgba(0, 0, 0, 0.08);
+      --navbar-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      --brand-text: #0f172a;
+
+      --btn-primary-bg: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #0284c7 100%);
+      --btn-primary-text: #ffffff;
+      --btn-primary-shadow: 0 4px 20px rgba(79, 70, 229, 0.35);
+      --btn-primary-hover-shadow: 0 8px 30px rgba(2, 132, 199, 0.45);
+
+      --btn-secondary-bg: rgba(0, 0, 0, 0.04);
+      --btn-secondary-border: rgba(0, 0, 0, 0.12);
+      --btn-secondary-text: #0f172a;
+      --btn-secondary-hover-bg: rgba(0, 0, 0, 0.08);
+      --btn-secondary-hover-border: rgba(0, 0, 0, 0.22);
+
+      --badge-bg: rgba(99, 102, 241, 0.08);
+      --badge-border: rgba(99, 102, 241, 0.22);
+      --badge-text: #4338ca;
+
+      --sphere-1: radial-gradient(circle, rgba(165, 180, 252, 0.75), transparent 70%);
+      --sphere-2: radial-gradient(circle, rgba(221, 214, 254, 0.8), transparent 70%);
+      --sphere-3: radial-gradient(circle, rgba(186, 230, 253, 0.75), transparent 70%);
+      --sphere-opacity: 0.55;
+
+      --noise-pattern: radial-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 0);
+
+      --window-bg: #ffffff;
+      --window-border: rgba(0, 0, 0, 0.1);
+      --window-header-bg: rgba(248, 250, 252, 0.95);
+      --window-shadow: 0 30px 80px rgba(15, 23, 42, 0.12), 0 0 40px rgba(99, 102, 241, 0.1);
+      --window-content-bg: #0b0d13;
+
+      --view-tabs-bg: rgba(0, 0, 0, 0.06);
+      --view-tabs-border: rgba(0, 0, 0, 0.06);
+      --view-tab-text: #64748b;
+      --view-tab-active-bg: #ffffff;
+      --view-tab-active-text: #0f172a;
+      --view-tab-active-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+      --card-bg: var(--bg-card);
+      --card-border: var(--border);
+      --card-hover-border: rgba(99, 102, 241, 0.35);
+      --card-shadow: 0 20px 40px rgba(15, 23, 42, 0.07);
+      --card-icon-bg: rgba(99, 102, 241, 0.09);
+      --card-icon-border: rgba(99, 102, 241, 0.2);
+      --card-icon-color: #4338ca;
+
+      --controls-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.98) 100%);
+      --controls-border: rgba(0, 0, 0, 0.08);
+      --controls-item-bg: rgba(255, 255, 255, 0.85);
+      --controls-item-border: rgba(0, 0, 0, 0.07);
+      --kbd-color: #4338ca;
+      --kbd-bg: rgba(99, 102, 241, 0.08);
+      --kbd-border: rgba(99, 102, 241, 0.22);
+      --kbd-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+
+      --terminal-bg: #0f172a;
+      --terminal-border: rgba(0, 0, 0, 0.1);
+      --terminal-header-bg: #1e293b;
+      --terminal-code-color: #38bdf8;
+      --copy-btn-bg: rgba(255, 255, 255, 0.1);
+      --copy-btn-hover: rgba(255, 255, 255, 0.2);
+      --copy-btn-text: #ffffff;
+
+      --cta-bg: radial-gradient(circle at 50% 0%, rgba(199, 210, 254, 0.5) 0%, rgba(255, 255, 255, 0.95) 75%);
+      --cta-border: rgba(131, 153, 255, 0.35);
+      --cta-shadow: 0 20px 60px rgba(99, 102, 241, 0.12);
+
+      --footer-border: rgba(0, 0, 0, 0.08);
+      --footer-text: #64748b;
+      --social-bg: rgba(0, 0, 0, 0.04);
+      --social-border: rgba(0, 0, 0, 0.08);
+      --social-color: #64748b;
+      --social-hover-bg: rgba(99, 102, 241, 0.08);
+      --social-hover-border: rgba(99, 102, 241, 0.3);
+      --social-hover-color: #4338ca;
+      --social-hover-shadow: 0 4px 16px rgba(99, 102, 241, 0.15);
+
+      --theme-switch-bg: rgba(0, 0, 0, 0.05);
+      --theme-switch-border: rgba(0, 0, 0, 0.08);
+      --theme-switch-active-bg: #ffffff;
+      --theme-switch-active-text: #0f172a;
+      --theme-switch-active-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     * {
@@ -54,20 +253,21 @@
       position: absolute;
       border-radius: 50%;
       filter: blur(120px);
-      opacity: 0.35;
+      opacity: var(--sphere-opacity);
       animation: float 20s infinite alternate ease-in-out;
+      transition: opacity 0.5s ease;
     }
     .sphere-1 {
       width: 500px;
       height: 500px;
-      background: radial-gradient(circle, #8399ff, transparent 70%);
+      background: var(--sphere-1);
       top: -100px;
       left: 20%;
     }
     .sphere-2 {
       width: 600px;
       height: 600px;
-      background: radial-gradient(circle, #c5b1e7, transparent 70%);
+      background: var(--sphere-2);
       top: 40%;
       right: -150px;
       animation-duration: 25s;
@@ -75,7 +275,7 @@
     .sphere-3 {
       width: 450px;
       height: 450px;
-      background: radial-gradient(circle, #9bd9dc, transparent 70%);
+      background: var(--sphere-3);
       bottom: 10%;
       left: -100px;
       animation-duration: 18s;
@@ -90,7 +290,7 @@
     .noise {
       position: fixed;
       inset: 0;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+      background-image: var(--noise-pattern);
       background-size: 24px 24px;
       pointer-events: none;
       z-index: 1;
@@ -116,22 +316,24 @@
       align-items: center;
       justify-content: space-between;
       padding: 14px 24px;
-      background: rgba(12, 14, 20, 0.7);
+      background: var(--navbar-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
+      border: 1px solid var(--navbar-border);
       border-radius: 999px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      box-shadow: var(--navbar-shadow);
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
       text-decoration: none;
-      color: #fff;
+      color: var(--brand-text);
       font-weight: 700;
       font-size: 1.15rem;
       letter-spacing: -0.02em;
+      transition: color 0.3s ease;
     }
     .brand img {
       width: 32px;
@@ -152,12 +354,47 @@
       transition: color 0.2s;
     }
     .nav-links a:hover {
-      color: #fff;
+      color: var(--text);
     }
     .nav-actions {
       display: flex;
       align-items: center;
       gap: 12px;
+    }
+
+    /* Theme Toggle */
+    .theme-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 3px;
+      background: var(--theme-switch-bg);
+      border: 1px solid var(--theme-switch-border);
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    .theme-option {
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
+      border-radius: 999px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .theme-option:hover {
+      color: var(--text);
+    }
+    .theme-option.active {
+      background: var(--theme-switch-active-bg);
+      color: var(--theme-switch-active-text);
+      box-shadow: var(--theme-switch-active-shadow);
     }
 
     /* Buttons */
@@ -176,23 +413,24 @@
       border: 1px solid transparent;
     }
     .btn-primary {
-      background: var(--gradient-main);
-      color: #08090c;
-      box-shadow: 0 4px 20px rgba(131, 153, 255, 0.35);
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      box-shadow: var(--btn-primary-shadow);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(155, 217, 220, 0.5);
+      box-shadow: var(--btn-primary-hover-shadow);
     }
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: var(--border);
-      color: #fff;
+      background: var(--btn-secondary-bg);
+      border-color: var(--btn-secondary-border);
+      color: var(--btn-secondary-text);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
+      background: var(--btn-secondary-hover-bg);
+      border-color: var(--btn-secondary-hover-border);
       transform: translateY(-2px);
     }
     .btn-lg {
@@ -210,21 +448,22 @@
       align-items: center;
       gap: 8px;
       padding: 6px 16px;
-      background: rgba(131, 153, 255, 0.1);
-      border: 1px solid rgba(131, 153, 255, 0.25);
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
       border-radius: 999px;
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--accent-cyan);
+      color: var(--badge-text);
       margin-bottom: 24px;
       backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
     }
     .badge-dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: #4ade80;
-      box-shadow: 0 0 10px #4ade80;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
     }
     .hero h1 {
       font-size: clamp(2.5rem, 6vw, 4.2rem);
@@ -234,7 +473,7 @@
       margin-bottom: 20px;
     }
     .hero h1 span {
-      background: var(--gradient-main);
+      background: var(--gradient-text);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -273,26 +512,28 @@
       max-width: 500px;
       height: 48px;
       margin: 0 auto 32px;
-      opacity: 0.85;
+      opacity: 0.9;
     }
 
     /* Showcase Window */
     .showcase-window {
       position: relative;
-      background: #0f1118;
-      border: 1px solid var(--border);
+      background: var(--window-bg);
+      border: 1px solid var(--window-border);
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(131, 153, 255, 0.1);
+      box-shadow: var(--window-shadow);
       margin-bottom: 120px;
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .window-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 14px 20px;
-      background: rgba(18, 20, 28, 0.9);
-      border-bottom: 1px solid var(--border);
+      background: var(--window-header-bg);
+      border-bottom: 1px solid var(--window-border);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
     .window-dots {
       display: flex;
@@ -310,15 +551,16 @@
     .view-tabs {
       display: flex;
       gap: 8px;
-      background: rgba(0, 0, 0, 0.35);
+      background: var(--view-tabs-bg);
       padding: 4px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--view-tabs-border);
+      transition: all 0.3s ease;
     }
     .view-tab {
       background: none;
       border: none;
-      color: var(--text-muted);
+      color: var(--view-tab-text);
       padding: 6px 16px;
       border-radius: 999px;
       font-size: 0.85rem;
@@ -327,8 +569,9 @@
       transition: all 0.2s;
     }
     .view-tab.active {
-      background: rgba(255, 255, 255, 0.12);
-      color: #fff;
+      background: var(--view-tab-active-bg);
+      color: var(--view-tab-active-text);
+      box-shadow: var(--view-tab-active-shadow);
     }
 
     .window-content {
@@ -337,7 +580,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #08090c;
+      background: var(--window-content-bg);
+      transition: background-color 0.3s ease;
     }
     .view-frame {
       width: 100%;
@@ -366,6 +610,7 @@
       font-weight: 800;
       letter-spacing: -0.03em;
       margin-bottom: 16px;
+      color: var(--text);
     }
     .section-title p {
       color: var(--text-muted);
@@ -381,38 +626,41 @@
       margin-bottom: 120px;
     }
     .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 20px;
       padding: 32px;
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
     }
     .card:hover {
-      border-color: rgba(157, 217, 220, 0.3);
+      border-color: var(--card-hover-border);
       transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: var(--card-shadow);
     }
     .card-icon {
       width: 48px;
       height: 48px;
       border-radius: 14px;
-      background: rgba(131, 153, 255, 0.12);
-      border: 1px solid rgba(131, 153, 255, 0.25);
+      background: var(--card-icon-bg);
+      border: 1px solid var(--card-icon-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--accent-cyan);
+      color: var(--card-icon-color);
       margin-bottom: 20px;
       font-size: 1.3rem;
+      transition: all 0.3s ease;
     }
     .card h3 {
       font-size: 1.3rem;
       font-weight: 700;
       margin-bottom: 12px;
       letter-spacing: -0.01em;
+      color: var(--text);
     }
     .card p {
       color: var(--text-muted);
@@ -422,11 +670,12 @@
 
     /* Controls Showcase */
     .controls-box {
-      background: linear-gradient(180deg, rgba(18, 20, 30, 0.8) 0%, rgba(12, 14, 20, 0.95) 100%);
-      border: 1px solid var(--border);
+      background: var(--controls-bg);
+      border: 1px solid var(--controls-border);
       border-radius: 24px;
       padding: 48px;
       margin-bottom: 120px;
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
     .controls-grid {
       display: grid;
@@ -439,9 +688,10 @@
       align-items: center;
       justify-content: space-between;
       padding: 14px 18px;
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid var(--border);
+      background: var(--controls-item-bg);
+      border: 1px solid var(--controls-item-border);
       border-radius: 12px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
     .kbd {
       display: inline-block;
@@ -449,11 +699,12 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.85rem;
       font-weight: 500;
-      color: var(--accent-cyan);
-      background: rgba(155, 217, 220, 0.1);
-      border: 1px solid rgba(155, 217, 220, 0.25);
+      color: var(--kbd-color);
+      background: var(--kbd-bg);
+      border: 1px solid var(--kbd-border);
       border-radius: 6px;
-      box-shadow: 0 2px 0 rgba(0,0,0,0.5);
+      box-shadow: var(--kbd-shadow);
+      transition: all 0.3s ease;
     }
     .control-action {
       color: var(--text);
@@ -463,35 +714,38 @@
 
     /* Terminal Quickstart */
     .terminal-box {
-      background: #0d0f17;
-      border: 1px solid var(--border);
+      background: var(--terminal-bg);
+      border: 1px solid var(--terminal-border);
       border-radius: 18px;
       overflow: hidden;
       max-width: 650px;
       margin: 0 auto 120px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
     .terminal-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 12px 18px;
-      background: #141722;
-      border-bottom: 1px solid var(--border);
+      background: var(--terminal-header-bg);
+      border-bottom: 1px solid var(--terminal-border);
       font-size: 0.85rem;
       color: var(--text-muted);
+      transition: background-color 0.3s ease;
     }
     .terminal-body {
       padding: 24px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.92rem;
       line-height: 1.8;
-      color: #9bd9dc;
+      color: var(--terminal-code-color);
       position: relative;
+      transition: color 0.3s ease;
     }
     .copy-btn {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--border);
-      color: #fff;
+      background: var(--copy-btn-bg);
+      border: 1px solid var(--terminal-border);
+      color: var(--copy-btn-text);
       padding: 4px 12px;
       border-radius: 6px;
       font-size: 0.78rem;
@@ -499,23 +753,25 @@
       transition: background 0.2s;
     }
     .copy-btn:hover {
-      background: rgba(255, 255, 255, 0.16);
+      background: var(--copy-btn-hover);
     }
 
     /* CTA Banner */
     .cta-banner {
-      background: radial-gradient(circle at 50% 0%, rgba(131, 153, 255, 0.2) 0%, rgba(12, 14, 20, 0.8) 70%);
-      border: 1px solid rgba(131, 153, 255, 0.3);
+      background: var(--cta-bg);
+      border: 1px solid var(--cta-border);
       border-radius: 28px;
       padding: 64px 32px;
       text-align: center;
       margin-bottom: 100px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      box-shadow: var(--cta-shadow);
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .cta-banner h2 {
       font-size: clamp(2rem, 4vw, 2.8rem);
       font-weight: 800;
       margin-bottom: 16px;
+      color: var(--text);
     }
     .cta-banner p {
       color: var(--text-muted);
@@ -524,32 +780,437 @@
       margin: 0 auto 36px;
     }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 0;
-      color: var(--text-muted);
-      font-size: 0.9rem;
+    /* ========================================================
+       CELESTIAL HYPER-DOCK FOOTER (1-of-1 Living UI Experience)
+       ======================================================== */
+    footer.hyper-footer {
+      position: relative;
+      overflow: hidden;
+      padding: 100px 24px 70px;
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-top: 1px solid var(--footer-border);
+      background: radial-gradient(ellipse 100% 70% at 50% 100%, rgba(131, 153, 255, 0.08) 0%, transparent 80%);
     }
-    .footer-content {
+
+    /* Ambient Constellation & Stardust Canvas */
+    .footer-nebula-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.7;
+    }
+
+    /* Floating Celestial Dock Capsule */
+    .hyper-dock {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 880px;
+      margin: 0 auto;
+      border-radius: 36px;
+      padding: 44px 36px 36px;
+      background: rgba(14, 16, 26, 0.72);
+      backdrop-filter: blur(40px) saturate(190%);
+      -webkit-backdrop-filter: blur(40px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 
+        0 30px 100px rgba(0, 0, 0, 0.7),
+        0 0 50px rgba(155, 217, 220, 0.12),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      isolation: isolate;
+    }
+
+    /* Specular light sheen that follows cursor */
+    .hyper-dock::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 36px;
+      padding: 1px;
+      background: radial-gradient(
+        500px circle at var(--dock-mouse-x, 50%) var(--dock-mouse-y, 50%),
+        rgba(155, 217, 220, 0.35),
+        rgba(197, 177, 231, 0.2) 30%,
+        transparent 65%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    [data-theme="light"] .hyper-dock {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 
+        0 30px 90px rgba(15, 23, 42, 0.12),
+        0 0 40px rgba(99, 102, 241, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.9);
+    }
+
+    [data-theme="light"] .hyper-dock::before {
+      background: radial-gradient(
+        500px circle at var(--dock-mouse-x, 50%) var(--dock-mouse-y, 50%),
+        rgba(99, 102, 241, 0.35),
+        rgba(2, 132, 199, 0.2) 30%,
+        transparent 65%
+      );
+    }
+
+    /* Top Telemetry Strip */
+    .dock-telemetry {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .telemetry-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.03em;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--footer-text);
+      transition: all 0.25s ease;
+    }
+    [data-theme="light"] .telemetry-pill {
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    .telemetry-pill:hover {
+      border-color: var(--accent-cyan);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+    .telemetry-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .telemetry-dot.live {
+      background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+      animation: livePulse 2s infinite ease-in-out;
+    }
+    .telemetry-dot.purple {
+      background: #c5b1e7;
+      box-shadow: 0 0 8px #c5b1e7;
+    }
+    .telemetry-dot.cyan {
+      background: #9bd9dc;
+      box-shadow: 0 0 8px #9bd9dc;
+    }
+    @keyframes livePulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.6; }
+    }
+
+    /* Living Atmospheric Audio Core */
+    .dock-core-section {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
+      gap: 18px;
+      padding: 16px 24px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      margin-bottom: 28px;
+      width: 100%;
+      max-width: 580px;
+      transition: all 0.3s ease;
+      cursor: pointer;
     }
-    .footer-links {
+    [data-theme="light"] .dock-core-section {
+      background: rgba(0, 0, 0, 0.025);
+      border-color: rgba(0, 0, 0, 0.06);
+    }
+    .dock-core-section:hover, .dock-core-section.playing {
+      background: rgba(155, 217, 220, 0.08);
+      border-color: var(--border-glow);
+      box-shadow: 0 10px 30px rgba(155, 217, 220, 0.15);
+      transform: translateY(-2px);
+    }
+    [data-theme="light"] .dock-core-section:hover, [data-theme="light"] .dock-core-section.playing {
+      background: rgba(99, 102, 241, 0.06);
+      border-color: rgba(99, 102, 241, 0.25);
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+    }
+
+    .core-orb-wrapper {
+      position: relative;
+      width: 48px;
+      height: 48px;
       display: flex;
-      gap: 24px;
-      list-style: none;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
-    .footer-links a {
-      color: var(--text-muted);
+    .core-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid var(--accent-cyan);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .dock-core-section.playing .core-ring.ring-1 {
+      width: 100%;
+      height: 100%;
+      animation: coreRipple 2.2s infinite ease-out;
+    }
+    .dock-core-section.playing .core-ring.ring-2 {
+      width: 100%;
+      height: 100%;
+      animation: coreRipple 2.2s infinite ease-out 0.7s;
+    }
+    .dock-core-section.playing .core-ring.ring-3 {
+      width: 100%;
+      height: 100%;
+      animation: coreRipple 2.2s infinite ease-out 1.4s;
+    }
+    @keyframes coreRipple {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+    .core-orb {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--gradient-main);
+      border: none;
+      color: #08090c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(131, 153, 255, 0.4);
+      transition: all 0.25s ease;
+      position: relative;
+      z-index: 2;
+    }
+    .core-orb:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 24px rgba(155, 217, 220, 0.6);
+    }
+    .core-info {
+      flex: 1;
+      text-align: left;
+    }
+    .core-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 2px;
+    }
+    .core-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    .core-badge {
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(155, 217, 220, 0.15);
+      color: var(--accent-cyan);
+      font-weight: 500;
+    }
+    [data-theme="light"] .core-badge {
+      background: rgba(99, 102, 241, 0.12);
+      color: #4338ca;
+    }
+    .core-subtitle {
+      font-size: 0.78rem;
+      color: var(--footer-text);
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    /* Brand Header inside Dock */
+    .dock-brand-row {
+      margin-bottom: 12px;
+    }
+    .dock-brand-row .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
       text-decoration: none;
-      transition: color 0.2s;
+      color: var(--text);
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
     }
-    .footer-links a:hover {
-      color: #fff;
+    .dock-brand-row .footer-brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      object-fit: contain;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+    .brand-gradient {
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Tagline */
+    .dock-tagline {
+      color: var(--footer-text);
+      font-size: 0.88rem;
+      margin-bottom: 28px;
+      letter-spacing: 0.02em;
+      opacity: 0.9;
+    }
+
+    /* Magnetic Nav Links */
+    .dock-nav-links {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      list-style: none;
+      padding: 0;
+    }
+    .dock-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--footer-text);
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+      will-change: transform;
+    }
+    [data-theme="light"] .dock-link {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+    .dock-link:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: var(--border-glow);
+      color: var(--text);
+      box-shadow: 0 4px 20px rgba(155, 217, 220, 0.2);
+    }
+    [data-theme="light"] .dock-link:hover {
+      background: rgba(99, 102, 241, 0.08);
+      border-color: rgba(99, 102, 241, 0.3);
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
+    }
+    .dock-link.store-link {
+      color: var(--accent-cyan);
+      border-color: rgba(155, 217, 220, 0.3);
+      background: rgba(155, 217, 220, 0.06);
+    }
+    [data-theme="light"] .dock-link.store-link {
+      color: var(--accent-blue);
+      border-color: rgba(99, 102, 241, 0.3);
+      background: rgba(99, 102, 241, 0.06);
+    }
+
+    /* Magnetic Social Orbits */
+    .dock-socials {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 34px;
+    }
+    .social-icon-link {
+      color: var(--social-color);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--social-bg);
+      border: 1px solid var(--social-border);
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+      text-decoration: none;
+      will-change: transform;
+    }
+    .social-icon-link:hover {
+      color: var(--social-hover-color);
+      background: var(--social-hover-bg);
+      border-color: var(--social-hover-border);
+      box-shadow: var(--social-hover-shadow);
+    }
+
+    /* Divider */
+    .dock-epoch-divider {
+      width: 100%;
+      max-width: 640px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin-bottom: 24px;
+    }
+
+    /* Bottom Meta */
+    .dock-bottom-meta {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .footer-copyright {
+      color: var(--footer-text);
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .footer-copyright strong, .footer-copyright a {
+      color: var(--text);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .footer-copyright a:hover {
+      color: var(--accent-cyan);
+    }
+    [data-theme="light"] .footer-copyright a:hover {
+      color: var(--accent-blue);
+    }
+    .footer-disclaimer {
+      font-size: 0.78rem;
+      color: #5a5f73;
+      line-height: 1.55;
+      margin: 0;
+    }
+    [data-theme="light"] .footer-disclaimer {
+      color: #94a3b8;
+    }
+
+    /* Magnetic helper */
+    .magnetic {
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     /* Responsive */
@@ -558,6 +1219,15 @@
       .hero { padding: 40px 0 50px; }
       .controls-box { padding: 24px; }
       .cta-banner { padding: 40px 20px; }
+      .navbar { padding: 10px 16px; }
+      .nav-actions { gap: 8px; }
+    }
+    @media (max-width: 540px) {
+      .btn-secondary .btn-label { display: none; }
+      .btn { padding: 8px 14px; font-size: 0.88rem; }
+      .brand span { font-size: 1rem; }
+      .theme-option { width: 28px; height: 28px; }
+      .theme-switch { padding: 2px; }
     }
   </style>
 </head>
@@ -586,9 +1256,36 @@
           <li><a href="#install">Install</a></li>
         </ul>
         <div class="nav-actions">
+          <div class="theme-switch" role="group" aria-label="Theme selection">
+            <button type="button" class="theme-option" data-theme-val="light" title="Light theme" aria-label="Light theme">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </button>
+            <button type="button" class="theme-option" data-theme-val="system" title="System preference" aria-label="System preference">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </button>
+            <button type="button" class="theme-option" data-theme-val="dark" title="Dark theme" aria-label="Dark theme">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </button>
+          </div>
           <a href="https://github.com/Samar-019/afterglow-" target="_blank" class="btn btn-secondary">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-            GitHub
+            <span class="btn-label">GitHub</span>
           </a>
           <a href="https://github.com/Samar-019/afterglow-/releases/latest" class="btn btn-primary">
             Download
@@ -778,26 +1475,174 @@ npm start
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-      <div class="footer-content">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <img src="icon.png" width="24" height="24" alt="logo" style="border-radius: 6px;">
-          <span>© 2026 <strong>Afterglow</strong> by <a href="https://github.com/Samar-019" target="_blank" style="color: #fff; text-decoration: none;">Samar-019</a>. Licensed under MIT.</span>
+    <!-- Celestial Hyper-Dock Footer (1-of-1 Living Audio Experience) -->
+    <footer class="hyper-footer" id="hyper-footer">
+      <!-- Stardust & Constellation Particle Canvas -->
+      <canvas id="footer-nebula" class="footer-nebula-canvas"></canvas>
+
+      <!-- Floating Celestial Dock Capsule -->
+      <div class="hyper-dock" id="hyper-dock">
+        <!-- Sci-Fi Telemetry Strip -->
+        <div class="dock-telemetry">
+          <span class="telemetry-pill">
+            <span class="telemetry-dot live"></span>
+            <span>WinUI 3 & Windows App SDK</span>
+          </span>
+          <span class="telemetry-pill">
+            <span class="telemetry-dot purple"></span>
+            <span>Zero Ads · 100% Free & Open Source</span>
+          </span>
+          <span class="telemetry-pill">
+            <span class="telemetry-dot cyan"></span>
+            <span id="telemetry-epoch">System Epoch: Auto-Synced</span>
+          </span>
         </div>
-        <ul class="footer-links">
-          <li><a href="https://github.com/Samar-019/afterglow-" target="_blank">Repository</a></li>
-          <li><a href="https://github.com/Samar-019/afterglow-/releases" target="_blank">Releases</a></li>
-          <li><a href="https://github.com/Samar-019/afterglow-/issues" target="_blank">Issues</a></li>
+
+        <!-- Living Atmospheric Audio Core -->
+        <div class="dock-core-section" id="dock-core-card" title="Click to Experience Afterglow Ambient Soundscape">
+          <div class="core-orb-wrapper">
+            <div class="core-ring ring-1"></div>
+            <div class="core-ring ring-2"></div>
+            <div class="core-ring ring-3"></div>
+            <button class="core-orb" id="core-orb-btn" aria-label="Toggle Atmospheric Ambient Sound">
+              <svg id="core-sound-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="core-info">
+            <div class="core-title-row">
+              <span class="core-title">Atmospheric Sound Console</span>
+              <span class="core-badge" id="sound-state-badge">Tap to Listen</span>
+            </div>
+            <p class="core-subtitle">Real-time procedural 432Hz ambient chord synth & dynamic stardust harmonics</p>
+          </div>
+        </div>
+
+        <!-- Brand Header inside Dock -->
+        <div class="dock-brand-row">
+          <a href="#" class="footer-brand magnetic">
+            <img src="icon.png" alt="Afterglow Logo">
+            <span>After<span class="brand-gradient">glow</span></span>
+          </a>
+        </div>
+        <p class="dock-tagline">Cinematic Visuals · Synced Lyrics · Floating Controls · Windows 10 & 11</p>
+
+        <!-- Magnetic Navigation Pills -->
+        <ul class="dock-nav-links">
+          <li><a href="#" class="dock-link magnetic">Home</a></li>
+          <li><a href="#views" class="dock-link magnetic">Views</a></li>
+          <li><a href="#features" class="dock-link magnetic">Features</a></li>
+          <li><a href="#controls" class="dock-link magnetic">Controls</a></li>
+          <li><a href="#install" class="dock-link magnetic">Install</a></li>
+          <li><a href="https://github.com/Samar-019/afterglow-/releases" target="_blank" rel="noopener noreferrer" class="dock-link magnetic">Releases</a></li>
+          <li>
+            <a href="https://github.com/Samar-019/afterglow-/releases" target="_blank" rel="noopener noreferrer" class="dock-link store-link magnetic">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"></rect><rect x="13" y="3" width="8" height="8" rx="1"></rect><rect x="3" y="13" width="8" height="8" rx="1"></rect><rect x="13" y="13" width="8" height="8" rx="1"></rect></svg>
+              Windows App
+            </a>
+          </li>
         </ul>
-      </div>
-      <div style="margin-top: 16px; font-size: 0.8rem; color: #5a5f73; text-align: center;">
-        Afterglow is an independent music player and is not affiliated with YouTube or Google. All music and album artwork belong to their respective owners.
+
+        <!-- Magnetic Social Orbits -->
+        <div class="dock-socials">
+          <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-icon-link magnetic" aria-label="X (Twitter)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.873 11.633Z"/></svg>
+          </a>
+          <a href="https://github.com/Samar-019/afterglow-" target="_blank" rel="noopener noreferrer" class="social-icon-link magnetic" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          </a>
+          <a href="https://github.com/Samar-019/afterglow-/releases" target="_blank" rel="noopener noreferrer" class="social-icon-link magnetic" aria-label="Releases">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"></rect><rect x="13" y="3" width="8" height="8" rx="1"></rect><rect x="3" y="13" width="8" height="8" rx="1"></rect><rect x="13" y="13" width="8" height="8" rx="1"></rect></svg>
+          </a>
+          <a href="https://music.youtube.com" target="_blank" rel="noopener noreferrer" class="social-icon-link magnetic" aria-label="YouTube Music">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15.2V8.8L15.4 12z"></path></svg>
+          </a>
+        </div>
+
+        <div class="dock-epoch-divider"></div>
+
+        <!-- Futuristic Auto-Updating Temporal Epoch Bar -->
+        <div class="dock-bottom-meta">
+          <p class="footer-copyright">
+            © <span id="current-year">2024–2026</span> <strong>Afterglow</strong> by <a href="https://github.com/Samar-019" target="_blank" rel="noopener noreferrer">Samar-019</a>. Licensed under MIT. All rights reserved.
+          </p>
+          <p class="footer-disclaimer">
+            Afterglow is an independent atmospheric music player crafted for Windows. Not affiliated with YouTube or Google.
+          </p>
+        </div>
       </div>
     </footer>
   </div>
 
   <script>
+    // Theme Switcher & System Preference Sync
+    const ThemeManager = {
+      mediaQuery: window.matchMedia('(prefers-color-scheme: dark)'),
+      
+      init() {
+        const saved = localStorage.getItem('afterglow-theme') || 'system';
+        this.apply(saved, false);
+
+        // Listen for OS/System theme changes dynamically
+        const handleSystemChange = (e) => {
+          if (this.getPreference() === 'system') {
+            this.updateDOM('system', e.matches ? 'dark' : 'light');
+          }
+        };
+
+        if (this.mediaQuery.addEventListener) {
+          this.mediaQuery.addEventListener('change', handleSystemChange);
+        } else if (this.mediaQuery.addListener) {
+          this.mediaQuery.addListener(handleSystemChange);
+        }
+
+        // Attach event listeners to all theme toggle buttons
+        document.querySelectorAll('.theme-option').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const val = btn.getAttribute('data-theme-val');
+            this.apply(val, true);
+          });
+        });
+      },
+
+      getPreference() {
+        return localStorage.getItem('afterglow-theme') || 'system';
+      },
+
+      resolveTheme(preference) {
+        if (preference === 'system') {
+          return this.mediaQuery.matches ? 'dark' : 'light';
+        }
+        return preference;
+      },
+
+      updateDOM(preference, resolved) {
+        document.documentElement.setAttribute('data-theme', resolved);
+        document.documentElement.setAttribute('data-theme-preference', preference);
+        document.documentElement.style.colorScheme = resolved;
+
+        document.querySelectorAll('.theme-option').forEach(btn => {
+          const isSelected = btn.getAttribute('data-theme-val') === preference;
+          btn.classList.toggle('active', isSelected);
+          btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+        });
+      },
+
+      apply(preference, save = true) {
+        if (save) {
+          localStorage.setItem('afterglow-theme', preference);
+        }
+        const resolved = this.resolveTheme(preference);
+        this.updateDOM(preference, resolved);
+      }
+    };
+
+    window.ThemeManager = ThemeManager;
+    ThemeManager.init();
+
     // Tab switcher for UI previews
     function switchView(viewName, tabEl) {
       document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
@@ -838,6 +1683,7 @@ npm start
       function draw() {
         ctx.clearRect(0, 0, width, height);
         const startX = (width - (bars * (barWidth + gap))) / 2;
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
 
         for (let i = 0; i < bars; i++) {
           const x = startX + i * (barWidth + gap);
@@ -846,9 +1692,15 @@ npm start
           const barHeight = Math.max(4, normalized * wave * (height * 0.85));
 
           const gradient = ctx.createLinearGradient(0, height - barHeight, 0, height);
-          gradient.addColorStop(0, '#9bd9dc');
-          gradient.addColorStop(0.5, '#c5b1e7');
-          gradient.addColorStop(1, '#8399ff');
+          if (isLight) {
+            gradient.addColorStop(0, '#0284c7');
+            gradient.addColorStop(0.5, '#7c3aed');
+            gradient.addColorStop(1, '#4f46e5');
+          } else {
+            gradient.addColorStop(0, '#9bd9dc');
+            gradient.addColorStop(0.5, '#c5b1e7');
+            gradient.addColorStop(1, '#8399ff');
+          }
 
           ctx.fillStyle = gradient;
           ctx.beginPath();
@@ -861,6 +1713,267 @@ npm start
       }
       draw();
     }
+
+    // ========================================================
+    // CELESTIAL HYPER-DOCK LIVING ENGINE (1-of-1 Dynamic Experience)
+    // ========================================================
+
+    // 1. Automatic Dynamic Epoch & Copyright Synchronizer
+    (function initDynamicFooter() {
+      const startYear = 2024;
+      const currentYear = new Date().getFullYear();
+      const yearEl = document.getElementById('current-year');
+      if (yearEl) {
+        yearEl.textContent = currentYear > startYear ? `${startYear}–${currentYear}` : `${currentYear}`;
+      }
+
+      const epochEl = document.getElementById('telemetry-epoch');
+      if (epochEl) {
+        epochEl.textContent = `Epoch: 2024–${currentYear} (Synced)`;
+      }
+
+      // Automatically sync latest release version from GitHub API
+      fetch('https://api.github.com/repos/Samar-019/afterglow-/releases/latest')
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          if (data && data.tag_name) {
+            const cleanTag = data.tag_name.replace(/^v/, '');
+            const badge = document.querySelector('.badge-pill span:last-child');
+            if (badge) {
+              badge.textContent = `Version ${cleanTag} Released · Windows 10 & 11`;
+            }
+          }
+        })
+        .catch(() => {});
+    })();
+
+    // 2. Zero-G Magnetic Cursor Physics for Dock Elements
+    (function initMagneticPhysics() {
+      const magneticItems = document.querySelectorAll('.magnetic');
+      if (!magneticItems.length || window.matchMedia('(pointer: coarse)').matches) return;
+
+      document.addEventListener('mousemove', (e) => {
+        magneticItems.forEach(item => {
+          const rect = item.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const dx = e.clientX - centerX;
+          const dy = e.clientY - centerY;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < 72) {
+            const pullX = dx * 0.32;
+            const pullY = dy * 0.32;
+            item.style.transform = `translate(${pullX}px, ${pullY}px) scale(1.05)`;
+          } else if (item.style.transform) {
+            item.style.transform = '';
+          }
+        });
+      });
+    })();
+
+    // 3. Specular Light Sheen Tracking
+    (function initDockSpecularLight() {
+      const dock = document.getElementById('hyper-dock');
+      if (!dock) return;
+
+      dock.addEventListener('mousemove', (e) => {
+        const rect = dock.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        dock.style.setProperty('--dock-mouse-x', `${x}px`);
+        dock.style.setProperty('--dock-mouse-y', `${y}px`);
+      });
+    })();
+
+    // 4. Stardust & Constellation Particle Canvas
+    (function initNebulaCanvas() {
+      const canvas = document.getElementById('footer-nebula');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = 0, h = 0;
+      let mouseX = -9999, mouseY = -9999;
+
+      function resize() {
+        w = canvas.width = canvas.offsetWidth;
+        h = canvas.height = canvas.offsetHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      const footer = document.getElementById('hyper-footer');
+      if (footer) {
+        footer.addEventListener('mousemove', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          mouseX = e.clientX - rect.left;
+          mouseY = e.clientY - rect.top;
+        });
+        footer.addEventListener('mouseleave', () => {
+          mouseX = -9999;
+          mouseY = -9999;
+        });
+      }
+
+      const particleCount = 40;
+      const particles = Array.from({ length: particleCount }, () => ({
+        x: Math.random() * (w || 900),
+        y: Math.random() * (h || 400),
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: -0.15 - Math.random() * 0.25,
+        size: Math.random() * 1.6 + 0.6,
+        alpha: Math.random() * 0.5 + 0.2
+      }));
+
+      function step() {
+        ctx.clearRect(0, 0, w, h);
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.y < 0) { p.y = h; p.x = Math.random() * w; }
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+
+          const dx = mouseX - p.x;
+          const dy = mouseY - p.y;
+          const dist = Math.hypot(dx, dy);
+          let currentAlpha = p.alpha;
+          if (dist < 110) {
+            currentAlpha = Math.min(1, p.alpha + (1 - dist / 110) * 0.5);
+          }
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = isLight 
+            ? `rgba(99, 102, 241, ${currentAlpha * 0.7})` 
+            : `rgba(155, 217, 220, ${currentAlpha})`;
+          ctx.fill();
+
+          // Interconnecting constellation threads
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const d = Math.hypot(p.x - p2.x, p.y - p2.y);
+            if (d < 75) {
+              const lineAlpha = (1 - d / 75) * 0.16;
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = isLight 
+                ? `rgba(99, 102, 241, ${lineAlpha})` 
+                : `rgba(155, 217, 220, ${lineAlpha})`;
+              ctx.lineWidth = 0.6;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(step);
+      }
+      step();
+    })();
+
+    // 5. Procedural 432Hz Ambient Soundscape Synthesizer
+    const CoreAudioEngine = {
+      ctx: null,
+      isPlaying: false,
+      oscillators: [],
+      masterGain: null,
+
+      init() {
+        const btn = document.getElementById('core-orb-btn');
+        const card = document.getElementById('dock-core-card');
+        const badge = document.getElementById('sound-state-badge');
+        const icon = document.getElementById('core-sound-icon');
+
+        if (!btn || !card) return;
+
+        const toggle = () => {
+          if (!this.isPlaying) {
+            this.start();
+            card.classList.add('playing');
+            if (badge) {
+              badge.textContent = 'Playing 432Hz Ambient';
+              badge.style.color = '#4ade80';
+            }
+            if (icon) {
+              icon.innerHTML = '<rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/>';
+            }
+          } else {
+            this.stop();
+            card.classList.remove('playing');
+            if (badge) {
+              badge.textContent = 'Tap to Listen';
+              badge.style.color = '';
+            }
+            if (icon) {
+              icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>';
+            }
+          }
+        };
+
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggle();
+        });
+        card.addEventListener('click', toggle);
+      },
+
+      start() {
+        try {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) return;
+          if (!this.ctx) this.ctx = new AudioContextClass();
+          if (this.ctx.state === 'suspended') this.ctx.resume();
+
+          this.masterGain = this.ctx.createGain();
+          this.masterGain.gain.setValueAtTime(0.0001, this.ctx.currentTime);
+          this.masterGain.gain.exponentialRampToValueAtTime(0.18, this.ctx.currentTime + 1.5);
+          this.masterGain.connect(this.ctx.destination);
+
+          // Ethereal chord frequencies: F3, Ab3, C4, Eb4 (Atmospheric F minor 7th)
+          const frequencies = [174.61, 207.65, 261.63, 311.13];
+          this.oscillators = [];
+
+          frequencies.forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+
+            osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+            osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+            osc.detune.setValueAtTime((idx - 1.5) * 4.2, this.ctx.currentTime);
+
+            gain.gain.setValueAtTime(0.25 / frequencies.length, this.ctx.currentTime);
+
+            osc.connect(gain);
+            gain.connect(this.masterGain);
+            osc.start();
+
+            this.oscillators.push(osc);
+          });
+
+          this.isPlaying = true;
+        } catch (e) {
+          console.warn('Audio synthesis not supported or blocked:', e);
+        }
+      },
+
+      stop() {
+        if (!this.masterGain || !this.ctx) return;
+        this.masterGain.gain.setValueAtTime(this.masterGain.gain.value, this.ctx.currentTime);
+        this.masterGain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.7);
+        setTimeout(() => {
+          this.oscillators.forEach(osc => {
+            try { osc.stop(); osc.disconnect(); } catch (e) {}
+          });
+          this.oscillators = [];
+          this.isPlaying = false;
+        }, 750);
+      }
+    };
+
+    CoreAudioEngine.init();
   </script>
 </body>
 </html>
