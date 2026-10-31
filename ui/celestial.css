@@ -9,9 +9,9 @@
   --celestial-gradient: linear-gradient(135deg, #8399ff 0%, #c5b1e7 50%, #9bd9dc 100%);
   --celestial-gradient-text: linear-gradient(135deg, #ffffff 20%, #c5b1e7 65%, #9bd9dc 100%);
   --celestial-glow: rgba(155, 217, 220, 0.3);
-  --celestial-dock-bg: rgba(14, 16, 28, 0.78);
-  --celestial-glass-panel: rgba(13, 15, 26, 0.84);
-  --celestial-border: rgba(255, 255, 255, 0.14);
+  --celestial-dock-bg: rgba(14, 16, 28, 0.82);
+  --celestial-glass-panel: rgba(13, 15, 26, 0.86);
+  --celestial-border: rgba(255, 255, 255, 0.15);
   --celestial-border-glow: rgba(155, 217, 220, 0.4);
 }
 
@@ -83,15 +83,16 @@ body:is([data-layout=albums],[data-layout=cinema],[data-layout=split]) .player-d
   -webkit-backdrop-filter: blur(48px) saturate(200%) !important;
   border: 1px solid var(--celestial-border) !important;
   border-radius: 999px !important;
-  height: 72px !important;
-  width: min(840px, calc(100% - 48px)) !important;
-  padding: 0 22px !important;
+  height: 68px !important;
+  width: min(820px, calc(100% - 48px)) !important;
+  padding: 0 20px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  gap: 12px !important;
+  gap: 10px !important;
   position: fixed !important;
-  bottom: 24px !important;
+  bottom: 20px !important;
+  top: auto !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   box-shadow: 
@@ -101,7 +102,7 @@ body:is([data-layout=albums],[data-layout=cinema],[data-layout=split]) .player-d
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
   isolation: isolate !important;
   overflow: visible !important;
-  z-index: 40 !important;
+  z-index: 50 !important;
 }
 
 /* Specular cursor light sheen on dock border */
@@ -149,14 +150,14 @@ body[data-layout] .player-dock .transport,
 body:is([data-layout=albums],[data-layout=cinema]) .transport {
   display: flex !important;
   align-items: center !important;
-  gap: 6px !important;
+  gap: 5px !important;
   flex-shrink: 0 !important;
 }
 
 body .player-dock .transport .icon-button,
 body[data-layout] .player-dock .transport .icon-button {
-  width: 34px !important;
-  height: 34px !important;
+  width: 32px !important;
+  height: 32px !important;
   border-radius: 50% !important;
   display: flex !important;
   align-items: center !important;
@@ -165,8 +166,8 @@ body[data-layout] .player-dock .transport .icon-button {
 
 body .player-dock .transport .icon-button svg,
 body[data-layout] .player-dock .transport .icon-button svg {
-  width: 17px !important;
-  height: 17px !important;
+  width: 16px !important;
+  height: 16px !important;
 }
 
 /* Play button as living core orb with Sonar Rings */
@@ -229,9 +230,9 @@ body .player-dock .dock-track,
 body[data-layout] .player-dock .dock-track,
 body:is([data-layout=albums],[data-layout=cinema]) .dock-track {
   width: auto !important;
-  min-width: 140px !important;
-  max-width: 210px !important;
-  gap: 12px !important;
+  min-width: 130px !important;
+  max-width: 190px !important;
+  gap: 10px !important;
   display: flex !important;
   align-items: center !important;
   padding: 0 !important;
@@ -241,8 +242,8 @@ body:is([data-layout=albums],[data-layout=cinema]) .dock-track {
 }
 body .player-dock .dock-track img,
 body[data-layout] .player-dock .dock-track img {
-  width: 42px !important;
-  height: 42px !important;
+  width: 40px !important;
+  height: 40px !important;
   border-radius: 12px !important;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
   object-fit: cover !important;
@@ -297,13 +298,13 @@ body[data-layout] .player-dock .seek-group,
 body:is([data-layout=albums],[data-layout=cinema]) .seek-group {
   position: static !important;
   display: flex !important;
-  flex: 1 1 160px !important;
+  flex: 1 1 140px !important;
   align-items: center !important;
-  gap: 10px !important;
-  margin: 0 6px !important;
+  gap: 8px !important;
+  margin: 0 4px !important;
   padding: 0 !important;
   width: auto !important;
-  min-width: 100px !important;
+  min-width: 90px !important;
 }
 #seek {
   background: linear-gradient(to right, #9bd9dc 0%, #c5b1e7 var(--fill, 0%), rgba(255, 255, 255, 0.14) var(--fill, 0%)) !important;
@@ -328,7 +329,7 @@ body .player-dock .seek-times,
 body[data-layout] .player-dock .seek-times {
   display: flex !important;
   align-items: center !important;
-  gap: 6px !important;
+  gap: 5px !important;
   font-size: 11px !important;
   color: rgba(255, 255, 255, 0.65) !important;
   white-space: nowrap !important;
@@ -342,7 +343,7 @@ body:is([data-layout=albums],[data-layout=cinema]) .volume-group {
   display: flex !important;
   align-items: center !important;
   position: static !important;
-  gap: 8px !important;
+  gap: 7px !important;
   margin: 0 4px !important;
   order: unset !important;
   flex-shrink: 0 !important;
@@ -361,8 +362,8 @@ body:is([data-layout=albums],[data-layout=cinema]) .volume-group .icon-button {
 
 body .player-dock #mute-button svg,
 body[data-layout] .player-dock #mute-button svg {
-  width: 17px !important;
-  height: 17px !important;
+  width: 16px !important;
+  height: 16px !important;
 }
 
 /* The visible, styled, rounded volume slider track */
@@ -372,8 +373,8 @@ body:is([data-layout=albums],[data-layout=cinema]) .volume-group input,
 body:is([data-layout=albums],[data-layout=cinema]) #volume {
   display: block !important;
   position: static !important;
-  width: 82px !important;
-  min-width: 65px !important;
+  width: 76px !important;
+  min-width: 60px !important;
   height: 6px !important;
   border-radius: 999px !important;
   appearance: none !important;
@@ -397,8 +398,8 @@ body[data-layout] .player-dock #volume::-webkit-slider-thumb,
 body:is([data-layout=albums],[data-layout=cinema]) #volume::-webkit-slider-thumb {
   appearance: none !important;
   -webkit-appearance: none !important;
-  width: 14px !important;
-  height: 14px !important;
+  width: 13px !important;
+  height: 13px !important;
   border-radius: 50% !important;
   background: #ffffff !important;
   box-shadow: 0 0 10px #9bd9dc, 0 2px 6px rgba(0, 0, 0, 0.5) !important;
@@ -450,62 +451,72 @@ body[data-layout] .player-dock .dock-tools .icon-button {
   position: relative !important;
 }
 
-/* Inbuilt Carousel Navigation Buttons */
+/* Inbuilt Carousel Navigation Buttons — Floating Beside Center Hero Card */
 .carousel-nav-btn {
   position: absolute !important;
-  top: 48% !important;
-  transform: translateY(-50%) !important;
-  width: 48px !important;
-  height: 48px !important;
+  top: 45% !important;
+  width: 40px !important;
+  height: 40px !important;
   border-radius: 50% !important;
-  background: rgba(18, 20, 32, 0.76) !important;
+  background: rgba(18, 20, 32, 0.82) !important;
   backdrop-filter: blur(28px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
   box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.6),
-    0 0 20px rgba(155, 217, 220, 0.2),
-    inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+    0 10px 28px rgba(0, 0, 0, 0.65),
+    0 0 18px rgba(155, 217, 220, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
   color: #ffffff !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer !important;
-  z-index: 45 !important;
-  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  z-index: 35 !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 .carousel-nav-btn.carousel-prev {
-  left: -54px !important;
+  left: calc(50% - 138px) !important;
+  right: auto !important;
+  transform: translateY(-50%) !important;
 }
 .carousel-nav-btn.carousel-next {
-  right: -54px !important;
+  left: calc(50% + 138px) !important;
+  right: auto !important;
+  transform: translate(-100%, -50%) !important;
 }
 .carousel-nav-btn svg {
-  width: 22px !important;
-  height: 22px !important;
+  width: 20px !important;
+  height: 20px !important;
   stroke: #ffffff !important;
   transition: all 0.2s ease !important;
 }
-.carousel-nav-btn:hover {
-  transform: translateY(-50%) scale(1.14) !important;
-  background: rgba(28, 32, 52, 0.92) !important;
-  border-color: rgba(155, 217, 220, 0.8) !important;
+.carousel-nav-btn.carousel-prev:hover {
+  transform: translateY(-50%) scale(1.15) !important;
+  background: rgba(28, 32, 54, 0.94) !important;
+  border-color: rgba(155, 217, 220, 0.85) !important;
   box-shadow: 
-    0 14px 40px rgba(0, 0, 0, 0.7),
-    0 0 30px rgba(155, 217, 220, 0.5),
+    0 12px 36px rgba(0, 0, 0, 0.7),
+    0 0 28px rgba(155, 217, 220, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5) !important;
+}
+.carousel-nav-btn.carousel-next:hover {
+  transform: translate(-100%, -50%) scale(1.15) !important;
+  background: rgba(28, 32, 54, 0.94) !important;
+  border-color: rgba(155, 217, 220, 0.85) !important;
+  box-shadow: 
+    0 12px 36px rgba(0, 0, 0, 0.7),
+    0 0 28px rgba(155, 217, 220, 0.55),
     inset 0 1px 1px rgba(255, 255, 255, 0.5) !important;
 }
 .carousel-nav-btn:hover svg {
   stroke: var(--celestial-cyan) !important;
   filter: drop-shadow(0 0 8px rgba(155, 217, 220, 0.8));
 }
-.carousel-nav-btn:active {
-  transform: translateY(-50%) scale(0.96) !important;
+.carousel-nav-btn.carousel-prev:active {
+  transform: translateY(-50%) scale(0.95) !important;
 }
-
-@media(max-width: 900px) {
-  .carousel-nav-btn.carousel-prev { left: -18px !important; }
-  .carousel-nav-btn.carousel-next { right: -18px !important; }
+.carousel-nav-btn.carousel-next:active {
+  transform: translate(-100%, -50%) scale(0.95) !important;
 }
 
 /* Continuous Levitating 3D Album Cards Animation */
@@ -586,7 +597,7 @@ body[data-layout=albums] .cover-pagination,
   align-items: center !important;
   justify-content: center !important;
   gap: 7px !important;
-  margin: 18px auto 0 !important;
+  margin: 14px auto 0 !important;
   width: fit-content !important;
   padding: 5px 14px !important;
   background: rgba(18, 20, 32, 0.6) !important;
@@ -607,25 +618,31 @@ body[data-layout=albums] .cover-pagination,
   box-shadow: 0 0 10px rgba(155, 217, 220, 0.6) !important;
 }
 
-/* 6. Gallery Search Bar — Ultra Rounded Pill */
+/* 6. Gallery Search Bar — Fixed Clear of Dock */
 body[data-layout=albums] .gallery-search,
 .gallery-search {
   display: flex !important;
   align-items: center !important;
   gap: 12px !important;
-  width: min(640px, calc(100% - 48px)) !important;
-  height: 44px !important;
-  margin: 22px auto 0 !important;
-  padding: 0 20px !important;
+  position: fixed !important;
+  bottom: 102px !important;
+  top: auto !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: min(560px, calc(100% - 64px)) !important;
+  height: 40px !important;
+  margin: 0 !important;
+  padding: 0 18px !important;
   border-radius: 999px !important;
-  background: rgba(18, 20, 32, 0.74) !important;
+  background: rgba(18, 20, 32, 0.78) !important;
   backdrop-filter: blur(32px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
   box-shadow: 
-    0 8px 30px rgba(0, 0, 0, 0.4),
-    inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
+    0 8px 30px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
   transition: all 0.25s ease !important;
+  z-index: 45 !important;
 }
 .gallery-search:focus-within {
   border-color: rgba(155, 217, 220, 0.7) !important;
@@ -649,14 +666,17 @@ body[data-layout=albums] .gallery-search,
 }
 
 /* 7. Continue Playing Queue Rail (#desktop-rail) — Rounded Glass Capsule */
+body[data-layout] .desktop-rail,
 #desktop-rail {
   border-radius: 24px !important;
-  background: rgba(14, 16, 28, 0.72) !important;
+  background: rgba(14, 16, 28, 0.75) !important;
   backdrop-filter: blur(40px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
   padding: 16px !important;
+  max-height: calc(100vh - var(--queue-top, 280px) - 110px) !important;
+  z-index: 20 !important;
 }
 .rail-source {
   border-radius: 16px !important;

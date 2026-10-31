@@ -179,9 +179,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 5. Zero-G magnetic micro-physics on interactive buttons
+  // 5. Zero-G magnetic micro-physics on dock and topbar buttons
   const magneticTargets = document.querySelectorAll(
-    '.player-dock .icon-button, .player-dock .play-button, .carousel-nav-btn, .window-tools .icon-button, .scene-tools .icon-button'
+    '.player-dock .icon-button, .player-dock .play-button, .window-tools .icon-button, .scene-tools .icon-button'
   );
 
   magneticTargets.forEach((btn) => btn.classList.add('celestial-magnetic'));
@@ -195,11 +195,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const dy = e.clientY - centerY;
       const dist = Math.hypot(dx, dy);
 
-      if (dist < 55) {
-        const pullX = dx * 0.26;
-        const pullY = dy * 0.26;
-        btn.style.transform = `translate(${pullX}px, ${pullY}px) scale(1.06)`;
-      } else if (btn.style.transform && !btn.classList.contains('carousel-nav-btn')) {
+      if (dist < 50) {
+        const pullX = dx * 0.24;
+        const pullY = dy * 0.24;
+        btn.style.transform = `translate(${pullX}px, ${pullY}px) scale(1.05)`;
+      } else if (btn.style.transform) {
         btn.style.transform = '';
       }
     });
