@@ -607,7 +607,7 @@ body[data-layout=albums] .cover-pagination,
   box-shadow: 0 0 10px rgba(155, 217, 220, 0.6) !important;
 }
 
-/* 6. Gallery Search Bar — Fixed Clear of Dock */
+/* 6. Gallery Search Bar — Fixed Clear of Dock and Queue Rail */
 body[data-layout=albums] .gallery-search,
 .gallery-search {
   display: flex !important;
@@ -616,9 +616,10 @@ body[data-layout=albums] .gallery-search,
   position: fixed !important;
   bottom: 102px !important;
   top: auto !important;
-  left: 50% !important;
+  left: var(--reference-center, 50%) !important;
   transform: translateX(-50%) !important;
-  width: min(560px, calc(100% - 64px)) !important;
+  width: min(480px, calc(100% - 64px)) !important;
+  max-width: calc(100vw - var(--left-column-width, 240px) - 80px) !important;
   height: 40px !important;
   margin: 0 !important;
   padding: 0 18px !important;
@@ -666,6 +667,11 @@ body[data-layout] .desktop-rail,
   padding: 16px !important;
   max-height: calc(100vh - var(--queue-top, 280px) - 110px) !important;
   z-index: 20 !important;
+}
+
+/* In albums layout, ensure queue rail stops well above gallery-search with clean breathing space */
+body[data-layout=albums] .desktop-rail {
+  max-height: calc(100vh - var(--queue-top, 280px) - 170px) !important;
 }
 .rail-source {
   border-radius: 16px !important;
