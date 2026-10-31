@@ -37,7 +37,7 @@
     <text x="0" y="106" font-family="'Plus Jakarta Sans', Segoe UI, -apple-system, sans-serif" font-size="14" font-weight="700" letter-spacing="4" fill="#9bd9dc">YOUR MUSIC. YOUR ATMOSPHERE.</text>
     
     <!-- Wordmark Sonoglow -->
-    <text x="-4" y="216" font-family="'Plus Jakarta Sans', Segoe UI, -apple-system, sans-serif" font-size="104" font-weight="300" letter-spacing="-3" fill="#ffffff">sonoglow</text>
+    <text x="-4" y="216" font-family="'Plus Jakarta Sans', Segoe UI, -apple-system, sans-serif" font-size="104" font-weight="300" letter-spacing="-3" fill="#ffffff">Sonoglow</text>
     
     <!-- Subtitle -->
     <text x="2" y="278" font-family="'Plus Jakarta Sans', Segoe UI, -apple-system, sans-serif" font-size="22" font-weight="400" fill="#c5b1e7">An immersive music player for Windows.</text>
