@@ -156,12 +156,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const volSlider = document.getElementById('volume');
   if (volSlider) {
     function syncVolumeFill() {
+      const min = Number(volSlider.min) || 0;
+      const max = Number(volSlider.max) || 100;
       const val = Number(volSlider.value) || 0;
-      volSlider.style.setProperty('--vol-fill', `${val}%`);
+      const percent = Math.min(100, Math.max(0, ((val - min) / (max - min)) * 100));
+      volSlider.style.setProperty('--fill', `${percent}%`);
+      volSlider.style.setProperty('--vol-fill', `${percent}%`);
     }
     volSlider.addEventListener('input', syncVolumeFill);
     volSlider.addEventListener('change', syncVolumeFill);
     syncVolumeFill();
+
+    const descriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
+    if (descriptor && descriptor.set) {
+      Object.defineProperty(volSlider, 'value', {
+        get() {
+          return descriptor.get.call(this);
+        },
+        set(v) {
+          descriptor.set.call(this, v);
+          syncVolumeFill();
+        }
+      });
+    }
 
     const volObserver = new MutationObserver(syncVolumeFill);
     volObserver.observe(volSlider, { attributes: true, attributeFilter: ['value'] });
