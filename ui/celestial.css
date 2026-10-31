@@ -507,19 +507,19 @@ body[data-layout] .player-dock .dock-tools .icon-button {
   transform: translateY(-50%) scale(0.95) !important;
 }
 
-/* Continuous Levitating 3D Album Cards Animation */
+/* Continuous Levitating Album Cards Animation — Completely Straight, Zero Tilt */
 @keyframes celestialLevitate {
   0%, 100% {
-    transform: translateX(-50%) translateY(0px) rotate(0deg);
+    transform: translateX(-50%) translateY(0px);
   }
   50% {
-    transform: translateX(-50%) translateY(-10px) rotate(0.4deg);
+    transform: translateX(-50%) translateY(-8px);
   }
 }
 
 body[data-layout=albums] .album-card {
   border-radius: 24px !important;
-  background: rgba(18, 20, 32, 0.68) !important;
+  background: rgba(18, 20, 32, 0.75) !important;
   backdrop-filter: blur(35px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(35px) saturate(180%) !important;
   border: 1px solid rgba(255, 255, 255, 0.16) !important;
@@ -528,6 +528,7 @@ body[data-layout=albums] .album-card {
     0 0 50px rgba(131, 153, 255, 0.16),
     inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
   animation: celestialLevitate 6s ease-in-out infinite !important;
+  transform: translateX(-50%) !important;
 }
 body[data-layout=albums] .album-card:hover {
   box-shadow: 
@@ -543,7 +544,7 @@ body[data-layout=albums] .album-image-wrap img {
   border-radius: 18px !important;
 }
 
-/* Neighbor cards rounded & floating */
+/* Neighbor cards rounded & floating — Straight and Symmetrical */
 body[data-layout=albums] .album-neighbor {
   border-radius: 20px !important;
   overflow: hidden !important;
@@ -557,18 +558,18 @@ body[data-layout=albums] .album-neighbor img {
 
 @keyframes neighborLevitateLeft {
   0%, 100% {
-    transform: translateX(-227px) translateZ(-75px) rotateY(32deg) translateY(0px) scale(0.88);
+    transform: translateX(-220px) translateZ(-50px) rotateY(12deg) translateY(0px) scale(0.9);
   }
   50% {
-    transform: translateX(-227px) translateZ(-75px) rotateY(30deg) translateY(-7px) scale(0.88);
+    transform: translateX(-220px) translateZ(-50px) rotateY(12deg) translateY(-6px) scale(0.9);
   }
 }
 @keyframes neighborLevitateRight {
   0%, 100% {
-    transform: translateX(36px) translateZ(-75px) rotateY(-32deg) translateY(0px) scale(0.88);
+    transform: translateX(36px) translateZ(-50px) rotateY(-12deg) translateY(0px) scale(0.9);
   }
   50% {
-    transform: translateX(36px) translateZ(-75px) rotateY(-30deg) translateY(-7px) scale(0.88);
+    transform: translateX(36px) translateZ(-50px) rotateY(-12deg) translateY(-6px) scale(0.9);
   }
 }
 body[data-layout=albums] .album-neighbor[data-slot='-1'] {

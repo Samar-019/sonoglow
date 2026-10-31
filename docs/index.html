@@ -702,7 +702,6 @@
     .preview-cover-section {
       display: flex;
       justify-content: center;
-      perspective: 1000px;
       position: relative;
     }
     .preview-ghost-card {
@@ -711,18 +710,19 @@
       width: 180px;
       height: 220px;
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(14px);
       z-index: 1;
+      transition: all 0.3s ease;
     }
     .preview-ghost-left {
-      transform: translateX(-32px) rotateY(22deg) rotate(-6deg) scale(0.9);
-      opacity: 0.4;
+      transform: translateX(-45px) scale(0.92);
+      opacity: 0.45;
     }
     .preview-ghost-right {
-      transform: translateX(32px) rotateY(-22deg) rotate(6deg) scale(0.9);
-      opacity: 0.4;
+      transform: translateX(45px) scale(0.92);
+      opacity: 0.45;
     }
     .preview-album-card {
       position: relative;
@@ -730,16 +730,16 @@
       width: 200px;
       padding: 10px 10px 12px;
       border-radius: 20px;
-      background: rgba(18, 20, 32, 0.75);
+      background: rgba(18, 20, 32, 0.78);
       border: 1px solid rgba(255, 255, 255, 0.16);
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(131, 153, 255, 0.2);
       backdrop-filter: blur(28px) saturate(180%);
-      transform: rotate(-2deg);
+      transform: none;
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
     }
     .preview-album-card:hover {
-      transform: rotate(0deg) translateY(-4px) scale(1.03);
+      transform: translateY(-5px) scale(1.03);
       box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 45px rgba(155, 217, 220, 0.35);
     }
     .preview-album-art {
