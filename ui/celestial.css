@@ -475,14 +475,14 @@ body[data-layout] .player-dock .dock-tools .icon-button {
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 .carousel-nav-btn.carousel-prev {
-  left: calc(50% - 138px) !important;
+  left: calc(50% - 145px) !important;
   right: auto !important;
   transform: translateY(-50%) !important;
 }
 .carousel-nav-btn.carousel-next {
-  left: calc(50% + 138px) !important;
-  right: auto !important;
-  transform: translate(-100%, -50%) !important;
+  right: calc(50% - 145px) !important;
+  left: auto !important;
+  transform: translateY(-50%) !important;
 }
 .carousel-nav-btn svg {
   width: 20px !important;
@@ -490,17 +490,8 @@ body[data-layout] .player-dock .dock-tools .icon-button {
   stroke: #ffffff !important;
   transition: all 0.2s ease !important;
 }
-.carousel-nav-btn.carousel-prev:hover {
+.carousel-nav-btn:hover {
   transform: translateY(-50%) scale(1.15) !important;
-  background: rgba(28, 32, 54, 0.94) !important;
-  border-color: rgba(155, 217, 220, 0.85) !important;
-  box-shadow: 
-    0 12px 36px rgba(0, 0, 0, 0.7),
-    0 0 28px rgba(155, 217, 220, 0.55),
-    inset 0 1px 1px rgba(255, 255, 255, 0.5) !important;
-}
-.carousel-nav-btn.carousel-next:hover {
-  transform: translate(-100%, -50%) scale(1.15) !important;
   background: rgba(28, 32, 54, 0.94) !important;
   border-color: rgba(155, 217, 220, 0.85) !important;
   box-shadow: 
@@ -512,11 +503,8 @@ body[data-layout] .player-dock .dock-tools .icon-button {
   stroke: var(--celestial-cyan) !important;
   filter: drop-shadow(0 0 8px rgba(155, 217, 220, 0.8));
 }
-.carousel-nav-btn.carousel-prev:active {
+.carousel-nav-btn:active {
   transform: translateY(-50%) scale(0.95) !important;
-}
-.carousel-nav-btn.carousel-next:active {
-  transform: translate(-100%, -50%) scale(0.95) !important;
 }
 
 /* Continuous Levitating 3D Album Cards Animation */
