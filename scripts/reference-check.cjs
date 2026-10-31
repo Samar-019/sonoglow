@@ -1,9 +1,9 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..');
-const {origin}=JSON.parse(fs.readFileSync(path.join(root,'.afterglow-data/runtime.json'),'utf8'));
+const {origin}=JSON.parse(fs.readFileSync(path.join(root,'.sonoglow-data/runtime.json'),'utf8'));
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 async function get(route){const r=await fetch(origin+route,{signal:AbortSignal.timeout(45000)}),d=await r.json();if(!r.ok)throw Error(d.error);return d;}
-async function action(action,payload){const r=await fetch(origin+'/api/action',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json','X-Afterglow-Request':'1'},body:JSON.stringify({action,payload}),signal:AbortSignal.timeout(60000)}),d=await r.json();if(!r.ok)throw Error(d.error);return d.result;}
+async function action(action,payload){const r=await fetch(origin+'/api/action',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json','X-Sonoglow-Request':'1'},body:JSON.stringify({action,payload}),signal:AbortSignal.timeout(60000)}),d=await r.json();if(!r.ok)throw Error(d.error);return d.result;}
 async function waitFor(predicate,timeout=90000){const end=Date.now()+timeout;while(Date.now()<end){const s=(await get('/api/bootstrap')).state;if(s.error)throw Error(s.error);if(predicate(s))return s;await delay(700);}throw Error('Live verification timed out');}
 (async()=>{
   const {tracks}=await get('/api/search?q=Juice%20WRLD%20Righteous&kind=video');

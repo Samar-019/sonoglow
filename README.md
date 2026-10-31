@@ -165,7 +165,7 @@ Lyrics use source line timestamps. Long lines are split proportionally into shor
 
 ## Your local data
 
-Favorites, playlists, queue, history, settings and the playback profile live in `.afterglow-data/`. Imported audio and custom backgrounds remain in their original locations; Sonoglow stores their file paths. Keep that folder when updating your local copy. It is excluded from the repository along with dependencies, caches, logs and temporary verification output.
+Favorites, playlists, queue, history, settings and the playback profile live in `.sonoglow-data/`. Imported audio and custom backgrounds remain in their original locations; Sonoglow stores their file paths. Keep that folder when updating your local copy. It is excluded from the repository along with dependencies, caches, logs and temporary verification output.
 
 ## Links & Resources
 

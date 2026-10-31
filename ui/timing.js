@@ -21,5 +21,5 @@
     rows.push([finalWord]);
     return rows;
   }
-  const api={lyricPhrases,lyricRows};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.AfterglowTiming=api;
+  const api={lyricPhrases,lyricRows};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.SonoglowTiming=api;
 })(typeof window==='undefined'?globalThis:window);

@@ -1,10 +1,10 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..');
-const {origin}=JSON.parse(fs.readFileSync(path.join(root,'.afterglow-data/runtime.json'),'utf8'));
+const {origin}=JSON.parse(fs.readFileSync(path.join(root,'.sonoglow-data/runtime.json'),'utf8'));
 const report={at:new Date().toISOString(),transitions:[],complete:false};
 const save=()=>fs.writeFileSync(path.join(root,'screenshots/transition-verification.json'),JSON.stringify(report,null,2));
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
-async function request(route,body){const response=await fetch(origin+route,{method:body?'POST':'GET',headers:body?{Origin:origin,'X-Afterglow-Request':'1','Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(60000)});const data=await response.json();if(!response.ok)throw Error(data.error);return data;}
+async function request(route,body){const response=await fetch(origin+route,{method:body?'POST':'GET',headers:body?{Origin:origin,'X-Sonoglow-Request':'1','Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(60000)});const data=await response.json();if(!response.ok)throw Error(data.error);return data;}
 const action=(action,payload)=>request('/api/action',{action,payload});
 async function check(track){
   await action('play',track);

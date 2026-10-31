@@ -1,8 +1,8 @@
 const fs=require('node:fs');const path=require('node:path');const assert=require('node:assert/strict');
-const root=path.resolve(__dirname,'..');const {origin}=JSON.parse(fs.readFileSync(path.join(root,'.afterglow-data/runtime.json'),'utf8'));
+const root=path.resolve(__dirname,'..');const {origin}=JSON.parse(fs.readFileSync(path.join(root,'.sonoglow-data/runtime.json'),'utf8'));
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 async function get(route){const response=await fetch(origin+route,{signal:AbortSignal.timeout(45000)});const data=await response.json();if(!response.ok)throw new Error(data.error);return data;}
-async function action(action,payload){const response=await fetch(origin+'/api/action',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json','X-Afterglow-Request':'1'},body:JSON.stringify({action,payload}),signal:AbortSignal.timeout(60000)});const data=await response.json();if(!response.ok)throw new Error(data.error);return data;}
+async function action(action,payload){const response=await fetch(origin+'/api/action',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json','X-Sonoglow-Request':'1'},body:JSON.stringify({action,payload}),signal:AbortSignal.timeout(60000)});const data=await response.json();if(!response.ok)throw new Error(data.error);return data;}
 async function waitFor(predicate,timeout=45000){const start=Date.now();while(Date.now()-start<timeout){const data=await get('/api/bootstrap');if(predicate(data.state))return data.state;if(data.state.error)throw new Error(data.state.error);await delay(1000);}throw new Error('Playback verification timed out');}
 (async()=>{
   const initial=await get('/api/bootstrap');assert.equal(initial.desktop,true);console.log('Native app service: ready');

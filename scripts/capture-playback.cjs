@@ -1,8 +1,8 @@
 const fs=require('node:fs');const path=require('node:path');const root=path.resolve(__dirname,'..');
-const {origin}=JSON.parse(fs.readFileSync(path.join(root,'.afterglow-data/runtime.json'),'utf8'));
+const {origin}=JSON.parse(fs.readFileSync(path.join(root,'.sonoglow-data/runtime.json'),'utf8'));
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 async function get(route){const response=await fetch(origin+route);const data=await response.json();if(!response.ok)throw new Error(data.error);return data;}
-async function action(action,payload){const response=await fetch(origin+'/api/action',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json','X-Afterglow-Request':'1'},body:JSON.stringify({action,payload}),signal:AbortSignal.timeout(60000)});const data=await response.json();if(!response.ok)throw new Error(data.error);return data.result;}
+async function action(action,payload){const response=await fetch(origin+'/api/action',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json','X-Sonoglow-Request':'1'},body:JSON.stringify({action,payload}),signal:AbortSignal.timeout(60000)});const data=await response.json();if(!response.ok)throw new Error(data.error);return data.result;}
 (async()=>{
   const initial=await get('/api/bootstrap');if(!initial.desktop)throw new Error('The Windows app must be running');
   await action('settings',{volume:25});

@@ -35,7 +35,7 @@ function createServer({store,catalog=new Catalog(),controller=null,port=0}) {
       if(req.method==='GET' && url.pathname==='/api/lyrics') {const track={title:url.searchParams.get('title'),artist:url.searchParams.get('artist'),duration:Number(url.searchParams.get('duration'))};return json(res,await catalog.lyrics(track));}
       if(req.method==='GET' && url.pathname==='/api/health') return json(res,{ok:true,desktop:!!controller});
       if(req.method==='POST' && url.pathname==='/api/action') {
-        if(req.headers.origin!==origin || req.headers['x-afterglow-request']!=='1' || !String(req.headers['content-type']).startsWith('application/json')) return json(res,{error:'Request denied'},403);
+        if(req.headers.origin!==origin || req.headers['x-sonoglow-request']!=='1' || !String(req.headers['content-type']).startsWith('application/json')) return json(res,{error:'Request denied'},403);
         let body='';for await(const chunk of req){body+=chunk;if(body.length>2000000)return json(res,{error:'Request too large'},413);}
         let data;try{data=JSON.parse(body);}catch{return json(res,{error:'Invalid JSON'},400);}
         const {action,payload}=data;

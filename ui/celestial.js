@@ -1,5 +1,5 @@
 // ========================================================
-// AFTERGLOW CELESTIAL LIVING ENGINE (Spatial Micro-Physics & Living Animations)
+// SONOGLOW CELESTIAL LIVING ENGINE (Spatial Micro-Physics & Living Animations)
 // ========================================================
 
 document.addEventListener('DOMContentLoaded', () => {

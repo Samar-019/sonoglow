@@ -26,7 +26,7 @@ function connect(){
   const player=document.querySelector('#movie_player');
   if(player!==observedPlayer){playerObserver.disconnect();observedPlayer=player;if(player)playerObserver.observe(player,{attributes:true,attributeFilter:['class']});}
   for(const video of document.querySelectorAll('video')){
-    for(let ancestor=video.parentElement;ancestor&&ancestor!==document.body;ancestor=ancestor.parentElement)if(!ancestor.hasAttribute('data-afterglow-video-parent'))ancestor.setAttribute('data-afterglow-video-parent','');
+    for(let ancestor=video.parentElement;ancestor&&ancestor!==document.body;ancestor=ancestor.parentElement)if(!ancestor.hasAttribute('data-sonoglow-video-parent'))ancestor.setAttribute('data-sonoglow-video-parent','');
     if(hooked.has(video))continue;hooked.add(video);
     video.addEventListener('volumechange',guardAds);
     video.addEventListener('ended',()=>{const player=document.querySelector('#movie_player');if(adMedia.has(video)||player?.classList.contains('ad-showing')||player?.classList.contains('ad-interrupting'))return;ipcRenderer.send('engine-ended',{id:new URL(location.href).searchParams.get('v')||''});});

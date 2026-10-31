@@ -14,5 +14,5 @@
     return neighbors;
   }
   const api={carouselOrder,carouselNeighbors};
-  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.AfterglowCarousel=api;
+  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.SonoglowCarousel=api;
 })(typeof window==='undefined'?globalThis:window);

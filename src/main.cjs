@@ -5,7 +5,7 @@ const {reconcilePlayback}=require('./playback.cjs');
 const {enableAdBlocking}=require('./adblock.cjs');
 app.setName('Sonoglow');
 const root=path.resolve(__dirname,'..');
-const dataDir=app.isPackaged?path.join(app.getPath('appData'),'Sonoglow'):path.join(root,'.afterglow-data');
+const dataDir=app.isPackaged?path.join(app.getPath('appData'),'Sonoglow'):path.join(root,'.sonoglow-data');
 fs.mkdirSync(dataDir,{recursive:true});
 if(!app.isPackaged)app.setPath('userData',dataDir);
 app.setPath('sessionData',path.join(dataDir,'session'));app.setPath('crashDumps',path.join(dataDir,'crashes'));
@@ -34,7 +34,7 @@ async function applyBackgroundStyle(){
     html,body{background:#08090c!important;overflow:hidden!important;margin:0!important;padding:0!important;width:100vw!important;height:100vh!important}
     body *{visibility:hidden!important;transform:none!important;transform-style:flat!important;translate:none!important;rotate:none!important;scale:none!important;contain:none!important;content-visibility:visible!important;container-type:normal!important;zoom:1!important;filter:none!important;backdrop-filter:none!important;perspective:none!important;will-change:auto!important;overflow:visible!important;clip-path:none!important}
     ytmusic-app,ytmusic-app-layout,ytmusic-player-page,ytmusic-player,#player,#movie_player,.html5-video-container{position:static!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important}
-    body [data-afterglow-video-parent]{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important}
+    body [data-sonoglow-video-parent]{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important}
     video{visibility:visible!important;display:block!important;position:fixed!important;inset:0!important;left:0!important;top:0!important;width:100vw!important;height:100vh!important;min-width:100vw!important;min-height:100vh!important;max-width:none!important;max-height:none!important;object-fit:cover!important;object-position:center center!important;margin:0!important;padding:0!important;z-index:2147483600!important;opacity:1!important}
     .ad-showing video,.ad-interrupting video{visibility:hidden!important}
   `,{cssOrigin:'user'});
@@ -45,11 +45,11 @@ async function showSource(enabled=true){leaveCompact();sourceMode=enabled;win.se
 async function remoteCommand(command,value){
   if(quitting||!engine?.webContents||engine.webContents.isDestroyed()||!engine.webContents.getURL())return;
   const commands={
-    toggle:`window.__afterglowTransport=(window.__afterglowTransport||0)+1;const v=document.querySelector('video');const p=document.querySelector('#movie_player');if(v){if(v.paused){if(p?.playVideo)p.playVideo();else await v.play();}else{p?.pauseVideo?.();v.pause();}}`,
-    play:`window.__afterglowTransport=(window.__afterglowTransport||0)+1;const v=document.querySelector('video');const p=document.querySelector('#movie_player');if(p?.playVideo)p.playVideo();else if(v)await v.play();`,
-    pause:`window.__afterglowTransport=(window.__afterglowTransport||0)+1;document.querySelector('#movie_player')?.pauseVideo?.();document.querySelector('video')?.pause();`,
+    toggle:`window.__sonoglowTransport=(window.__sonoglowTransport||0)+1;const v=document.querySelector('video');const p=document.querySelector('#movie_player');if(v){if(v.paused){if(p?.playVideo)p.playVideo();else await v.play();}else{p?.pauseVideo?.();v.pause();}}`,
+    play:`window.__sonoglowTransport=(window.__sonoglowTransport||0)+1;const v=document.querySelector('video');const p=document.querySelector('#movie_player');if(p?.playVideo)p.playVideo();else if(v)await v.play();`,
+    pause:`window.__sonoglowTransport=(window.__sonoglowTransport||0)+1;document.querySelector('#movie_player')?.pauseVideo?.();document.querySelector('video')?.pause();`,
     stop:`document.querySelector('#movie_player')?.stopVideo?.();document.querySelector('video')?.pause();`,
-    seek:`const token=window.__afterglowTransport=(window.__afterglowTransport||0)+1;const v=document.querySelector('video');const p=document.querySelector('#movie_player');if(v){const paused=${!state.playing};const keepPaused=()=>{if(paused&&window.__afterglowTransport===token){p?.pauseVideo?.();v.pause();}};v.addEventListener('seeked',keepPaused,{once:true});if(p?.seekTo)p.seekTo(${Math.max(0,Number(value)||0)},true);else v.currentTime=${Math.max(0,Number(value)||0)};keepPaused();if(paused)setTimeout(keepPaused,350);}`,
+    seek:`const token=window.__sonoglowTransport=(window.__sonoglowTransport||0)+1;const v=document.querySelector('video');const p=document.querySelector('#movie_player');if(v){const paused=${!state.playing};const keepPaused=()=>{if(paused&&window.__sonoglowTransport===token){p?.pauseVideo?.();v.pause();}};v.addEventListener('seeked',keepPaused,{once:true});if(p?.seekTo)p.seekTo(${Math.max(0,Number(value)||0)},true);else v.currentTime=${Math.max(0,Number(value)||0)};keepPaused();if(paused)setTimeout(keepPaused,350);}`,
     volume:`const v=document.querySelector('video');if(v){v.volume=${Math.min(1,Math.max(0,Number(value)/100||0))};v.muted=false;}`,
     next:`document.querySelector('.next-button')?.click();`,
     previous:`document.querySelector('.previous-button')?.click();`,
@@ -176,7 +176,7 @@ const controller={
       const result=await dialog.showOpenDialog({title:'Load synced lyrics',properties:['openFile'],filters:[{name:'LRC lyrics',extensions:['lrc']}]});if(result.canceled)return null;
       return {lines:require('./model.cjs').parseLrc(fs.readFileSync(result.filePaths[0],'utf8')),source:'Local LRC'};
     }
-    if(action==='verify-motion'&&process.env.AFTERGLOW_VERIFY_UI==='1'){
+    if(action==='verify-motion'&&process.env.SONOGLOW_VERIFY_UI==='1'){
       const windowState=()=>({visible:win.isVisible(),focused:win.isFocused(),minimized:win.isMinimized(),uiVisible:ui.getVisible(),bounds:win.getBounds(),uiBounds:ui.getBounds()});
       const windowBefore=windowState();const {sampleMotion}=require('./verify.cjs');const sample=await ui.webContents.executeJavaScript('('+sampleMotion.toString()+')()');
       const report={...sample,windowBefore,windowAfter:windowState(),gpuFeatures:app.getGPUFeatureStatus()};
@@ -184,11 +184,11 @@ const controller={
       const dir=app.isPackaged?path.join(dataDir,'screenshots'):path.join(root,'screenshots');
       fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'motion-verification.json'),JSON.stringify({at:new Date().toISOString(),layout:store.data.settings.layout,...report},null,2));return report;
     }
-    if(action==='verify-inspect'&&process.env.AFTERGLOW_VERIFY_UI==='1'){
+    if(action==='verify-inspect'&&process.env.SONOGLOW_VERIFY_UI==='1'){
       const {inspectVideo,inspectUI}=require('./verify.cjs');
       return {state:controller.getState(),ui:await ui.webContents.executeJavaScript('('+inspectUI.toString()+')()'),engine:engine.webContents.getURL().startsWith('https://music.youtube.com')?await engine.webContents.executeJavaScript('('+inspectVideo.toString()+')()'):null};
     }
-    if(action==='verify-snapshot'&&process.env.AFTERGLOW_VERIFY_UI==='1'){
+    if(action==='verify-snapshot'&&process.env.SONOGLOW_VERIFY_UI==='1'){
       const name=String(payload?.name||payload||'player').replace(/[^a-z0-9-]/gi,'').slice(0,40)||'player';const directory=app.isPackaged?path.join(dataDir,'screenshots'):path.join(root,'screenshots');fs.mkdirSync(directory,{recursive:true});
       const videoGeometry=engine.webContents.getURL().startsWith('https://music.youtube.com')?await engine.webContents.executeJavaScript(`(()=>{const v=document.querySelector('video');const r=v?.getBoundingClientRect();return {viewport:{width:innerWidth,height:innerHeight},video:r?{x:r.x,y:r.y,width:r.width,height:r.height}:null}})()`).catch(()=>null):null;
       const diagnostics={visible:win.isVisible(),minimized:win.isMinimized(),focused:win.isFocused(),bounds:win.getBounds(),uiBounds:ui.getBounds(),engineBounds:engine.getBounds(),uiUrl:ui.webContents.getURL(),videoGeometry};fs.writeFileSync(path.join(directory,name+'-window.json'),JSON.stringify(diagnostics,null,2));
@@ -205,7 +205,7 @@ const controller={
 };
 async function start(){
   store=new Store(dataDir);state.volume=store.data.settings.volume;
-  service=await createServer({store,controller,port:Number(process.env.AFTERGLOW_PORT)||0});
+  service=await createServer({store,controller,port:Number(process.env.SONOGLOW_PORT)||0});
   fs.writeFileSync(stateFile,JSON.stringify({origin:service.origin,pid:process.pid,started:new Date().toISOString()}));
   const icon=path.join(root,'ui/assets/icon.png');
   win=new BaseWindow({width:1360,height:880,minWidth:900,minHeight:620,frame:false,show:false,backgroundColor:'#08090c',title:'Sonoglow',icon});
@@ -213,7 +213,7 @@ async function start(){
   adProtection=enableAdBlocking(remoteSession,dataDir);adProtection.ready.then(()=>log('Ad protection enabled')).catch(error=>log('Ad protection failed',error));
   remoteSession.setPermissionRequestHandler((_w,_p,callback)=>callback(false));
   remoteSession.setPermissionCheckHandler(()=>false);
-  const agent=remoteSession.getUserAgent().replace(/\s(?:Electron|Afterglow|Sonogloam|Velvanoct|velvanoct-player)\/[^\s]+/g,'');remoteSession.setUserAgent(agent);
+  const agent=remoteSession.getUserAgent().replace(/\s(?:Electron|Sonoglow|Sonogloam|Velvanoct|velvanoct-player)\/[^\s]+/g,'');remoteSession.setUserAgent(agent);
   engine=new WebContentsView({webPreferences:{partition:'persist:youtube',preload:path.join(__dirname,'engine-preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,backgroundThrottling:false}});
   engine.setBackgroundColor('#08090c');
   ui=new WebContentsView({webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,backgroundThrottling:false}});ui.setBackgroundColor('#00000000');

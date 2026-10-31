@@ -41,5 +41,5 @@
     element.addEventListener('click',event=>{if(event.detail!==0&&performance.now()<suppressUntil){event.preventDefault();event.stopImmediatePropagation();}},true);
   }
   const api={swipeDirection,bindSwipe};
-  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.AfterglowGestures=api;
+  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.SonoglowGestures=api;
 })(typeof window==='undefined'?globalThis:window);
