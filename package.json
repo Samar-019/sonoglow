@@ -11,7 +11,7 @@
     "preview": "node src/preview.cjs",
     "test": "node --test tests/*.test.cjs",
     "check": "node scripts/check.cjs",
-    "dist": "electron-builder --win nsis"
+    "dist": "electron-builder --win nsis --publish never"
   },
   "build": {
     "appId": "com.smithcooks.afterglow",
