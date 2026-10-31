@@ -53,6 +53,12 @@ body {
 }
 
 .web-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.brand-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 12px rgba(155, 217, 220, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
 .brand-badge {
   width: 32px; height: 32px; border-radius: 10px;
   background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
