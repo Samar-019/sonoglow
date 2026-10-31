@@ -30,5 +30,3 @@ jobs:
 
       - name: Build Windows Installer (setup.exe)
         run: npm run dist
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
