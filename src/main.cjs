@@ -3,8 +3,12 @@ const path=require('node:path');const fs=require('node:fs');const crypto=require
 const {Store,cleanTrack,nextQueueIndex}=require('./model.cjs');const {createServer}=require('./server.cjs');
 const {reconcilePlayback}=require('./playback.cjs');
 const {enableAdBlocking}=require('./adblock.cjs');
-const root=path.resolve(__dirname,'..');const dataDir=path.join(root,'.afterglow-data');
-fs.mkdirSync(dataDir,{recursive:true});app.setName('Afterglow');app.setPath('userData',dataDir);app.setPath('sessionData',path.join(dataDir,'session'));app.setPath('crashDumps',path.join(dataDir,'crashes'));
+app.setName('Afterglow');
+const root=path.resolve(__dirname,'..');
+const dataDir=app.isPackaged?path.join(app.getPath('appData'),'Afterglow'):path.join(root,'.afterglow-data');
+fs.mkdirSync(dataDir,{recursive:true});
+if(!app.isPackaged)app.setPath('userData',dataDir);
+app.setPath('sessionData',path.join(dataDir,'session'));app.setPath('crashDumps',path.join(dataDir,'crashes'));
 app.commandLine.appendSwitch('autoplay-policy','no-user-gesture-required');
 let win,ui,engine,tray,service,store;let sourceMode=false,compact=false,quitting=false,pollBusy=false,sourceStyleKey=null,modeBeforeCompact=null;
 let styleUpdate=Promise.resolve(),wasDesktop=false,normalBounds=null;
@@ -177,14 +181,15 @@ const controller={
       const windowBefore=windowState();const {sampleMotion}=require('./verify.cjs');const sample=await ui.webContents.executeJavaScript('('+sampleMotion.toString()+')()');
       const report={...sample,windowBefore,windowAfter:windowState(),gpuFeatures:app.getGPUFeatureStatus()};
       if([report.windowBefore,report.windowAfter].some(w=>!w.visible||w.minimized||!w.uiVisible))report.sampleStatus='inconclusive';
-      fs.mkdirSync(path.join(root,'screenshots'),{recursive:true});fs.writeFileSync(path.join(root,'screenshots/motion-verification.json'),JSON.stringify({at:new Date().toISOString(),layout:store.data.settings.layout,...report},null,2));return report;
+      const dir=app.isPackaged?path.join(dataDir,'screenshots'):path.join(root,'screenshots');
+      fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'motion-verification.json'),JSON.stringify({at:new Date().toISOString(),layout:store.data.settings.layout,...report},null,2));return report;
     }
     if(action==='verify-inspect'&&process.env.AFTERGLOW_VERIFY_UI==='1'){
       const {inspectVideo,inspectUI}=require('./verify.cjs');
       return {state:controller.getState(),ui:await ui.webContents.executeJavaScript('('+inspectUI.toString()+')()'),engine:engine.webContents.getURL().startsWith('https://music.youtube.com')?await engine.webContents.executeJavaScript('('+inspectVideo.toString()+')()'):null};
     }
     if(action==='verify-snapshot'&&process.env.AFTERGLOW_VERIFY_UI==='1'){
-      const name=String(payload?.name||payload||'player').replace(/[^a-z0-9-]/gi,'').slice(0,40)||'player';const directory=path.join(root,'screenshots');fs.mkdirSync(directory,{recursive:true});
+      const name=String(payload?.name||payload||'player').replace(/[^a-z0-9-]/gi,'').slice(0,40)||'player';const directory=app.isPackaged?path.join(dataDir,'screenshots'):path.join(root,'screenshots');fs.mkdirSync(directory,{recursive:true});
       const videoGeometry=engine.webContents.getURL().startsWith('https://music.youtube.com')?await engine.webContents.executeJavaScript(`(()=>{const v=document.querySelector('video');const r=v?.getBoundingClientRect();return {viewport:{width:innerWidth,height:innerHeight},video:r?{x:r.x,y:r.y,width:r.width,height:r.height}:null}})()`).catch(()=>null):null;
       const diagnostics={visible:win.isVisible(),minimized:win.isMinimized(),focused:win.isFocused(),bounds:win.getBounds(),uiBounds:ui.getBounds(),engineBounds:engine.getBounds(),uiUrl:ui.webContents.getURL(),videoGeometry};fs.writeFileSync(path.join(directory,name+'-window.json'),JSON.stringify(diagnostics,null,2));
       ui.webContents.invalidate();await new Promise(resolve=>setTimeout(resolve,200));
