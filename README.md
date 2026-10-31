@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/images/banner.svg" alt="Sonoglow — your music, your atmosphere" width="100%" />
+<img src="docs/images/banner.svg?v=sonoglow" alt="Sonoglow — your music, your atmosphere" width="100%" />
 
 <br />
 
