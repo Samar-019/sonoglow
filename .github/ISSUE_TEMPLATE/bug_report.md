@@ -3,7 +3,7 @@ name: Bug Report
 about: Create a report to help improve Afterglow
 title: '[BUG] '
 labels: bug
-assignees: Axis-019
+assignees: Samar-019
 ---
 
 **Describe the bug**

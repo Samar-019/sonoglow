@@ -3,7 +3,7 @@ name: Feature Request
 about: Suggest an idea or new feature for Afterglow
 title: '[FEATURE] '
 labels: enhancement
-assignees: Axis-019
+assignees: Samar-019
 ---
 
 **Is your feature request related to a problem? Please describe.**
