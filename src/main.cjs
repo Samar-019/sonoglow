@@ -213,7 +213,7 @@ async function start(){
   adProtection=enableAdBlocking(remoteSession,dataDir);adProtection.ready.then(()=>log('Ad protection enabled')).catch(error=>log('Ad protection failed',error));
   remoteSession.setPermissionRequestHandler((_w,_p,callback)=>callback(false));
   remoteSession.setPermissionCheckHandler(()=>false);
-  const agent=remoteSession.getUserAgent().replace(/\s(?:Electron|Sonoglow|Sonogloam|Velvanoct|velvanoct-player)\/[^\s]+/g,'');remoteSession.setUserAgent(agent);
+  const agent=remoteSession.getUserAgent().replace(/\s(?:Electron|Sonoglow|sonoglow-player)\/[^\s]+/g,'');remoteSession.setUserAgent(agent);
   engine=new WebContentsView({webPreferences:{partition:'persist:youtube',preload:path.join(__dirname,'engine-preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,backgroundThrottling:false}});
   engine.setBackgroundColor('#08090c');
   ui=new WebContentsView({webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,backgroundThrottling:false}});ui.setBackgroundColor('#00000000');
