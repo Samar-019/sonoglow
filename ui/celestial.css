@@ -1,5 +1,5 @@
 /* ========================================================
-   AFTERGLOW CELESTIAL LIVING UI (Next-Gen Spatial Glass)
+   AFTERGLOW CELESTIAL LIVING UI (Next-Gen Spatial Glass & Rounded Architecture)
    ======================================================== */
 
 :root {
@@ -8,87 +8,100 @@
   --celestial-blue: #8399ff;
   --celestial-gradient: linear-gradient(135deg, #8399ff 0%, #c5b1e7 50%, #9bd9dc 100%);
   --celestial-gradient-text: linear-gradient(135deg, #ffffff 20%, #c5b1e7 65%, #9bd9dc 100%);
-  --celestial-glow: rgba(155, 217, 220, 0.25);
-  --celestial-dock-bg: rgba(14, 16, 28, 0.74);
-  --celestial-glass-panel: rgba(13, 15, 26, 0.82);
-  --celestial-border: rgba(255, 255, 255, 0.13);
-  --celestial-border-glow: rgba(155, 217, 220, 0.35);
+  --celestial-glow: rgba(155, 217, 220, 0.3);
+  --celestial-dock-bg: rgba(14, 16, 28, 0.78);
+  --celestial-glass-panel: rgba(13, 15, 26, 0.84);
+  --celestial-border: rgba(255, 255, 255, 0.14);
+  --celestial-border-glow: rgba(155, 217, 220, 0.4);
 }
 
 /* 1. Celestial Stardust Canvas */
 #celestial-stardust {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.65;
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+  opacity: 0.95 !important;
 }
 
 /* 2. Topbar Overhaul */
 .topbar {
-  background: linear-gradient(180deg, rgba(8, 9, 15, 0.75) 0%, rgba(8, 9, 15, 0) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 0 20px;
-  height: 56px;
+  background: linear-gradient(180deg, rgba(8, 9, 15, 0.75) 0%, rgba(8, 9, 15, 0) 100%) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  padding: 0 20px !important;
+  height: 56px !important;
+  z-index: 30 !important;
 }
 .wordmark {
-  gap: 9px;
-  opacity: 0.95;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  gap: 9px !important;
+  opacity: 0.95 !important;
+  transition: opacity 0.2s ease, transform 0.2s ease !important;
 }
 .wordmark:hover {
-  opacity: 1;
-  transform: translateY(-1px);
+  opacity: 1 !important;
+  transform: translateY(-1px) !important;
 }
 .brand-symbol {
   font-family: 'Plus Jakarta Sans', sans-serif !important;
   font-weight: 800 !important;
   font-style: normal !important;
   font-size: 20px !important;
-  background: var(--celestial-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(155, 217, 220, 0.45));
+  background: var(--celestial-gradient) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 0 10px rgba(155, 217, 220, 0.45)) !important;
 }
 .source-label {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
-  padding: 4px 12px;
-  backdrop-filter: blur(10px);
-  letter-spacing: 0.04em;
-  font-size: 10.5px;
-  opacity: 0.85;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 999px !important;
+  padding: 5px 14px !important;
+  backdrop-filter: blur(12px) !important;
+  letter-spacing: 0.04em !important;
+  font-size: 11px !important;
+  opacity: 0.9 !important;
 }
 .source-dot {
   background: #4ade80 !important;
-  box-shadow: 0 0 8px #4ade80;
-  animation: liveDotPulse 2s infinite ease-in-out;
+  box-shadow: 0 0 8px #4ade80 !important;
+  animation: liveDotPulse 2s infinite ease-in-out !important;
 }
 @keyframes liveDotPulse {
   0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.65; }
+  50% { transform: scale(1.35); opacity: 0.65; }
 }
 
-/* 3. Celestial Player Dock */
-.player-dock {
+/* 3. Celestial Player Dock — Global Rounded Pill Capsule */
+body .player-dock,
+body[data-layout] .player-dock,
+body:is([data-layout=albums],[data-layout=cinema],[data-layout=split]) .player-dock {
   background: var(--celestial-dock-bg) !important;
   backdrop-filter: blur(48px) saturate(200%) !important;
   -webkit-backdrop-filter: blur(48px) saturate(200%) !important;
   border: 1px solid var(--celestial-border) !important;
-  border-radius: 28px !important;
-  height: 80px !important;
+  border-radius: 999px !important;
+  height: 72px !important;
+  width: min(840px, calc(100% - 48px)) !important;
   padding: 0 22px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  position: fixed !important;
+  bottom: 24px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
   box-shadow: 
     0 24px 80px rgba(0, 0, 0, 0.72),
-    0 0 50px rgba(155, 217, 220, 0.12),
-    inset 0 1px 1px rgba(255, 255, 255, 0.28) !important;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  isolation: isolate;
-  overflow: visible;
+    0 0 45px rgba(155, 217, 220, 0.14),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  isolation: isolate !important;
+  overflow: visible !important;
+  z-index: 40 !important;
 }
 
 /* Specular cursor light sheen on dock border */
@@ -96,7 +109,7 @@
   content: '';
   position: absolute;
   inset: -1px;
-  border-radius: 28px;
+  border-radius: 999px;
   padding: 1px;
   background: radial-gradient(
     480px circle at var(--dock-x, 50%) var(--dock-y, 50%),
@@ -111,8 +124,54 @@
   z-index: 1;
 }
 
-/* Play button as living core orb */
-.play-button {
+/* Breathing ambient glow on dock when music is playing */
+body.playing .player-dock {
+  animation: dockGlowPulse 4s ease-in-out infinite alternate !important;
+}
+@keyframes dockGlowPulse {
+  0% {
+    box-shadow: 
+      0 24px 80px rgba(0, 0, 0, 0.72),
+      0 0 35px rgba(155, 217, 220, 0.16),
+      inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    box-shadow: 
+      0 28px 90px rgba(0, 0, 0, 0.78),
+      0 0 60px rgba(197, 177, 231, 0.28),
+      inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  }
+}
+
+/* Transport Controls in Dock */
+body .player-dock .transport,
+body[data-layout] .player-dock .transport,
+body:is([data-layout=albums],[data-layout=cinema]) .transport {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+body .player-dock .transport .icon-button,
+body[data-layout] .player-dock .transport .icon-button {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+body .player-dock .transport .icon-button svg,
+body[data-layout] .player-dock .transport .icon-button svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+/* Play button as living core orb with Sonar Rings */
+body .player-dock .play-button,
+body[data-layout] .player-dock .play-button {
   width: 44px !important;
   height: 44px !important;
   border-radius: 50% !important;
@@ -121,137 +180,523 @@
   border: none !important;
   box-shadow: 0 4px 20px rgba(131, 153, 255, 0.45) !important;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease !important;
-  position: relative;
-  z-index: 2;
+  position: relative !important;
+  z-index: 2 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
 }
-.play-button svg {
+body .player-dock .play-button svg,
+body[data-layout] .player-dock .play-button svg {
   fill: #08090c !important;
   width: 20px !important;
   height: 20px !important;
-  margin-left: 2px;
+  margin-left: 2px !important;
 }
-.play-button:hover {
-  transform: scale(1.08) !important;
-  box-shadow: 0 6px 28px rgba(155, 217, 220, 0.65) !important;
+body .player-dock .play-button:hover,
+body[data-layout] .player-dock .play-button:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 28px rgba(155, 217, 220, 0.7) !important;
 }
-body.playing .play-button {
-  animation: coreAuraPulse 3s infinite ease-in-out alternate;
+
+/* Living Sonar Rings when playing */
+body.playing .player-dock .play-button::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.8px solid rgba(155, 217, 220, 0.75);
+  animation: sonarRipple 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  pointer-events: none;
 }
-@keyframes coreAuraPulse {
-  0% { box-shadow: 0 4px 20px rgba(131, 153, 255, 0.45), 0 0 10px rgba(155, 217, 220, 0.3); }
-  100% { box-shadow: 0 6px 30px rgba(155, 217, 220, 0.6), 0 0 25px rgba(197, 177, 231, 0.4); }
+body.playing .player-dock .play-button::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(197, 177, 231, 0.55);
+  animation: sonarRipple 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite 1.1s;
+  pointer-events: none;
+}
+@keyframes sonarRipple {
+  0% { transform: scale(0.95); opacity: 0.9; }
+  100% { transform: scale(1.8); opacity: 0; }
 }
 
 /* Dock track thumbnail and text */
-.dock-track {
+body .player-dock .dock-track,
+body[data-layout] .player-dock .dock-track,
+body:is([data-layout=albums],[data-layout=cinema]) .dock-track {
+  width: auto !important;
+  min-width: 140px !important;
+  max-width: 210px !important;
   gap: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  text-align: left !important;
+  flex-shrink: 0 !important;
 }
-.dock-track img {
+body .player-dock .dock-track img,
+body[data-layout] .player-dock .dock-track img {
   width: 42px !important;
   height: 42px !important;
-  border-radius: 9px !important;
+  border-radius: 12px !important;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
-  object-fit: cover;
+  object-fit: cover !important;
 }
-.dock-track strong {
-  font-size: 11.5px !important;
-  letter-spacing: -0.01em;
-  color: #ffffff;
+body .player-dock .dock-track strong,
+body[data-layout] .player-dock .dock-track strong {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  color: #ffffff !important;
+  display: block !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
-.dock-track small {
+body .player-dock .dock-track small,
+body[data-layout] .player-dock .dock-track small {
   color: var(--celestial-cyan) !important;
-  font-size: 9.5px !important;
-  opacity: 0.85;
+  font-size: 10px !important;
+  opacity: 0.9 !important;
+  display: block !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
-/* Glowing Seekbar */
-#seek {
-  background: linear-gradient(to right, #9bd9dc 0%, #c5b1e7 var(--fill, 0%), rgba(255, 255, 255, 0.12) var(--fill, 0%)) !important;
-  height: 4px !important;
-  border-radius: 999px !important;
-}
-#seek::-webkit-slider-thumb {
-  width: 12px !important;
-  height: 12px !important;
+/* Favorite button in dock */
+body .player-dock .favorite-button,
+body[data-layout] .player-dock .favorite-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
   border-radius: 50% !important;
-  background: #ffffff !important;
-  box-shadow: 0 0 12px var(--celestial-cyan), 0 0 20px rgba(131, 153, 255, 0.5) !important;
-  opacity: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease !important;
+  flex-shrink: 0 !important;
 }
-#seek:hover::-webkit-slider-thumb {
-  opacity: 1 !important;
-  transform: scale(1.15);
-}
-
-/* Icon Buttons in dock */
-.icon-button {
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  border-radius: 10px !important;
-}
-.icon-button:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: var(--celestial-cyan) !important;
-  transform: translateY(-2px);
+body .player-dock .favorite-button svg,
+body[data-layout] .player-dock .favorite-button svg {
+  width: 16px !important;
+  height: 16px !important;
 }
 .favorite-button[aria-pressed=true] svg {
   fill: #f43f5e !important;
   stroke: #f43f5e !important;
-  filter: drop-shadow(0 0 8px rgba(244, 63, 94, 0.5));
+  filter: drop-shadow(0 0 8px rgba(244, 63, 94, 0.6)) !important;
 }
 
-/* 4. 3D Album Card Cover Flow */
-.album-card {
+/* Glowing Seekbar */
+body .player-dock .seek-group,
+body[data-layout] .player-dock .seek-group,
+body:is([data-layout=albums],[data-layout=cinema]) .seek-group {
+  position: static !important;
+  display: flex !important;
+  flex: 1 1 160px !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 0 6px !important;
+  padding: 0 !important;
+  width: auto !important;
+  min-width: 100px !important;
+}
+#seek {
+  background: linear-gradient(to right, #9bd9dc 0%, #c5b1e7 var(--fill, 0%), rgba(255, 255, 255, 0.14) var(--fill, 0%)) !important;
+  height: 5px !important;
+  border-radius: 999px !important;
+  cursor: pointer !important;
+}
+#seek::-webkit-slider-thumb {
+  width: 13px !important;
+  height: 13px !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 12px var(--celestial-cyan), 0 0 20px rgba(131, 153, 255, 0.6) !important;
+  opacity: 0.9 !important;
+  transition: opacity 0.2s ease, transform 0.2s ease !important;
+}
+#seek:hover::-webkit-slider-thumb {
+  opacity: 1 !important;
+  transform: scale(1.22) !important;
+}
+body .player-dock .seek-times,
+body[data-layout] .player-dock .seek-times {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 11px !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  white-space: nowrap !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* 4. VOLUME UI OVERHAUL & FULL FIX — Rounded Capsule Slider */
+body .player-dock .volume-group,
+body[data-layout] .player-dock .volume-group,
+body:is([data-layout=albums],[data-layout=cinema]) .volume-group {
+  display: flex !important;
+  align-items: center !important;
+  position: static !important;
+  gap: 8px !important;
+  margin: 0 4px !important;
+  order: unset !important;
+  flex-shrink: 0 !important;
+}
+
+body .player-dock #mute-button,
+body[data-layout] .player-dock #mute-button,
+body:is([data-layout=albums],[data-layout=cinema]) .volume-group .icon-button {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+body .player-dock #mute-button svg,
+body[data-layout] .player-dock #mute-button svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+/* The visible, styled, rounded volume slider track */
+body .player-dock #volume,
+body[data-layout] .player-dock #volume,
+body:is([data-layout=albums],[data-layout=cinema]) .volume-group input,
+body:is([data-layout=albums],[data-layout=cinema]) #volume {
+  display: block !important;
+  position: static !important;
+  width: 82px !important;
+  min-width: 65px !important;
+  height: 6px !important;
+  border-radius: 999px !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background: linear-gradient(to right, #9bd9dc 0%, #c5b1e7 var(--vol-fill, 65%), rgba(255, 255, 255, 0.18) var(--vol-fill, 65%)) !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.45) !important;
+  cursor: pointer !important;
+  opacity: 0.9 !important;
+  transition: opacity 0.2s ease, width 0.2s ease !important;
+}
+
+body .player-dock #volume:hover {
+  opacity: 1 !important;
+}
+
+/* Circular glowing pearl thumb */
+body .player-dock #volume::-webkit-slider-thumb,
+body[data-layout] .player-dock #volume::-webkit-slider-thumb,
+body:is([data-layout=albums],[data-layout=cinema]) #volume::-webkit-slider-thumb {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 10px #9bd9dc, 0 2px 6px rgba(0, 0, 0, 0.5) !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease !important;
+}
+
+body .player-dock #volume:hover::-webkit-slider-thumb {
+  transform: scale(1.25) !important;
+  box-shadow: 0 0 14px #9bd9dc, 0 0 24px rgba(131, 153, 255, 0.7) !important;
+}
+
+/* Dock tools */
+body .player-dock .dock-tools,
+body[data-layout] .player-dock .dock-tools,
+body:is([data-layout=albums],[data-layout=cinema]) .dock-tools {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  margin-left: 0 !important;
+  order: unset !important;
+  flex-shrink: 0 !important;
+}
+
+body .player-dock .dock-tools .icon-button,
+body[data-layout] .player-dock .dock-tools .icon-button {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* All Icon Buttons in dock */
+.icon-button {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border-radius: 50% !important;
+}
+.icon-button:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--celestial-cyan) !important;
+  transform: translateY(-2px);
+}
+
+/* 5. 3D ALBUM CAROUSEL & INBUILT NAVIGATION BUTTONS */
+.cover-section {
+  position: relative !important;
+}
+
+/* Inbuilt Carousel Navigation Buttons */
+.carousel-nav-btn {
+  position: absolute !important;
+  top: 48% !important;
+  transform: translateY(-50%) !important;
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  background: rgba(18, 20, 32, 0.76) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(155, 217, 220, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  z-index: 45 !important;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.carousel-nav-btn.carousel-prev {
+  left: -54px !important;
+}
+.carousel-nav-btn.carousel-next {
+  right: -54px !important;
+}
+.carousel-nav-btn svg {
+  width: 22px !important;
+  height: 22px !important;
+  stroke: #ffffff !important;
+  transition: all 0.2s ease !important;
+}
+.carousel-nav-btn:hover {
+  transform: translateY(-50%) scale(1.14) !important;
+  background: rgba(28, 32, 52, 0.92) !important;
+  border-color: rgba(155, 217, 220, 0.8) !important;
+  box-shadow: 
+    0 14px 40px rgba(0, 0, 0, 0.7),
+    0 0 30px rgba(155, 217, 220, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5) !important;
+}
+.carousel-nav-btn:hover svg {
+  stroke: var(--celestial-cyan) !important;
+  filter: drop-shadow(0 0 8px rgba(155, 217, 220, 0.8));
+}
+.carousel-nav-btn:active {
+  transform: translateY(-50%) scale(0.96) !important;
+}
+
+@media(max-width: 900px) {
+  .carousel-nav-btn.carousel-prev { left: -18px !important; }
+  .carousel-nav-btn.carousel-next { right: -18px !important; }
+}
+
+/* Continuous Levitating 3D Album Cards Animation */
+@keyframes celestialLevitate {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px) rotate(0.4deg);
+  }
+}
+
+body[data-layout=albums] .album-card {
   border-radius: 24px !important;
-  background: rgba(18, 20, 32, 0.65) !important;
+  background: rgba(18, 20, 32, 0.68) !important;
   backdrop-filter: blur(35px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(35px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
   box-shadow: 
     0 30px 90px rgba(0, 0, 0, 0.72),
     0 0 50px rgba(131, 153, 255, 0.16),
     inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
-  transition: transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.4s ease !important;
+  animation: celestialLevitate 6s ease-in-out infinite !important;
 }
-.album-card:hover {
+body[data-layout=albums] .album-card:hover {
   box-shadow: 
     0 35px 100px rgba(0, 0, 0, 0.8),
     0 0 60px rgba(155, 217, 220, 0.3),
     inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
 }
-.album-image-wrap {
+body[data-layout=albums] .album-image-wrap {
+  border-radius: 18px !important;
+  overflow: hidden !important;
+}
+body[data-layout=albums] .album-image-wrap img {
+  border-radius: 18px !important;
+}
+
+/* Neighbor cards rounded & floating */
+body[data-layout=albums] .album-neighbor {
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  backdrop-filter: blur(24px) saturate(160%) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
+}
+body[data-layout=albums] .album-neighbor img {
+  border-radius: 14px !important;
+}
+
+@keyframes neighborLevitateLeft {
+  0%, 100% {
+    transform: translateX(-227px) translateZ(-75px) rotateY(32deg) translateY(0px) scale(0.88);
+  }
+  50% {
+    transform: translateX(-227px) translateZ(-75px) rotateY(30deg) translateY(-7px) scale(0.88);
+  }
+}
+@keyframes neighborLevitateRight {
+  0%, 100% {
+    transform: translateX(36px) translateZ(-75px) rotateY(-32deg) translateY(0px) scale(0.88);
+  }
+  50% {
+    transform: translateX(36px) translateZ(-75px) rotateY(-30deg) translateY(-7px) scale(0.88);
+  }
+}
+body[data-layout=albums] .album-neighbor[data-slot='-1'] {
+  animation: neighborLevitateLeft 7s ease-in-out infinite 0.5s !important;
+}
+body[data-layout=albums] .album-neighbor[data-slot='1'] {
+  animation: neighborLevitateRight 7s ease-in-out infinite 1s !important;
+}
+
+/* Cover Pagination Indicator Bar */
+body[data-layout=albums] .cover-pagination,
+.cover-pagination {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  margin: 18px auto 0 !important;
+  width: fit-content !important;
+  padding: 5px 14px !important;
+  background: rgba(18, 20, 32, 0.6) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 999px !important;
+}
+.cover-pagination span {
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.25) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.cover-pagination span.active {
+  width: 22px !important;
+  background: var(--celestial-gradient) !important;
+  box-shadow: 0 0 10px rgba(155, 217, 220, 0.6) !important;
+}
+
+/* 6. Gallery Search Bar — Ultra Rounded Pill */
+body[data-layout=albums] .gallery-search,
+.gallery-search {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: min(640px, calc(100% - 48px)) !important;
+  height: 44px !important;
+  margin: 22px auto 0 !important;
+  padding: 0 20px !important;
+  border-radius: 999px !important;
+  background: rgba(18, 20, 32, 0.74) !important;
+  backdrop-filter: blur(32px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
+  transition: all 0.25s ease !important;
+}
+.gallery-search:focus-within {
+  border-color: rgba(155, 217, 220, 0.7) !important;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(155, 217, 220, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
+}
+.gallery-search input {
+  font-size: 13px !important;
+  color: #ffffff !important;
+  flex: 1 !important;
+}
+.gallery-search input::placeholder {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+.gallery-search svg {
+  width: 16px !important;
+  height: 16px !important;
+  color: var(--celestial-cyan) !important;
+}
+
+/* 7. Continue Playing Queue Rail (#desktop-rail) — Rounded Glass Capsule */
+#desktop-rail {
+  border-radius: 24px !important;
+  background: rgba(14, 16, 28, 0.72) !important;
+  backdrop-filter: blur(40px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+  padding: 16px !important;
+}
+.rail-source {
   border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 10px 14px !important;
+}
+.rail-source img {
+  border-radius: 10px !important;
+}
+.rail-track {
+  border-radius: 14px !important;
+  padding: 8px 10px !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.rail-track:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  transform: translateX(3px);
+}
+.rail-track img {
+  border-radius: 10px !important;
 }
 
-/* 5. Synced Lyrics Enhancement */
-.lyric-current {
-  background: var(--celestial-gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 35px rgba(155, 217, 220, 0.25));
-  font-weight: 800 !important;
-}
-.lyric-before, .lyric-after {
-  color: rgba(220, 225, 240, 0.45) !important;
-  filter: blur(0.7px);
-}
-
-/* 6. Floating Glass Panels (Library, Queue, Settings) */
+/* 8. Floating Glass Panels (Library, Queue, Settings) */
 .glass-panel {
   background: var(--celestial-glass-panel) !important;
   backdrop-filter: blur(55px) saturate(190%) !important;
   -webkit-backdrop-filter: blur(55px) saturate(190%) !important;
   border: 1px solid var(--celestial-border) !important;
-  border-radius: 26px !important;
+  border-radius: 28px !important;
   box-shadow: 
     0 35px 120px rgba(0, 0, 0, 0.75),
     0 0 60px rgba(155, 217, 220, 0.1),
     inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
 }
-
-/* Search Row in Library */
 .search-row {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 0 16px !important;
 }
 .search-row input {
   color: #ffffff !important;
@@ -260,33 +705,61 @@ body.playing .play-button {
 .search-row input::placeholder {
   color: rgba(255, 255, 255, 0.35) !important;
 }
-
-/* Active tabs */
 .library-tabs > button.active:after {
   background: var(--celestial-gradient) !important;
   box-shadow: 0 0 10px rgba(155, 217, 220, 0.5);
 }
-
-/* Track rows */
 .track-row:hover, .track-row.current {
   background: rgba(255, 255, 255, 0.06) !important;
-  border-radius: 12px !important;
+  border-radius: 14px !important;
 }
 .track-row.current strong {
   color: var(--celestial-cyan) !important;
 }
 
-/* Clock block */
+/* 9. Synced Lyrics Enhancement */
+.lyric-current {
+  background: var(--celestial-gradient-text) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 0 35px rgba(155, 217, 220, 0.25)) !important;
+  font-weight: 800 !important;
+}
+.lyric-before, .lyric-after {
+  color: rgba(220, 225, 240, 0.45) !important;
+  filter: blur(0.7px) !important;
+}
+
+/* 10. Clock block */
 #clock {
-  filter: drop-shadow(0 4px 40px rgba(131, 153, 255, 0.25));
+  filter: drop-shadow(0 4px 40px rgba(131, 153, 255, 0.25)) !important;
 }
 #date {
   color: var(--celestial-purple) !important;
   letter-spacing: 3px !important;
-  opacity: 0.85;
+  opacity: 0.85 !important;
 }
 
-/* Subtle magnetic class for smooth spring physics */
+/* 11. Edge Light Breathing Neon Halo */
+#edge-light {
+  animation: edgeBreathe 6s ease-in-out infinite alternate !important;
+}
+@keyframes edgeBreathe {
+  0% {
+    box-shadow: 
+      inset 0 0 35px rgba(155, 217, 220, 0.25), 
+      inset 0 0 4px rgba(155, 217, 220, 0.5), 
+      inset 0 -25px 75px rgba(131, 153, 255, 0.2);
+  }
+  100% {
+    box-shadow: 
+      inset 0 0 55px rgba(197, 177, 231, 0.35), 
+      inset 0 0 8px rgba(197, 177, 231, 0.7), 
+      inset 0 -35px 95px rgba(155, 217, 220, 0.28);
+  }
+}
+
+/* 12. Subtle magnetic class for smooth spring physics */
 .celestial-magnetic {
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
