@@ -3,7 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sonogloam — Modern Atmospheric YouTube Music Player</title>
+  <title>Velvanoct — Modern Atmospheric YouTube Music Player</title>
+  <link rel="canonical" href="https://velvanoct.io/">
+  <meta property="og:title" content="Velvanoct — Modern Atmospheric YouTube Music Player">
+  <meta property="og:description" content="Music that becomes part of your desktop. Cinematic backgrounds, synced lyrics, floating glass controls, and a dimensional album carousel for Windows.">
+  <meta property="og:url" content="https://velvanoct.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://velvanoct.io/images/banner.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Velvanoct — Modern Atmospheric YouTube Music Player">
+  <meta name="twitter:description" content="Music that becomes part of your desktop. Built for Windows.">
+  <meta name="twitter:image" content="https://velvanoct.io/images/banner.svg">
   <meta name="description" content="Music that becomes part of your desktop. Cinematic backgrounds, synced lyrics, floating glass controls, and a dimensional album carousel for Windows.">
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1131,13 +1141,13 @@
     }
 
     /* ========================================================
-       CELESTIAL HYPER-DOCK FOOTER (1-of-1 Living UI Experience)
+       CELESTIAL HYPER-DOCK FOOTER (Living UI Experience)
        ======================================================== */
     footer.hyper-footer {
       position: relative;
       overflow: hidden;
-      padding: 100px 24px 70px;
-      margin-top: 40px;
+      padding: 80px 20px 60px;
+      margin-top: 50px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1154,7 +1164,7 @@
       height: 100%;
       pointer-events: none;
       z-index: 1;
-      opacity: 0.7;
+      opacity: 0.6;
     }
 
     /* Floating Celestial Dock Capsule */
@@ -1162,19 +1172,18 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 880px;
+      max-width: 660px;
       margin: 0 auto;
-      border-radius: 36px;
-      padding: 44px 36px 36px;
-      background: rgba(14, 16, 26, 0.72);
-      backdrop-filter: blur(40px) saturate(190%);
-      -webkit-backdrop-filter: blur(40px) saturate(190%);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 32px;
+      padding: 36px 30px 32px;
+      background: rgba(13, 16, 26, 0.78);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 
-        0 30px 100px rgba(0, 0, 0, 0.7),
-        0 0 50px rgba(155, 217, 220, 0.12),
-        inset 0 1px 1px rgba(255, 255, 255, 0.25);
-      transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        0 30px 90px rgba(0, 0, 0, 0.65),
+        0 0 40px rgba(131, 153, 255, 0.06),
+        inset 0 1px 1px rgba(255, 255, 255, 0.12);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1182,75 +1191,53 @@
       isolation: isolate;
     }
 
-    /* Specular light sheen that follows cursor */
-    .hyper-dock::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: 36px;
-      padding: 1px;
-      background: radial-gradient(
-        500px circle at var(--dock-mouse-x, 50%) var(--dock-mouse-y, 50%),
-        rgba(155, 217, 220, 0.35),
-        rgba(197, 177, 231, 0.2) 30%,
-        transparent 65%
-      );
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-      z-index: 1;
-    }
-
     [data-theme="light"] .hyper-dock {
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       box-shadow: 
-        0 30px 90px rgba(15, 23, 42, 0.12),
-        0 0 40px rgba(99, 102, 241, 0.1),
+        0 30px 80px rgba(15, 23, 42, 0.08),
         inset 0 1px 1px rgba(255, 255, 255, 0.9);
     }
 
-    [data-theme="light"] .hyper-dock::before {
-      background: radial-gradient(
-        500px circle at var(--dock-mouse-x, 50%) var(--dock-mouse-y, 50%),
-        rgba(99, 102, 241, 0.35),
-        rgba(2, 132, 199, 0.2) 30%,
-        transparent 65%
-      );
-    }
-
-    /* Top Telemetry Strip */
+    /* Top Telemetry Strip (2 Rows) */
     .dock-telemetry {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      width: 100%;
+    }
+    .telemetry-row {
       display: flex;
       gap: 12px;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      margin-bottom: 28px;
     }
     .telemetry-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.74rem;
-      letter-spacing: 0.03em;
+      font-size: 0.72rem;
+      letter-spacing: 0.02em;
       padding: 5px 14px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.035);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      color: var(--footer-text);
+      color: #8c93a8;
       transition: all 0.25s ease;
     }
     [data-theme="light"] .telemetry-pill {
       background: rgba(0, 0, 0, 0.03);
       border: 1px solid rgba(0, 0, 0, 0.08);
+      color: #64748b;
     }
     .telemetry-pill:hover {
-      border-color: var(--accent-cyan);
+      border-color: rgba(255, 255, 255, 0.2);
       color: var(--text);
-      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.06);
     }
     .telemetry-dot {
       width: 6px;
@@ -1276,41 +1263,40 @@
       50% { transform: scale(1.3); opacity: 0.6; }
     }
 
-    /* Living Atmospheric Audio Core */
+    /* Living Atmospheric Audio Core Card */
     .dock-core-section {
       display: flex;
       align-items: center;
-      gap: 18px;
-      padding: 16px 24px;
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.03);
+      gap: 16px;
+      padding: 14px 20px;
+      border-radius: 20px;
+      background: rgba(18, 22, 34, 0.65);
       border: 1px solid rgba(255, 255, 255, 0.07);
       margin-bottom: 28px;
       width: 100%;
-      max-width: 580px;
-      transition: all 0.3s ease;
+      max-width: 560px;
+      transition: all 0.25s ease;
       cursor: pointer;
+      position: relative;
     }
     [data-theme="light"] .dock-core-section {
-      background: rgba(0, 0, 0, 0.025);
-      border-color: rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.85);
+      border-color: rgba(0, 0, 0, 0.08);
     }
     .dock-core-section:hover, .dock-core-section.playing {
-      background: rgba(155, 217, 220, 0.08);
-      border-color: var(--border-glow);
-      box-shadow: 0 10px 30px rgba(155, 217, 220, 0.15);
-      transform: translateY(-2px);
+      background: rgba(24, 29, 46, 0.85);
+      border-color: rgba(197, 177, 231, 0.35);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 25px rgba(197, 177, 231, 0.12);
     }
     [data-theme="light"] .dock-core-section:hover, [data-theme="light"] .dock-core-section.playing {
-      background: rgba(99, 102, 241, 0.06);
-      border-color: rgba(99, 102, 241, 0.25);
-      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+      background: rgba(245, 246, 255, 0.95);
+      border-color: rgba(99, 102, 241, 0.3);
     }
 
     .core-orb-wrapper {
       position: relative;
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1319,7 +1305,7 @@
     .core-ring {
       position: absolute;
       border-radius: 50%;
-      border: 1px solid var(--accent-cyan);
+      border: 1px solid #c5b1e7;
       opacity: 0;
       pointer-events: none;
     }
@@ -1340,27 +1326,27 @@
     }
     @keyframes coreRipple {
       0% { transform: scale(1); opacity: 0.8; }
-      100% { transform: scale(2.4); opacity: 0; }
+      100% { transform: scale(2.2); opacity: 0; }
     }
     .core-orb {
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: var(--gradient-main);
+      background: linear-gradient(135deg, #d8cbfa 0%, #b8a6f2 100%);
       border: none;
-      color: #08090c;
+      color: #12131d;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 18px rgba(131, 153, 255, 0.4);
+      box-shadow: 0 4px 16px rgba(184, 166, 242, 0.35);
       transition: all 0.25s ease;
       position: relative;
       z-index: 2;
     }
     .core-orb:hover {
-      transform: scale(1.08);
-      box-shadow: 0 6px 24px rgba(155, 217, 220, 0.6);
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(184, 166, 242, 0.55);
     }
     .core-info {
       flex: 1;
@@ -1374,117 +1360,177 @@
     }
     .core-title {
       font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--text);
+      font-size: 0.94rem;
+      color: #f0f2f8;
       letter-spacing: -0.01em;
     }
+    [data-theme="light"] .core-title {
+      color: #0f172a;
+    }
     .core-badge {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-family: 'JetBrains Mono', monospace;
       padding: 2px 8px;
       border-radius: 999px;
-      background: rgba(155, 217, 220, 0.15);
-      color: var(--accent-cyan);
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(155, 217, 220, 0.25);
+      color: #9bd9dc;
       font-weight: 500;
+      transition: all 0.2s ease;
     }
     [data-theme="light"] .core-badge {
-      background: rgba(99, 102, 241, 0.12);
+      background: rgba(99, 102, 241, 0.1);
+      border-color: rgba(99, 102, 241, 0.25);
       color: #4338ca;
     }
     .core-subtitle {
-      font-size: 0.78rem;
-      color: var(--footer-text);
+      font-size: 0.76rem;
+      color: #787f95;
       margin: 0;
       line-height: 1.35;
+    }
+    [data-theme="light"] .core-subtitle {
+      color: #64748b;
     }
 
     /* Brand Header inside Dock */
     .dock-brand-row {
-      margin-bottom: 12px;
+      margin-bottom: 6px;
     }
     .dock-brand-row .footer-brand {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
-      color: var(--text);
-      font-size: 1.45rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
+      color: #ffffff;
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
     .dock-brand-row .footer-brand img {
       width: 32px;
       height: 32px;
-      border-radius: 9px;
+      border-radius: 50%;
       object-fit: contain;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 16px rgba(197, 177, 231, 0.35);
     }
-    .brand-gradient {
-      background: var(--gradient-text);
+    .brand-glow-text {
+      color: #b4bef6;
+      background: linear-gradient(135deg, #c5b1e7 0%, #9bd9dc 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     /* Tagline */
     .dock-tagline {
-      color: var(--footer-text);
-      font-size: 0.88rem;
-      margin-bottom: 28px;
-      letter-spacing: 0.02em;
-      opacity: 0.9;
+      color: #787f95;
+      font-size: 0.85rem;
+      margin: 0 0 22px;
+      letter-spacing: 0.01em;
+    }
+    [data-theme="light"] .dock-tagline {
+      color: #64748b;
     }
 
-    /* Magnetic Nav Links */
+    /* Magnetic Nav Links & Cursor Lens */
+    .dock-nav-container {
+      position: relative;
+      margin-bottom: 18px;
+      display: inline-block;
+    }
+    .dock-lens {
+      position: absolute;
+      width: 90px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.16) 0%, rgba(155, 217, 220, 0.08) 45%, transparent 75%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      filter: blur(6px);
+      z-index: 1;
+    }
     .dock-nav-links {
+      position: relative;
+      z-index: 2;
       display: flex;
-      gap: 12px;
+      gap: 8px;
       justify-content: center;
       align-items: center;
-      margin-bottom: 30px;
       flex-wrap: wrap;
       list-style: none;
       padding: 0;
+      margin: 0;
     }
     .dock-link {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 8px 18px;
+      justify-content: center;
+      padding: 7px 16px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      color: var(--footer-text);
-      font-size: 0.88rem;
+      color: #8c93a8;
+      font-size: 0.85rem;
       font-weight: 500;
       text-decoration: none;
-      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
-      will-change: transform;
+      transition: all 0.25s ease;
+      cursor: pointer;
     }
     [data-theme="light"] .dock-link {
-      background: rgba(0, 0, 0, 0.03);
-      border-color: rgba(0, 0, 0, 0.08);
+      background: rgba(0, 0, 0, 0.035);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      color: #64748b;
     }
     .dock-link:hover {
       background: rgba(255, 255, 255, 0.09);
-      border-color: var(--border-glow);
-      color: var(--text);
-      box-shadow: 0 4px 20px rgba(155, 217, 220, 0.2);
+      border-color: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
     }
     [data-theme="light"] .dock-link:hover {
       background: rgba(99, 102, 241, 0.08);
-      border-color: rgba(99, 102, 241, 0.3);
-      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.25);
+      color: #1e1b4b;
     }
-    .dock-link.store-link {
-      color: var(--accent-cyan);
-      border-color: rgba(155, 217, 220, 0.3);
+
+    /* Windows App CTA Button */
+    .dock-cta-row {
+      margin-bottom: 22px;
+    }
+    .dock-windows-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 24px;
+      border-radius: 999px;
       background: rgba(155, 217, 220, 0.06);
+      border: 1px solid rgba(155, 217, 220, 0.3);
+      color: #9bd9dc;
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 0 16px rgba(155, 217, 220, 0.08);
+      transition: all 0.25s ease;
     }
-    [data-theme="light"] .dock-link.store-link {
-      color: var(--accent-blue);
-      border-color: rgba(99, 102, 241, 0.3);
+    [data-theme="light"] .dock-windows-btn {
       background: rgba(99, 102, 241, 0.06);
+      border-color: rgba(99, 102, 241, 0.3);
+      color: #4f46e5;
+    }
+    .dock-windows-btn:hover {
+      background: rgba(155, 217, 220, 0.12);
+      border-color: rgba(155, 217, 220, 0.55);
+      color: #ffffff;
+      box-shadow: 0 0 25px rgba(155, 217, 220, 0.25);
+      transform: translateY(-2px);
+    }
+    [data-theme="light"] .dock-windows-btn:hover {
+      background: rgba(99, 102, 241, 0.12);
+      border-color: rgba(99, 102, 241, 0.5);
+      color: #3730a3;
     }
 
     /* Magnetic Social Orbits */
@@ -1492,73 +1538,77 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 34px;
+      gap: 12px;
+      margin-bottom: 30px;
     }
     .social-icon-link {
-      color: var(--social-color);
+      color: #787f95;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: var(--social-bg);
-      border: 1px solid var(--social-border);
-      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.25s ease;
       text-decoration: none;
-      will-change: transform;
+    }
+    [data-theme="light"] .social-icon-link {
+      color: #64748b;
+      background: rgba(0, 0, 0, 0.035);
+      border-color: rgba(0, 0, 0, 0.08);
     }
     .social-icon-link:hover {
-      color: var(--social-hover-color);
-      background: var(--social-hover-bg);
-      border-color: var(--social-hover-border);
-      box-shadow: var(--social-hover-shadow);
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     }
-
-    /* Divider */
-    .dock-epoch-divider {
-      width: 100%;
-      max-width: 640px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-      margin-bottom: 24px;
+    [data-theme="light"] .social-icon-link:hover {
+      color: #1e1b4b;
+      background: rgba(99, 102, 241, 0.08);
+      border-color: rgba(99, 102, 241, 0.3);
     }
 
     /* Bottom Meta */
     .dock-bottom-meta {
-      max-width: 640px;
+      max-width: 600px;
       margin: 0 auto;
+      text-align: center;
     }
     .footer-copyright {
-      color: var(--footer-text);
-      font-size: 0.85rem;
-      margin-bottom: 10px;
-      line-height: 1.6;
+      color: #72798e;
+      font-size: 0.84rem;
+      margin: 0 0 6px;
+      line-height: 1.5;
     }
     .footer-copyright strong, .footer-copyright a {
-      color: var(--text);
+      color: #f0f2f8;
       font-weight: 600;
       text-decoration: none;
-      transition: color 0.2s ease;
     }
     .footer-copyright a:hover {
       color: var(--accent-cyan);
+      text-decoration: underline;
     }
-    [data-theme="light"] .footer-copyright a:hover {
-      color: var(--accent-blue);
+    [data-theme="light"] .footer-copyright {
+      color: #64748b;
+    }
+    [data-theme="light"] .footer-copyright strong, [data-theme="light"] .footer-copyright a {
+      color: #0f172a;
     }
     .footer-disclaimer {
-      font-size: 0.78rem;
-      color: #5a5f73;
-      line-height: 1.55;
+      color: #555b6e;
+      font-size: 0.76rem;
+      line-height: 1.5;
       margin: 0;
     }
     [data-theme="light"] .footer-disclaimer {
       color: #94a3b8;
     }
-
-    /* Magnetic helper */
+/* Magnetic helper */
     .magnetic {
       transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -1596,8 +1646,8 @@
     <header>
       <nav class="navbar">
         <a href="#" class="brand">
-          <img src="icon.png" alt="Sonogloam Logo">
-          <span>Sonogloam</span>
+          <img src="icon.png" alt="Velvanoct Logo">
+          <span>Velvanoct</span>
         </a>
         <ul class="nav-links">
           <li><a href="#views">Views</a></li>
@@ -1660,11 +1710,11 @@
       <canvas id="visualizer" class="visualizer-container"></canvas>
 
       <div class="hero-buttons">
-        <a href="https://github.com/Samar-019/afterglow-/releases/download/v0.1.0/Afterglow-Setup.exe" class="btn btn-primary btn-lg">
+        <a href="https://github.com/Samar-019/afterglow-/releases/download/v0.1.0/Velvanoct-Setup.exe" class="btn btn-primary btn-lg">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
-          Download Sonogloam (setup.exe)
+          Download Velvanoct (setup.exe)
         </a>
-        <a href="https://github.com/Samar-019/afterglow-/releases/download/v0.1.0/Afterglow-v0.1.0-win-x64-portable.zip" class="btn btn-secondary btn-lg">
+        <a href="https://github.com/Samar-019/afterglow-/releases/download/v0.1.0/Velvanoct-v0.1.0-win-x64-portable.zip" class="btn btn-secondary btn-lg">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M10 4v4M14 4v4"/></svg>
           Portable (.zip)
         </a>
@@ -1705,7 +1755,7 @@
           <div class="preview-topbar">
             <div class="preview-wordmark">
               <span>a</span>
-              <span>Sonogloam</span>
+              <span>Velvanoct</span>
             </div>
             <div class="preview-source-badge">
               <span class="preview-source-dot"></span>
@@ -1723,7 +1773,7 @@
               <div class="preview-album-card" id="preview-album-card-trigger">
                 <img src="icon.png" alt="Cover Artwork" class="preview-album-art" id="preview-album-art-img">
                 <div class="preview-album-meta">
-                  <div class="preview-album-title" id="preview-song-title">Sonogloam (Celestial Atmosphere)</div>
+                  <div class="preview-album-title" id="preview-song-title">Velvanoct (Celestial Atmosphere)</div>
                   <div class="preview-album-artist" id="preview-song-artist">Chvrches · Spatial Audio</div>
                 </div>
               </div>
@@ -1758,7 +1808,7 @@
             <div class="preview-dock-track">
               <img src="icon.png" alt="Mini Art" id="preview-mini-art">
               <div class="preview-dock-track-meta">
-                <div class="preview-dock-track-title" id="preview-mini-title">Sonogloam</div>
+                <div class="preview-dock-track-title" id="preview-mini-title">Velvanoct</div>
                 <div class="preview-dock-track-artist">YouTube Music</div>
               </div>
             </div>
@@ -1789,7 +1839,7 @@
         </div>
 
         <!-- Static screenshot tabs preserved -->
-        <img id="view-albums" src="images/albums.jpg" alt="Sonogloam Album Carousel View" class="view-frame">
+        <img id="view-albums" src="images/albums.jpg" alt="Velvanoct Album Carousel View" class="view-frame">
         <img id="view-lyrics" src="images/lyrics.jpg" alt="Cinema Lyrics View" class="view-frame">
         <img id="view-split" src="images/split.jpg" alt="Split Cover & Lyrics View" class="view-frame">
         <img id="view-search" src="images/search.png" alt="Search & Discovery View" class="view-frame">
@@ -1911,7 +1961,7 @@ npm start
       <h2>Ready to transform your desktop?</h2>
       <p>Download the latest release now and elevate your daily music listening experience.</p>
       <div class="hero-buttons" style="margin-bottom: 0;">
-        <a href="https://github.com/Samar-019/afterglow-/releases/download/v0.1.0/Afterglow-Setup.exe" class="btn btn-primary btn-lg">
+        <a href="https://github.com/Samar-019/afterglow-/releases/download/v0.1.0/Velvanoct-Setup.exe" class="btn btn-primary btn-lg">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
           Download Windows Setup.exe
         </a>
@@ -1921,38 +1971,42 @@ npm start
       </div>
     </section>
 
-    <!-- Celestial Hyper-Dock Footer (1-of-1 Living Audio Experience) -->
+    <!-- Celestial Hyper-Dock Footer (Living UI Experience) -->
     <footer class="hyper-footer" id="hyper-footer">
       <!-- Stardust & Constellation Particle Canvas -->
       <canvas id="footer-nebula" class="footer-nebula-canvas"></canvas>
 
       <!-- Floating Celestial Dock Capsule -->
       <div class="hyper-dock" id="hyper-dock">
-        <!-- Sci-Fi Telemetry Strip -->
+        <!-- Sci-Fi Telemetry Strip (2 Rows) -->
         <div class="dock-telemetry">
-          <span class="telemetry-pill">
-            <span class="telemetry-dot live"></span>
-            <span>WinUI 3 & Windows App SDK</span>
-          </span>
-          <span class="telemetry-pill">
-            <span class="telemetry-dot purple"></span>
-            <span>Zero Ads · 100% Free & Open Source</span>
-          </span>
-          <span class="telemetry-pill">
-            <span class="telemetry-dot cyan"></span>
-            <span id="telemetry-epoch">System Epoch: Auto-Synced</span>
-          </span>
+          <div class="telemetry-row">
+            <span class="telemetry-pill">
+              <span class="telemetry-dot live"></span>
+              <span>WinUI 3 &amp; Windows App SDK</span>
+            </span>
+            <span class="telemetry-pill">
+              <span class="telemetry-dot purple"></span>
+              <span>Zero Ads · 100% Free &amp; Open Source</span>
+            </span>
+          </div>
+          <div class="telemetry-row">
+            <span class="telemetry-pill">
+              <span class="telemetry-dot cyan"></span>
+              <span id="telemetry-epoch">Epoch: 2024–2026 (Synced)</span>
+            </span>
+          </div>
         </div>
 
-        <!-- Living Atmospheric Audio Core -->
-        <div class="dock-core-section" id="dock-core-card" title="Click to Experience Sonogloam Ambient Soundscape">
+        <!-- Living Atmospheric Audio Core Card -->
+        <div class="dock-core-section" id="dock-core-card" title="Click to Experience Velvanoct Ambient Soundscape">
           <div class="core-orb-wrapper">
             <div class="core-ring ring-1"></div>
             <div class="core-ring ring-2"></div>
             <div class="core-ring ring-3"></div>
             <button class="core-orb" id="core-orb-btn" aria-label="Toggle Atmospheric Ambient Sound">
-              <svg id="core-sound-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <svg id="core-sound-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#12131d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#12131d"></polygon>
                 <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
                 <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
               </svg>
@@ -1963,60 +2017,68 @@ npm start
               <span class="core-title">Atmospheric Sound Console</span>
               <span class="core-badge" id="sound-state-badge">Tap to Listen</span>
             </div>
-            <p class="core-subtitle">Real-time procedural 432Hz ambient chord synth & dynamic stardust harmonics</p>
+            <p class="core-subtitle">Real-time procedural 432Hz ambient chord synth &amp; dynamic stardust harmonics</p>
           </div>
         </div>
 
         <!-- Brand Header inside Dock -->
         <div class="dock-brand-row">
           <a href="#" class="footer-brand magnetic">
-            <img src="icon.png" alt="Sonogloam Logo">
-            <span>After<span class="brand-gradient">glow</span></span>
+            <img src="icon.png" alt="Velvanoct Logo">
+            <span>After<span class="brand-glow-text">glow</span></span>
           </a>
         </div>
-        <p class="dock-tagline">Cinematic Visuals · Synced Lyrics · Floating Controls · Windows 10 & 11</p>
+        <p class="dock-tagline">Cinematic Visuals · Synced Lyrics · Floating Controls · Windows 10 &amp; 11</p>
 
-        <!-- Magnetic Navigation Pills -->
-        <ul class="dock-nav-links">
-          <li><a href="#" class="dock-link magnetic">Home</a></li>
-          <li><a href="#views" class="dock-link magnetic">Views</a></li>
-          <li><a href="#features" class="dock-link magnetic">Features</a></li>
-          <li><a href="#controls" class="dock-link magnetic">Controls</a></li>
-          <li><a href="#install" class="dock-link magnetic">Install</a></li>
-          <li><a href="https://github.com/Samar-019/afterglow-/releases" target="_blank" rel="noopener noreferrer" class="dock-link magnetic">Releases</a></li>
-          <li>
-            <a href="https://github.com/Samar-019/afterglow-/releases" target="_blank" rel="noopener noreferrer" class="dock-link store-link magnetic">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"></rect><rect x="13" y="3" width="8" height="8" rx="1"></rect><rect x="3" y="13" width="8" height="8" rx="1"></rect><rect x="13" y="13" width="8" height="8" rx="1"></rect></svg>
-              Windows App
-            </a>
-          </li>
-        </ul>
+        <!-- Magnetic Navigation Pills with Spotlight Lens -->
+        <div class="dock-nav-container" id="dock-nav-container">
+          <div class="dock-lens" id="dock-lens"></div>
+          <ul class="dock-nav-links">
+            <li><a href="#" class="dock-link magnetic">Home</a></li>
+            <li><a href="#views" class="dock-link magnetic">Views</a></li>
+            <li><a href="#features" class="dock-link magnetic">Features</a></li>
+            <li><a href="#controls" class="dock-link magnetic">Controls</a></li>
+            <li><a href="#install" class="dock-link magnetic">Install</a></li>
+            <li><a href="https://github.com/Samar-019/afterglow-/releases" target="_blank" rel="noopener noreferrer" class="dock-link magnetic">Releases</a></li>
+          </ul>
+        </div>
+
+        <!-- Windows App CTA Button -->
+        <div class="dock-cta-row">
+          <a href="https://github.com/Samar-019/afterglow-/releases" target="_blank" rel="noopener noreferrer" class="dock-windows-btn magnetic">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <rect x="3" y="3" width="8" height="8" rx="1"></rect>
+              <rect x="13" y="3" width="8" height="8" rx="1"></rect>
+              <rect x="3" y="13" width="8" height="8" rx="1"></rect>
+              <rect x="13" y="13" width="8" height="8" rx="1"></rect>
+            </svg>
+            <span>Windows App</span>
+          </a>
+        </div>
 
         <!-- Magnetic Social Orbits -->
         <div class="dock-socials">
           <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-icon-link magnetic" aria-label="X (Twitter)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.873 11.633Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.873 11.633Z"/></svg>
           </a>
           <a href="https://github.com/Samar-019/afterglow-" target="_blank" rel="noopener noreferrer" class="social-icon-link magnetic" aria-label="GitHub">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
           </a>
-          <a href="https://github.com/Samar-019/afterglow-/releases" target="_blank" rel="noopener noreferrer" class="social-icon-link magnetic" aria-label="Releases">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"></rect><rect x="13" y="3" width="8" height="8" rx="1"></rect><rect x="3" y="13" width="8" height="8" rx="1"></rect><rect x="13" y="13" width="8" height="8" rx="1"></rect></svg>
+          <a href="https://github.com/Samar-019/afterglow-/releases" target="_blank" rel="noopener noreferrer" class="social-icon-link magnetic" aria-label="Windows Store / Releases">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"></rect><rect x="13" y="3" width="8" height="8" rx="1"></rect><rect x="3" y="13" width="8" height="8" rx="1"></rect><rect x="13" y="13" width="8" height="8" rx="1"></rect></svg>
           </a>
           <a href="https://music.youtube.com" target="_blank" rel="noopener noreferrer" class="social-icon-link magnetic" aria-label="YouTube Music">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15.2V8.8L15.4 12z"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15.2V8.8L15.4 12z"></path></svg>
           </a>
         </div>
 
-        <div class="dock-epoch-divider"></div>
-
-        <!-- Futuristic Auto-Updating Temporal Epoch Bar -->
+        <!-- Futuristic Auto-Updating Temporal Epoch Meta -->
         <div class="dock-bottom-meta">
           <p class="footer-copyright">
-            © <span id="current-year">2024–2026</span> <strong>Sonogloam</strong> by <a href="https://github.com/Samar-019" target="_blank" rel="noopener noreferrer">Samar-019</a>. Licensed under MIT. All rights reserved.
+            © <span id="current-year">2024–2026</span> <strong>Velvanoct</strong> by <a href="https://github.com/Samar-019" target="_blank" rel="noopener noreferrer"><strong>Samar-019</strong></a>. Licensed under MIT. All rights reserved.
           </p>
           <p class="footer-disclaimer">
-            Sonogloam is an independent atmospheric music player crafted for Windows. Not affiliated with YouTube or Google.
+            Velvanoct is an independent atmospheric music player crafted for Windows. Not affiliated with YouTube or Google.
           </p>
         </div>
       </div>
@@ -2320,6 +2382,27 @@ npm start
       step();
     })();
 
+    
+    // 6. Interactive Cursor Lens for Navigation Pills
+    (function initNavLens() {
+      const container = document.getElementById('dock-nav-container');
+      const lens = document.getElementById('dock-lens');
+      if (!container || !lens) return;
+
+      container.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        lens.style.left = `${x}px`;
+        lens.style.top = `${y}px`;
+        lens.style.opacity = '1';
+      });
+
+      container.addEventListener('mouseleave', () => {
+        lens.style.opacity = '0';
+      });
+    })();
+
     // 5. Procedural 432Hz Ambient Soundscape Synthesizer
     const CoreAudioEngine = {
       ctx: null,
@@ -2344,7 +2427,7 @@ npm start
               badge.style.color = '#4ade80';
             }
             if (icon) {
-              icon.innerHTML = '<rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/>';
+              icon.innerHTML = '<rect x="6" y="5" width="4" height="14" rx="1" fill="#12131d"/><rect x="14" y="5" width="4" height="14" rx="1" fill="#12131d"/>';
             }
           } else {
             this.stop();
@@ -2354,7 +2437,7 @@ npm start
               badge.style.color = '';
             }
             if (icon) {
-              icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>';
+              icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#12131d"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>';
             }
           }
         };
@@ -2431,7 +2514,7 @@ npm start
       lyricsIndex: 0,
       tracks: [
         {
-          title: 'Sonogloam (Celestial Atmosphere)',
+          title: 'Velvanoct (Celestial Atmosphere)',
           artist: 'Chvrches · Spatial Audio',
           lyrics: [
             ['Held in the gravity of forgotten skies...', 'We chase the afterglow into the deep night...', 'Echoes of soundwaves resonating forever...'],
