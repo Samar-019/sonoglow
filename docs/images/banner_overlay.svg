@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="400" viewBox="0 0 1280 400">
+  <defs>
+    <!-- Wordmark gradient -->
+    <linearGradient id="word-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#ffffff"/>
+      <stop offset="50%"  stop-color="#f3efff"/>
+      <stop offset="90%"  stop-color="#d8b4fe"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+
+    <!-- Accent line gradient -->
+    <linearGradient id="accent-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#00e5ff"/>
+      <stop offset="40%"  stop-color="#c084fc"/>
+      <stop offset="75%"  stop-color="#f43f5e"/>
+      <stop offset="100%" stop-color="#f43f5e" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Subtle vignette on left side to guarantee crystal-clear contrast -->
+    <radialGradient id="text-backdrop" cx="20%" cy="50%" r="58%">
+      <stop offset="0%"   stop-color="#020108" stop-opacity="0.82"/>
+      <stop offset="65%"  stop-color="#020108" stop-opacity="0.52"/>
+      <stop offset="100%" stop-color="#020108" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Wordmark glow filter -->
+    <filter id="word-glow" x="-25%" y="-40%" width="150%" height="180%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feFlood flood-color="#a855f7" flood-opacity="0.55" result="col"/>
+      <feComposite in="col" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Clip rounded rect -->
+    <clipPath id="frame-clip">
+      <rect width="1280" height="400" rx="20"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#frame-clip)">
+    <!-- Vignette behind typography -->
+    <rect width="1280" height="400" fill="url(#text-backdrop)"/>
+
+    <!-- Left side typography & branding -->
+    <g transform="translate(68, 0)">
+
+      <!-- Top micro pill badge -->
+      <g transform="translate(0, 50)">
+        <rect width="326" height="26" rx="13"
+              fill="#060918" fill-opacity="0.88"
+              stroke="#00e5ff" stroke-width="1.2" stroke-opacity="0.65"/>
+        <circle cx="14" cy="13" r="3.5" fill="#00e5ff"/>
+        <text x="26" y="17"
+              font-family="'Segoe UI', -apple-system, sans-serif"
+              font-size="10" font-weight="700" letter-spacing="3"
+              fill="#a5f3fc">ATMOSPHERIC YOUTUBE MUSIC</text>
+      </g>
+
+      <!-- Main Sonoglow Wordmark -->
+      <g filter="url(#word-glow)">
+        <text x="-4" y="164"
+              font-family="'Segoe UI', Arial, sans-serif"
+              font-size="94" font-weight="800" letter-spacing="-3.5"
+              fill="url(#word-grad)">Sonoglow</text>
+      </g>
+
+      <!-- Atmospheric Tagline -->
+      <text x="0" y="206"
+            font-family="'Segoe UI', -apple-system, sans-serif"
+            font-size="20" font-weight="600" letter-spacing="0.2"
+            fill="#f1f5f9">Music that becomes part of your desktop.</text>
+
+      <!-- Subtitle Tech Spec -->
+      <text x="0" y="234"
+            font-family="'Segoe UI', -apple-system, sans-serif"
+            font-size="13" font-weight="400" letter-spacing="1.2"
+            fill="#c4b5fd" opacity="0.95">CINEMATIC VISUALS  /  SYNCED LYRICS  /  GLASS DOCK  /  3D CAROUSEL</text>
+
+      <!-- Radiant accent line -->
+      <path d="M 0 254 h 280"
+            stroke="url(#accent-grad)" stroke-width="3" stroke-linecap="round"/>
+
+      <!-- Feature Badges Row 1 -->
+      <g transform="translate(0, 278)">
+        <!-- Badge 1: 100% Free & Open Source -->
+        <rect width="160" height="27" rx="13.5"
+              fill="#070c1e" fill-opacity="0.88"
+              stroke="#38bdf8" stroke-width="1" stroke-opacity="0.55"/>
+        <text x="14" y="17.5"
+              font-family="'Segoe UI', sans-serif"
+              font-size="11" font-weight="600" letter-spacing="0.4"
+              fill="#38bdf8">&#9889; 100% Free &amp; Open Source</text>
+
+        <!-- Badge 2: Lossless YouTube Stream -->
+        <g transform="translate(170, 0)">
+          <rect width="176" height="27" rx="13.5"
+                fill="#0e071e" fill-opacity="0.88"
+                stroke="#c084fc" stroke-width="1" stroke-opacity="0.55"/>
+          <text x="14" y="17.5"
+                font-family="'Segoe UI', sans-serif"
+                font-size="11" font-weight="600" letter-spacing="0.4"
+                fill="#c084fc">&#9835; YouTube Music Lossless</text>
+        </g>
+      </g>
+
+      <!-- Feature Badges Row 2 -->
+      <g transform="translate(0, 316)">
+        <!-- Badge 3: Zero Ads & No Subscription -->
+        <rect width="180" height="27" rx="13.5"
+              fill="#190714" fill-opacity="0.88"
+              stroke="#fb7185" stroke-width="1" stroke-opacity="0.55"/>
+        <text x="14" y="17.5"
+              font-family="'Segoe UI', sans-serif"
+              font-size="11" font-weight="600" letter-spacing="0.4"
+              fill="#fb7185">&#9733; Zero Ads · Zero Subscription</text>
+
+        <!-- Badge 4: Windows 10 & 11 Native -->
+        <g transform="translate(190, 0)">
+          <rect width="154" height="27" rx="13.5"
+                fill="#071913" fill-opacity="0.88"
+                stroke="#34d399" stroke-width="1" stroke-opacity="0.55"/>
+          <text x="14" y="17.5"
+                font-family="'Segoe UI', sans-serif"
+                font-size="11" font-weight="600" letter-spacing="0.4"
+                fill="#34d399">&#128187; Windows 10 &amp; 11 Native</text>
+        </g>
+      </g>
+
+    </g>
+
+    <!-- Outer sleek glass frame border with subtle neon corners -->
+    <rect width="1280" height="400" rx="20" fill="none"
+          stroke="#818cf8" stroke-width="1.2" stroke-opacity="0.25"/>
+
+    <!-- Cyberpunk Corner Brackets -->
+    <!-- Top-Left Cyan Bracket -->
+    <path d="M 0 54 L 0 20 Q 0 0 20 0 L 54 0"
+          fill="none" stroke="#00e5ff" stroke-width="2.5"
+          stroke-opacity="0.80" stroke-linecap="round"/>
+
+    <!-- Bottom-Left Magenta Bracket -->
+    <path d="M 54 400 L 20 400 Q 0 400 0 380 L 0 346"
+          fill="none" stroke="#a855f7" stroke-width="2.5"
+          stroke-opacity="0.80" stroke-linecap="round"/>
+
+    <!-- Top-Right Magenta Bracket -->
+    <path d="M 1226 0 L 1260 0 Q 1280 0 1280 20 L 1280 54"
+          fill="none" stroke="#f43f5e" stroke-width="2.5"
+          stroke-opacity="0.80" stroke-linecap="round"/>
+
+    <!-- Bottom-Right Cyan Bracket -->
+    <path d="M 1280 346 L 1280 380 Q 1280 400 1260 400 L 1226 400"
+          fill="none" stroke="#00e5ff" stroke-width="2.5"
+          stroke-opacity="0.80" stroke-linecap="round"/>
+
+  </g>
+</svg>
