@@ -76,7 +76,7 @@
       <div id="live-date">SUNDAY · NOV 1</div>
     </div>
 
-    <!-- 3D Dimensional Album Fan Carousel (Active in Albums layout) -->
+    <!-- 3D Dimensional Album Fan Carousel (Clean Rounded UI without Vinyl) -->
     <section class="stage-carousel" id="stage-carousel">
       <div class="carousel-fan">
         <!-- Left Ghost Album -->
@@ -88,9 +88,8 @@
           </div>
         </div>
 
-        <!-- Center Active Album with Spinning Vinyl -->
+        <!-- Center Active Album (Clean Artwork View) -->
         <div class="carousel-card card-center" id="carousel-center" title="Click to Play / Pause">
-          <div class="vinyl-disc" id="carousel-vinyl"></div>
           <img id="carousel-center-img" src="../images/midnight.jpg" alt="Active Album">
           <div class="card-caption">
             <strong id="carousel-center-title">Midnight Resonance</strong>
@@ -108,7 +107,7 @@
         </div>
       </div>
 
-      <!-- Pagination Dots -->
+      <!-- Rounded Pill Pagination Dots -->
       <div class="carousel-pagination" id="carousel-pagination">
         <span class="carousel-dot active" data-index="0"></span>
         <span class="carousel-dot" data-index="1"></span>
@@ -120,7 +119,6 @@
     <section class="stage-scene" id="player-scene">
       <!-- Cover Section -->
       <div class="stage-cover-wrap">
-        <div class="vinyl-disc" id="vinyl-disc" title="Click to Play / Pause"></div>
         <div class="stage-album-card" id="album-card" title="Click to Play / Pause" style="cursor: pointer;">
           <img id="track-art" src="../images/midnight.jpg" alt="Album Cover">
           <div class="card-caption">
@@ -148,7 +146,7 @@
       </div>
     </section>
 
-    <!-- Floating Capsule Player Dock -->
+    <!-- Ultra-Rounded Floating Capsule Player Dock -->
     <footer class="stage-dock">
       <div class="dock-left">
         <img src="../images/midnight.jpg" alt="Midnight Resonance" class="dock-thumb" id="dock-thumb">
@@ -555,8 +553,6 @@
     };
 
     const playBtn = document.getElementById('play-btn');
-    const vinyl = document.getElementById('vinyl-disc');
-    const carouselVinyl = document.getElementById('carousel-vinyl');
     const albumCard = document.getElementById('album-card');
     const seekFill = document.getElementById('seek-fill');
     const seekTrack = document.getElementById('seek-track');
@@ -579,14 +575,10 @@
       if (isPlaying) {
         playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>';
         playBtn.classList.add('playing');
-        if (vinyl) vinyl.classList.add('spinning');
-        if (carouselVinyl) carouselVinyl.classList.add('spinning');
         if (topbarEq) topbarEq.classList.add('playing');
       } else {
         playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
         playBtn.classList.remove('playing');
-        if (vinyl) vinyl.classList.remove('spinning');
-        if (carouselVinyl) carouselVinyl.classList.remove('spinning');
         if (topbarEq) topbarEq.classList.remove('playing');
       }
     }
@@ -603,7 +595,6 @@
 
     playBtn.addEventListener('click', togglePlay);
     if (albumCard) albumCard.addEventListener('click', togglePlay);
-    if (vinyl) vinyl.addEventListener('click', togglePlay);
 
     // Keyboard shortcut (Space = play/pause, ArrowLeft/Right = seek, ArrowUp/Down = volume, M = mute)
     window.addEventListener('keydown', (e) => {
