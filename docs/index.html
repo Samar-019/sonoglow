@@ -1766,19 +1766,19 @@
           <span class="window-dot dot-green"></span>
         </div>
         <div class="view-tabs">
-          <button class="view-tab active" onclick="switchView('live', this)">
-            <span class="tab-live-pulse"></span> Live Interactive Player
-          </button>
-          <button class="view-tab" onclick="switchView('albums', this)">Album Carousel</button>
+          <button class="view-tab active" onclick="switchView('albums', this)">Album Carousel</button>
           <button class="view-tab" onclick="switchView('lyrics', this)">Cinema Lyrics</button>
           <button class="view-tab" onclick="switchView('split', this)">Cover + Lyrics</button>
           <button class="view-tab" onclick="switchView('search', this)">Music Discovery</button>
+          <button class="view-tab" onclick="switchView('live', this)">
+            <span class="tab-live-pulse"></span> Live Interactive Player
+          </button>
         </div>
         <div style="width: 50px;"></div>
       </div>
       <div class="window-content">
         <!-- Live Player Stage (Default Active) -->
-        <div id="view-live" class="view-frame live-player-stage active">
+        <div id="view-live" class="view-frame live-player-stage">
           <canvas id="live-player-stardust"></canvas>
 
           <!-- Topbar inside preview -->
@@ -1869,7 +1869,7 @@
         </div>
 
         <!-- Static screenshot tabs preserved -->
-        <img id="view-albums" src="images/albums.jpg" alt="Sonoglow Album Carousel View" class="view-frame">
+        <img id="view-albums" src="images/albums.jpg" alt="Sonoglow Album Carousel View" class="view-frame active">
         <img id="view-lyrics" src="images/lyrics.jpg" alt="Cinema Lyrics View" class="view-frame">
         <img id="view-split" src="images/split.jpg" alt="Split Cover & Lyrics View" class="view-frame">
         <img id="view-search" src="images/search.png" alt="Search & Discovery View" class="view-frame">
