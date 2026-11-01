@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Sonoglow — Modern Atmospheric YouTube Music Player</title>
   <link rel="canonical" href="https://samar-019.github.io/sonoglow/">
   <meta property="og:title" content="Sonoglow — Modern Atmospheric YouTube Music Player">
@@ -386,27 +389,36 @@
       transition: all 0.3s ease;
     }
     .theme-option {
-      height: 32px;
-      padding: 0 10px;
+      height: 40px;
+      min-width: 46px;
+      padding: 3px 6px;
       display: inline-flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 2px;
       border: none;
       background: transparent;
       border-radius: 999px;
       color: var(--text-muted);
       cursor: pointer;
-      font-size: 0.8rem;
-      font-weight: 500;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       user-select: none;
     }
     .theme-option svg {
+      width: 14px;
+      height: 14px;
       flex-shrink: 0;
     }
     .theme-option .theme-label {
+      font-size: 0.62rem;
+      font-weight: 700;
       line-height: 1;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .theme-option.active .theme-label {
+      color: var(--theme-switch-active-text);
     }
     .theme-option:hover {
       color: var(--text);
@@ -1636,7 +1648,7 @@
       .btn-secondary .btn-label { display: none; }
       .btn { padding: 8px 14px; font-size: 0.88rem; }
       .brand span { font-size: 1rem; }
-      .theme-option { width: 28px; height: 28px; padding: 0; }
+      .theme-option { min-width: 32px; height: 32px; padding: 2px; }
       .theme-option .theme-label { display: none; }
       .theme-switch { padding: 2px; }
     }
