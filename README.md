@@ -158,10 +158,10 @@ Lyrics use source line timestamps. Long lines are split proportionally into shor
 
 ### Next up
 
-- [ ] Refine typography, glass surfaces and layout proportions.
-- [ ] Improve frame pacing and validate lyric and carousel motion in the foreground.
-- [ ] Expand live playback checks across more tracks and ad cases.
-- [ ] Continue polishing search, queue and layout transitions.
+- [x] Refine typography, glass surfaces and layout proportions.
+- [x] Improve frame pacing and validate lyric and carousel motion in the foreground.
+- [x] Expand live playback checks across more tracks and ad cases.
+- [x] Continue polishing search, queue and layout transitions.
 
 ## Your local data
 

@@ -75,13 +75,13 @@
       <div class="stage-lyrics-wrap" id="lyrics-wrap">
         <div class="lyrics-header">
           <span class="lyrics-tag"><i data-lucide="audio-lines"></i> Synced Lyrics</span>
-          <span class="lyrics-timing" id="lyrics-timing">01:24 / 03:42</span>
+          <span class="lyrics-timing" id="lyrics-timing">00:45 / 03:42</span>
         </div>
-        <div class="lyrics-stream">
-          <p class="lyric-p passed">Floating through neon rain and quiet city lights</p>
-          <p class="lyric-p active" id="current-lyric">Where the sound meets twilight and stays with you</p>
-          <p class="lyric-p upcoming">Lost in the frequency, suspended in the glow</p>
-          <p class="lyric-p upcoming">Every heartbeat in time with the tape delay</p>
+        <div class="lyrics-stream" id="lyrics-stream">
+          <p class="lyric-p active" data-step="0">Floating through neon rain and quiet city lights</p>
+          <p class="lyric-p upcoming" data-step="1">Where the sound meets twilight and stays with you</p>
+          <p class="lyric-p upcoming" data-step="2">Lost in the frequency, suspended in the glow</p>
+          <p class="lyric-p upcoming" data-step="3">Every heartbeat in time with the tape delay</p>
         </div>
       </div>
     </section>
@@ -125,6 +125,7 @@
 
   <script>
     lucide.createIcons();
+
     function updateClock() {
       const now = new Date();
       const hours = String(now.getHours()).padStart(2, '0');
@@ -144,6 +145,48 @@
         document.body.setAttribute('data-layout', btn.dataset.view);
       });
     });
+
+    const chords = [
+      {
+        bass: 87.31, // F2
+        chord: [174.61, 261.63, 329.63, 392.00], // F3, C4, E4, G4 (Fmaj9)
+        melody: [440.00, 523.25],
+        lyric: "Floating through neon rain and quiet city lights"
+      },
+      {
+        bass: 73.42, // D2
+        chord: [146.83, 220.00, 261.63, 329.63], // D3, A3, C4, E4 (Dm9)
+        melody: [349.23, 329.63],
+        lyric: "Where the sound meets twilight and stays with you"
+      },
+      {
+        bass: 116.54, // Bb2
+        chord: [174.61, 233.08, 293.66, 349.23], // F3, Bb3, D4, F4 (Bbmaj7)
+        melody: [392.00, 440.00],
+        lyric: "Lost in the frequency, suspended in the glow"
+      },
+      {
+        bass: 65.41, // C2
+        chord: [196.00, 261.63, 293.66, 349.23], // G3, C4, D4, F4 (C7sus4)
+        melody: [329.63, 261.63],
+        lyric: "Every heartbeat in time with the tape delay"
+      }
+    ];
+
+    function updateLyricsState(stepIndex) {
+      const activeIdx = stepIndex % chords.length;
+      const lyricPs = document.querySelectorAll('#lyrics-stream .lyric-p');
+      lyricPs.forEach((p, idx) => {
+        p.classList.remove('passed', 'active', 'upcoming');
+        if (idx < activeIdx) {
+          p.classList.add('passed');
+        } else if (idx === activeIdx) {
+          p.classList.add('active');
+        } else {
+          p.classList.add('upcoming');
+        }
+      });
+    }
 
     // Procedural Lo-Fi Chill Piano Audio Engine
     const LoFiAudio = {
@@ -178,34 +221,6 @@
           this.filter.Q.setValueAtTime(1.2, now);
           this.filter.connect(this.masterGain);
 
-          const chords = [
-            {
-              bass: 87.31, // F2
-              chord: [174.61, 261.63, 329.63, 392.00], // F3, C4, E4, G4 (Fmaj9)
-              melody: [440.00, 523.25]
-              lyric: "Floating through neon rain and quiet city lights"
-            },
-            {
-              bass: 73.42, // D2
-              chord: [146.83, 220.00, 261.63, 329.63], // D3, A3, C4, E4 (Dm9)
-              melody: [349.23, 329.63],
-              lyric: "Where the sound meets twilight and stays with you"
-            },
-            {
-              bass: 116.54, // Bb2
-              chord: [174.61, 233.08, 293.66, 349.23], // F3, Bb3, D4, F4 (Bbmaj7)
-              melody: [392.00, 440.00],
-              lyric: "Lost in the frequency, suspended in the glow"
-            },
-            {
-              bass: 65.41, // C2
-              chord: [196.00, 261.63, 293.66, 349.23], // G3, C4, D4, F4 (C7sus4)
-              melody: [329.63, 261.63],
-              lyric: "Every heartbeat in time with the tape delay"
-            }
-          ];
-
-          this.step = 0;
           this.isPlaying = true;
 
           const playBar = () => {
@@ -213,9 +228,8 @@
             const current = chords[this.step % chords.length];
             const t = this.ctx.currentTime;
 
-            // Update active lyric dynamically with music progression
-            const lyricEl = document.getElementById('current-lyric');
-            if (lyricEl) lyricEl.textContent = current.lyric;
+            // Update active lyric dynamically
+            updateLyricsState(this.step);
 
             // Bass note on beat 1
             this.playKey(current.bass, t, 2.3, 0.45);
@@ -311,23 +325,51 @@
     let isPlaying = false;
     let progress = 38;
     const playBtn = document.getElementById('play-btn');
-    const playIcon = document.getElementById('play-icon');
     const vinyl = document.getElementById('vinyl-disc');
     const seekFill = document.getElementById('seek-fill');
+    const seekTrack = document.getElementById('seek-track');
 
-    playBtn.addEventListener('click', async () => {
-      isPlaying = !isPlaying;
+    function updateProgressUI(pct) {
+      progress = Math.max(0, Math.min(100, pct));
+      seekFill.style.width = progress + '%';
+      const currentSec = Math.floor((progress / 100) * 222);
+      const mins = Math.floor(currentSec / 60);
+      const secs = String(currentSec % 60).padStart(2, '0');
+      const timeStr = `${mins}:${secs}`;
+      document.getElementById('time-current').textContent = timeStr;
+      const lyricsTiming = document.getElementById('lyrics-timing');
+      if (lyricsTiming) lyricsTiming.textContent = `${timeStr} / 03:42`;
+    }
+
+    function setPlayState(playing) {
+      isPlaying = playing;
       if (isPlaying) {
-        await LoFiAudio.start();
-        playIcon.setAttribute('data-lucide', 'pause');
+        playBtn.innerHTML = '<i data-lucide="pause"></i>';
         vinyl.classList.add('spinning');
       } else {
-        LoFiAudio.stop();
-        playIcon.setAttribute('data-lucide', 'play');
+        playBtn.innerHTML = '<i data-lucide="play"></i>';
         vinyl.classList.remove('spinning');
       }
       lucide.createIcons();
+    }
+
+    playBtn.addEventListener('click', async () => {
+      if (!isPlaying) {
+        await LoFiAudio.start();
+        setPlayState(true);
+      } else {
+        LoFiAudio.stop();
+        setPlayState(false);
+      }
     });
+
+    if (seekTrack) {
+      seekTrack.addEventListener('click', (e) => {
+        const rect = seekTrack.getBoundingClientRect();
+        const pct = ((e.clientX - rect.left) / rect.width) * 100;
+        updateProgressUI(pct);
+      });
+    }
 
     // Volume slider control
     const volumeSlider = document.getElementById('volume-slider');
@@ -337,48 +379,70 @@
       });
     }
 
-    // Previous / Next Track Controls (Restart bar or advance progression)
+    // Previous / Next Track Controls
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
-        progress = Math.max(0, progress - 15);
-        seekFill.style.width = progress + '%';
+        updateProgressUI(progress - 15);
       });
     }
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
-        progress = Math.min(95, progress + 15);
-        seekFill.style.width = progress + '%';
+        updateProgressUI(progress + 15);
       });
     }
 
     setInterval(() => {
       if (isPlaying) {
-        progress = (progress + 0.5) % 100;
-        seekFill.style.width = progress + '%';
-        const currentSec = Math.floor((progress / 100) * 222);
-        const mins = Math.floor(currentSec / 60);
-        const secs = String(currentSec % 60).padStart(2, '0');
-        document.getElementById('time-current').textContent = `${mins}:${secs}`;
+        updateProgressUI((progress + 0.5) % 100);
       }
     }, 1000);
 
     const glowToggle = document.getElementById('glow-toggle');
     let glowOn = true;
-    glowToggle.addEventListener('click', () => {
-      glowOn = !glowOn;
-      document.body.classList.toggle('no-glow', !glowOn);
-      glowToggle.style.color = glowOn ? 'var(--accent-cyan)' : 'inherit';
-    });
+    if (glowToggle) {
+      glowToggle.addEventListener('click', () => {
+        glowOn = !glowOn;
+        document.body.classList.toggle('no-glow', !glowOn);
+        glowToggle.style.color = glowOn ? 'var(--accent-cyan)' : 'var(--text-muted)';
+        glowToggle.title = `Atmospheric Lighting: ${glowOn ? 'ON' : 'OFF'}`;
+      });
+    }
 
-    document.getElementById('fullscreen-btn').addEventListener('click', () => {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
-      } else {
-        document.exitFullscreen().catch(() => {});
+    const favBtn = document.getElementById('dock-fav-btn');
+    let isFavorited = false;
+    if (favBtn) {
+      favBtn.addEventListener('click', () => {
+        isFavorited = !isFavorited;
+        favBtn.classList.toggle('favorited', isFavorited);
+        favBtn.title = isFavorited ? 'Favorited' : 'Add to Favorites';
+      });
+    }
+
+    const fsBtn = document.getElementById('fullscreen-btn');
+    function updateFullscreenIcon() {
+      const isFs = !!document.fullscreenElement;
+      if (fsBtn) {
+        fsBtn.innerHTML = `<i data-lucide="${isFs ? 'minimize' : 'maximize'}"></i>`;
+        fsBtn.title = isFs ? 'Exit Fullscreen' : 'Toggle Fullscreen';
+        lucide.createIcons();
       }
-    });
+    }
+    document.addEventListener('fullscreenchange', updateFullscreenIcon);
+    if (fsBtn) {
+      fsBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      });
+    }
+
+    // Initialize initial progress UI and lyrics
+    updateProgressUI(progress);
+    updateLyricsState(0);
   </script>
 </body>
 </html>

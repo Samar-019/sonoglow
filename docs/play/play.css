@@ -24,6 +24,12 @@ body {
 
 #ambient-backdrop {
   position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+body.no-glow #ambient-backdrop {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .ambient-sphere {
@@ -222,6 +228,8 @@ body {
 }
 
 .dock-btn-icon:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
+.dock-btn-icon.favorited { color: #ff6584 !important; }
+.dock-btn-icon.favorited svg { fill: #ff6584; }
 .dock-btn-icon svg { width: 16px; height: 16px; }
 
 .dock-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; max-width: 480px; margin: 0 20px; }

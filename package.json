@@ -55,5 +55,8 @@
     "electron-builder": "^26.18.0",
     "png-to-ico": "^3.0.2",
     "gifenc": "^1.0.3"
+  },
+  "overrides": {
+    "minimatch": "^11.0.3"
   }
 }
