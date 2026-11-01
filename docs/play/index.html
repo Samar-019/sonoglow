@@ -12,20 +12,20 @@
   <link rel="icon" type="image/png" href="../icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="play.css">
-  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body data-layout="split">
-  <!-- Dynamic Ambient Backdrop -->
+  <!-- Dynamic Ambient Scenic Backdrop -->
   <div id="ambient-backdrop">
+    <div class="scenic-backdrop"></div>
     <div class="ambient-sphere sphere-1"></div>
     <div class="ambient-sphere sphere-2"></div>
     <div class="ambient-sphere sphere-3"></div>
     <div class="ambient-noise"></div>
   </div>
 
-  <!-- Topbar -->
+  <!-- Topbar Navigation -->
   <header class="web-topbar">
     <a href="../" class="web-brand">
       <img src="../icon.png" class="brand-avatar" alt="Sonoglow Logo">
@@ -34,16 +34,25 @@
     </a>
     <div class="subdomain-nav">
       <div class="view-switchers">
-        <button class="view-btn" data-view="albums" title="Album Carousel View"><i data-lucide="gallery-horizontal-end"></i><span>Albums</span></button>
-        <button class="view-btn active" data-view="split" title="Split Cover + Lyrics View"><i data-lucide="panels-top-left"></i><span>Split</span></button>
-        <button class="view-btn" data-view="cinema" title="Cinema Lyrics View"><i data-lucide="captions"></i><span>Cinema</span></button>
+        <button class="view-btn" data-view="albums" title="Album Carousel View">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <span>Albums</span>
+        </button>
+        <button class="view-btn active" data-view="split" title="Split Cover + Lyrics View">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M12 3v18"/></svg>
+          <span>Split</span>
+        </button>
+        <button class="view-btn" data-view="cinema" title="Cinema Lyrics View">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="15" x="2" y="4.5" rx="2"/><path d="M7 10h10M7 14h6"/></svg>
+          <span>Cinema</span>
+        </button>
       </div>
       <a href="https://github.com/Samar-019/sonoglow" target="_blank" rel="noopener noreferrer" class="github-cta-btn" title="View Sonoglow on GitHub">
-        <i data-lucide="github"></i>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         <span>GitHub</span>
       </a>
       <a href="../#download" class="download-cta-btn">
-        <i data-lucide="download"></i>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         <span>Get Desktop App</span>
       </a>
     </div>
@@ -61,89 +70,173 @@
     <section class="stage-scene" id="player-scene">
       <!-- Cover Section -->
       <div class="stage-cover-wrap">
-        <div class="vinyl-disc" id="vinyl-disc"></div>
+        <div class="preview-ghost-card preview-ghost-left"></div>
+        <div class="preview-ghost-card preview-ghost-right"></div>
         <div class="stage-album-card" id="album-card">
-          <img id="track-art" src="../images/midnight.jpg" alt="Album Cover">
+          <img id="track-art" src="../icon.png" alt="Sonoglow (Celestial Atmosphere)">
           <div class="card-caption">
-            <strong id="track-title">Midnight Resonance</strong>
-            <span id="track-artist">Sonoglow Atmosphere · Lofi Synth</span>
+            <strong id="track-title">Sonoglow (Celestial Atm...</strong>
+            <span id="track-artist">Chvrches · Spatial Audio</span>
           </div>
         </div>
       </div>
 
       <!-- Synced Lyrics Section -->
       <div class="stage-lyrics-wrap" id="lyrics-wrap">
-        <div class="lyrics-header">
-          <span class="lyrics-tag"><i data-lucide="audio-lines"></i> Synced Lyrics</span>
-          <span class="lyrics-timing" id="lyrics-timing">01:24 / 03:42</span>
-        </div>
         <div class="lyrics-stream">
-          <p class="lyric-p passed">Floating through neon rain and quiet city lights</p>
-          <p class="lyric-p active" id="current-lyric">Where the sound meets twilight and stays with you</p>
-          <p class="lyric-p upcoming">Lost in the frequency, suspended in the glow</p>
-          <p class="lyric-p upcoming">Every heartbeat in time with the tape delay</p>
+          <p class="lyric-p passed" id="lyric-prev">Held in the gravity of forgotten skies...</p>
+          <p class="lyric-p active" id="lyric-curr">We chase the Sonoglow into the deep night...</p>
+          <p class="lyric-p upcoming" id="lyric-next">Echoes of soundwaves resonating forever...</p>
+        </div>
+        <div class="lyrics-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+          <span>Live Synced LRCLIB Stream</span>
         </div>
       </div>
     </section>
 
-    <!-- Floating Capsule Player Dock -->
+    <!-- Floating Capsule Player Dock (Matching Image 2) -->
     <footer class="stage-dock">
-      <div class="dock-left">
-        <img src="../images/midnight.jpg" alt="Midnight Resonance" class="dock-thumb" id="dock-thumb">
-        <div class="dock-track-info">
-          <strong id="dock-title">Midnight Resonance</strong>
-          <span id="dock-artist">Sonoglow Lo-Fi Mix</span>
-        </div>
-        <button class="dock-btn-icon" id="dock-fav-btn" title="Add to Favorites"><i data-lucide="heart"></i></button>
+      <!-- Left: Transport Controls -->
+      <div class="dock-transport">
+        <button class="dock-btn" id="prev-btn" title="Previous Track">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+        </button>
+        <button class="dock-play-btn" id="play-btn" title="Play / Pause Audio">
+          <svg id="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        </button>
+        <button class="dock-btn" id="next-btn" title="Next Track">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+        </button>
       </div>
 
-      <div class="dock-center">
-        <div class="transport-controls">
-          <button class="transport-btn" id="prev-btn" title="Previous Track"><i data-lucide="skip-back"></i></button>
-          <button class="transport-btn play-btn" id="play-btn" title="Play / Pause"><i data-lucide="play" id="play-icon"></i></button>
-          <button class="transport-btn" id="next-btn" title="Next Track"><i data-lucide="skip-forward"></i></button>
-        </div>
-        <div class="progress-bar-wrap">
-          <span class="time-label" id="time-current">0:45</span>
-          <div class="seek-track" id="seek-track">
-            <div class="seek-fill" id="seek-fill" style="width: 38%;"></div>
-          </div>
-          <span class="time-label" id="time-total">3:42</span>
+      <!-- Center-Left: Mini Track Info -->
+      <div class="dock-track">
+        <img src="../icon.png" alt="Sonoglow" class="dock-thumb" id="dock-thumb">
+        <div class="dock-track-meta">
+          <strong id="dock-title">Sonoglow</strong>
+          <span id="dock-artist">YouTube Music</span>
         </div>
       </div>
 
-      <div class="dock-right">
-        <div class="volume-container">
-          <i data-lucide="volume-2"></i>
-          <input type="range" min="0" max="100" value="75" id="volume-slider">
+      <!-- Heart Favorite Button -->
+      <button class="dock-btn dock-fav-btn" id="dock-fav-btn" title="Add to Favorites">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+      </button>
+
+      <!-- Center: Seek Progress Bar -->
+      <div class="dock-seek">
+        <div class="seek-track" id="seek-track" title="Click to Seek">
+          <div class="seek-fill" id="seek-fill" style="width: 32%;"></div>
         </div>
-        <button class="dock-btn-icon" id="glow-toggle" title="Atmospheric Lighting: ON"><i data-lucide="sparkles"></i></button>
-        <button class="dock-btn-icon" id="fullscreen-btn" title="Toggle Fullscreen"><i data-lucide="maximize"></i></button>
+        <div class="seek-times">
+          <span id="time-current">1:12</span>
+          <span id="time-total">3:45</span>
+        </div>
+      </div>
+
+      <!-- Right: Tools (Visualizer & Fullscreen) -->
+      <div class="dock-tools">
+        <button class="dock-btn dock-vis-btn" id="vis-btn" title="Audio Visualizer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5v14M7 9v6M22 10v4M2 10v4"></path></svg>
+        </button>
+        <button class="dock-btn" id="fullscreen-btn" title="Toggle Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg>
+        </button>
       </div>
     </footer>
   </main>
 
   <script>
-    lucide.createIcons();
+    // Live Desktop Clock
     function updateClock() {
       const now = new Date();
       const hours = String(now.getHours()).padStart(2, '0');
       const minutes = String(now.getMinutes()).padStart(2, '0');
-      document.getElementById('live-clock').textContent = `${hours}:${minutes}`;
+      const clockEl = document.getElementById('live-clock');
+      if (clockEl) clockEl.textContent = `${hours}:${minutes}`;
+
       const options = { weekday: 'long', month: 'short', day: 'numeric' };
-      document.getElementById('live-date').textContent = now.toLocaleDateString('en-US', options).toUpperCase();
+      const dateEl = document.getElementById('live-date');
+      if (dateEl) dateEl.textContent = now.toLocaleDateString('en-US', options).toUpperCase();
     }
     updateClock();
     setInterval(updateClock, 1000);
 
+    // View Switcher Buttons (Albums / Split / Cinema)
     const viewButtons = document.querySelectorAll('.view-btn');
     viewButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         viewButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        document.body.setAttribute('data-layout', btn.dataset.view);
+        const view = btn.getAttribute('data-view');
+        document.body.setAttribute('data-layout', view);
       });
     });
+
+    // Favorite heart toggle
+    const favBtn = document.getElementById('dock-fav-btn');
+    if (favBtn) {
+      favBtn.addEventListener('click', () => {
+        favBtn.classList.toggle('active');
+      });
+    }
+
+    // Lyrics Progression Data
+    const songData = [
+      {
+        chord: {
+          bass: 87.31, // F2
+          keys: [174.61, 261.63, 329.63, 392.00], // F3, C4, E4, G4 (Fmaj9)
+          lead: [440.00, 523.25] // A4, C5
+        },
+        prev: "Held in the gravity of forgotten skies...",
+        curr: "We chase the Sonoglow into the deep night...",
+        next: "Echoes of soundwaves resonating forever..."
+      },
+      {
+        chord: {
+          bass: 73.42, // D2
+          keys: [146.83, 220.00, 261.63, 329.63], // D3, A3, C4, E4 (Dm9)
+          lead: [349.23, 329.63] // F4, E4
+        },
+        prev: "We chase the Sonoglow into the deep night...",
+        curr: "Echoes of soundwaves resonating forever...",
+        next: "Lost in the rhythm where time stands still..."
+      },
+      {
+        chord: {
+          bass: 116.54, // Bb2
+          keys: [174.61, 233.08, 293.66, 349.23], // F3, Bb3, D4, F4 (Bbmaj7)
+          lead: [392.00, 440.00] // G4, A4
+        },
+        prev: "Echoes of soundwaves resonating forever...",
+        curr: "Lost in the rhythm where time stands still...",
+        next: "Atmosphere breathing with every heartbeat..."
+      },
+      {
+        chord: {
+          bass: 65.41, // C2
+          keys: [196.00, 261.63, 293.66, 349.23], // G3, C4, D4, F4 (C7sus4)
+          lead: [329.63, 261.63] // E4, C4
+        },
+        prev: "Lost in the rhythm where time stands still...",
+        curr: "Atmosphere breathing with every heartbeat...",
+        next: "Held in the gravity of forgotten skies..."
+      }
+    ];
+
+    let currentStep = 0;
+    const lyricPrevEl = document.getElementById('lyric-prev');
+    const lyricCurrEl = document.getElementById('lyric-curr');
+    const lyricNextEl = document.getElementById('lyric-next');
+
+    function updateLyrics(index) {
+      const item = songData[index % songData.length];
+      if (lyricPrevEl) lyricPrevEl.textContent = item.prev;
+      if (lyricCurrEl) lyricCurrEl.textContent = item.curr;
+      if (lyricNextEl) lyricNextEl.textContent = item.next;
+    }
 
     // Procedural Lo-Fi Chill Piano Audio Engine
     const LoFiAudio = {
@@ -152,8 +245,6 @@
       masterGain: null,
       filter: null,
       timer: null,
-      step: 0,
-      userVolume: 0.75,
 
       async start() {
         try {
@@ -169,78 +260,51 @@
           const now = this.ctx.currentTime;
           this.masterGain = this.ctx.createGain();
           this.masterGain.gain.setValueAtTime(0.001, now);
-          this.masterGain.gain.linearRampToValueAtTime(0.55 * this.userVolume, now + 0.4);
+          this.masterGain.gain.linearRampToValueAtTime(0.55, now + 0.35);
           this.masterGain.connect(this.ctx.destination);
 
+          // Warm vintage filter
           this.filter = this.ctx.createBiquadFilter();
           this.filter.type = 'lowpass';
           this.filter.frequency.setValueAtTime(1400, now);
           this.filter.Q.setValueAtTime(1.2, now);
           this.filter.connect(this.masterGain);
 
-          const chords = [
-            {
-              bass: 87.31, // F2
-              chord: [174.61, 261.63, 329.63, 392.00], // F3, C4, E4, G4 (Fmaj9)
-              melody: [440.00, 523.25]
-              lyric: "Floating through neon rain and quiet city lights"
-            },
-            {
-              bass: 73.42, // D2
-              chord: [146.83, 220.00, 261.63, 329.63], // D3, A3, C4, E4 (Dm9)
-              melody: [349.23, 329.63],
-              lyric: "Where the sound meets twilight and stays with you"
-            },
-            {
-              bass: 116.54, // Bb2
-              chord: [174.61, 233.08, 293.66, 349.23], // F3, Bb3, D4, F4 (Bbmaj7)
-              melody: [392.00, 440.00],
-              lyric: "Lost in the frequency, suspended in the glow"
-            },
-            {
-              bass: 65.41, // C2
-              chord: [196.00, 261.63, 293.66, 349.23], // G3, C4, D4, F4 (C7sus4)
-              melody: [329.63, 261.63],
-              lyric: "Every heartbeat in time with the tape delay"
-            }
-          ];
-
-          this.step = 0;
           this.isPlaying = true;
 
-          const playBar = () => {
+          const playStep = () => {
             if (!this.isPlaying || !this.ctx) return;
-            const current = chords[this.step % chords.length];
+            const item = songData[currentStep % songData.length];
             const t = this.ctx.currentTime;
 
-            // Update active lyric dynamically with music progression
-            const lyricEl = document.getElementById('current-lyric');
-            if (lyricEl) lyricEl.textContent = current.lyric;
+            updateLyrics(currentStep);
 
-            // Bass note on beat 1
-            this.playKey(current.bass, t, 2.3, 0.45);
+            // Bass note
+            this.playKey(item.chord.bass, t, 2.5, 0.45);
 
-            // Strummed chord
-            current.chord.forEach((freq, idx) => {
-              this.playKey(freq, t + (idx * 0.04), 2.1, 0.26);
+            // Strummed chords
+            item.chord.keys.forEach((freq, idx) => {
+              this.playKey(freq, t + (idx * 0.04), 2.2, 0.28);
             });
 
             // Lead melody notes
-            if (current.melody[0]) this.playKey(current.melody[0], t + 0.65, 1.4, 0.28);
-            if (current.melody[1]) this.playKey(current.melody[1], t + 1.25, 1.2, 0.24);
+            if (item.chord.lead[0]) this.playKey(item.chord.lead[0], t + 0.65, 1.4, 0.28);
+            if (item.chord.lead[1]) this.playKey(item.chord.lead[1], t + 1.25, 1.2, 0.24);
 
-            if (Math.random() > 0.4) {
-              const sparkle = [523.25, 659.25, 783.99][Math.floor(Math.random() * 3)];
-              this.playKey(sparkle, t + 1.85, 1.2, 0.16);
+            // Sparkle harmonic
+            if (Math.random() > 0.35) {
+              const sparkles = [523.25, 659.25, 783.99];
+              const sparkle = sparkles[Math.floor(Math.random() * sparkles.length)];
+              this.playKey(sparkle, t + 1.8, 1.1, 0.16);
             }
 
-            this.step++;
-            this.timer = setTimeout(playBar, 2400);
+            currentStep++;
+            this.timer = setTimeout(playStep, 2600);
           };
 
-          playBar();
+          playStep();
         } catch (e) {
-          console.warn('Audio error:', e);
+          console.warn('Audio start error:', e);
         }
       },
 
@@ -254,7 +318,7 @@
           const osc2 = this.ctx.createOscillator();
           osc2.type = 'triangle';
           osc2.frequency.setValueAtTime(freq, time);
-          osc2.detune.setValueAtTime(3.5, time);
+          osc2.detune.setValueAtTime(4.0, time);
 
           const osc3 = this.ctx.createOscillator();
           osc3.type = 'sine';
@@ -285,13 +349,6 @@
         } catch (e) {}
       },
 
-      setVolume(val) {
-        this.userVolume = Math.max(0, Math.min(1, val));
-        if (this.masterGain && this.ctx && this.isPlaying) {
-          this.masterGain.gain.linearRampToValueAtTime(0.55 * this.userVolume, this.ctx.currentTime + 0.1);
-        }
-      },
-
       stop() {
         if (this.timer) {
           clearTimeout(this.timer);
@@ -300,85 +357,104 @@
         if (!this.masterGain || !this.ctx) return;
         const now = this.ctx.currentTime;
         this.masterGain.gain.setValueAtTime(Math.max(0.001, this.masterGain.gain.value), now);
-        this.masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+        this.masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
         setTimeout(() => {
           this.isPlaying = false;
-          this.step = 0;
-        }, 550);
+        }, 450);
       }
     };
 
+    // Playback state and Seek bar
     let isPlaying = false;
-    let progress = 38;
+    let elapsedSeconds = 72; // Starts at 1:12 as shown in screenshot
+    const totalDurationSeconds = 225; // 3:45
     const playBtn = document.getElementById('play-btn');
     const playIcon = document.getElementById('play-icon');
-    const vinyl = document.getElementById('vinyl-disc');
     const seekFill = document.getElementById('seek-fill');
+    const timeCurrent = document.getElementById('time-current');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const seekTrack = document.getElementById('seek-track');
+
+    function updateTimeDisplay() {
+      const mins = Math.floor(elapsedSeconds / 60);
+      const secs = String(elapsedSeconds % 60).padStart(2, '0');
+      if (timeCurrent) timeCurrent.textContent = `${mins}:${secs}`;
+      const pct = (elapsedSeconds / totalDurationSeconds) * 100;
+      if (seekFill) seekFill.style.width = `${pct}%`;
+    }
+    updateTimeDisplay();
 
     playBtn.addEventListener('click', async () => {
       isPlaying = !isPlaying;
       if (isPlaying) {
         await LoFiAudio.start();
-        playIcon.setAttribute('data-lucide', 'pause');
-        vinyl.classList.add('spinning');
+        playBtn.classList.add('playing');
+        playIcon.innerHTML = '<rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect>';
       } else {
         LoFiAudio.stop();
-        playIcon.setAttribute('data-lucide', 'play');
-        vinyl.classList.remove('spinning');
+        playBtn.classList.remove('playing');
+        playIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
       }
-      lucide.createIcons();
     });
 
-    // Volume slider control
-    const volumeSlider = document.getElementById('volume-slider');
-    if (volumeSlider) {
-      volumeSlider.addEventListener('input', (e) => {
-        LoFiAudio.setVolume(Number(e.target.value) / 100);
+    // Previous and Next buttons
+    prevBtn.addEventListener('click', () => {
+      currentStep = (currentStep - 1 + songData.length) % songData.length;
+      elapsedSeconds = Math.max(0, elapsedSeconds - 15);
+      updateTimeDisplay();
+      updateLyrics(currentStep);
+      if (isPlaying && LoFiAudio.ctx) {
+        const item = songData[currentStep % songData.length];
+        const t = LoFiAudio.ctx.currentTime;
+        LoFiAudio.playKey(item.chord.bass, t, 1.8, 0.45);
+        item.chord.keys.forEach((freq, idx) => LoFiAudio.playKey(freq, t + (idx * 0.03), 1.6, 0.25));
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentStep = (currentStep + 1) % songData.length;
+      elapsedSeconds = Math.min(totalDurationSeconds - 2, elapsedSeconds + 15);
+      updateTimeDisplay();
+      updateLyrics(currentStep);
+      if (isPlaying && LoFiAudio.ctx) {
+        const item = songData[currentStep % songData.length];
+        const t = LoFiAudio.ctx.currentTime;
+        LoFiAudio.playKey(item.chord.bass, t, 1.8, 0.45);
+        item.chord.keys.forEach((freq, idx) => LoFiAudio.playKey(freq, t + (idx * 0.03), 1.6, 0.25));
+      }
+    });
+
+    // Seek track click
+    if (seekTrack) {
+      seekTrack.addEventListener('click', (e) => {
+        const rect = seekTrack.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+        elapsedSeconds = Math.floor(ratio * totalDurationSeconds);
+        updateTimeDisplay();
       });
     }
 
-    // Previous / Next Track Controls (Restart bar or advance progression)
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        progress = Math.max(0, progress - 15);
-        seekFill.style.width = progress + '%';
-      });
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        progress = Math.min(95, progress + 15);
-        seekFill.style.width = progress + '%';
-      });
-    }
-
+    // Playback elapsed timer
     setInterval(() => {
       if (isPlaying) {
-        progress = (progress + 0.5) % 100;
-        seekFill.style.width = progress + '%';
-        const currentSec = Math.floor((progress / 100) * 222);
-        const mins = Math.floor(currentSec / 60);
-        const secs = String(currentSec % 60).padStart(2, '0');
-        document.getElementById('time-current').textContent = `${mins}:${secs}`;
+        elapsedSeconds = (elapsedSeconds + 1) % totalDurationSeconds;
+        updateTimeDisplay();
       }
     }, 1000);
 
-    const glowToggle = document.getElementById('glow-toggle');
-    let glowOn = true;
-    glowToggle.addEventListener('click', () => {
-      glowOn = !glowOn;
-      document.body.classList.toggle('no-glow', !glowOn);
-      glowToggle.style.color = glowOn ? 'var(--accent-cyan)' : 'inherit';
-    });
-
-    document.getElementById('fullscreen-btn').addEventListener('click', () => {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
-      } else {
-        document.exitFullscreen().catch(() => {});
-      }
-    });
+    // Fullscreen toggle
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    if (fullscreenBtn) {
+      fullscreenBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      });
+    }
   </script>
 </body>
 </html>
