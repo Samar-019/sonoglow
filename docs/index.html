@@ -2044,10 +2044,10 @@ npm start
           </div>
           <div class="core-info">
             <div class="core-title-row">
-              <span class="core-title">Atmospheric Sound Console</span>
+              <span class="core-title">Lo-Fi Ambient Piano Console</span>
               <span class="core-badge" id="sound-state-badge">Tap to Listen</span>
             </div>
-            <p class="core-subtitle">Real-time procedural 432Hz ambient chord synth &amp; dynamic stardust harmonics</p>
+            <p class="core-subtitle">Soothing procedural Lo-Fi chill piano, warm Rhodes chords &amp; vinyl atmosphere</p>
           </div>
         </div>
 
@@ -2434,13 +2434,15 @@ npm start
       });
     })();
 
-    // 5. Procedural 432Hz Ambient Soundscape Synthesizer (Lush Pad + Stardust Chimes)
+    // 5. Procedural Lo-Fi Chill Piano & Ambient Chord Sequencer
     const CoreAudioEngine = {
       ctx: null,
       isPlaying: false,
-      nodes: [],
-      chimeTimer: null,
       masterGain: null,
+      filter: null,
+      timer: null,
+      step: 0,
+      vinylNode: null,
 
       init() {
         const btn = document.getElementById('core-orb-btn');
@@ -2459,8 +2461,8 @@ npm start
             await this.start();
             card.classList.add('playing');
             if (badge) {
-              badge.textContent = 'Playing 432Hz Ambient';
-              badge.style.color = '#4ade80';
+              badge.textContent = 'Playing Lo-Fi Piano ✨';
+              badge.style.color = '#38bdf8';
             }
             if (icon) {
               icon.innerHTML = '<rect x="6" y="5" width="4" height="14" rx="1" fill="#12131d"/><rect x="14" y="5" width="4" height="14" rx="1" fill="#12131d"/>';
@@ -2485,6 +2487,51 @@ npm start
         });
       },
 
+      // Plays a rich, soothing electric piano/Rhodes note
+      playPianoKey(freq, time, duration = 1.8, velocity = 0.3) {
+        if (!this.ctx || !this.filter || this.ctx.state !== 'running') return;
+        try {
+          // 1. Warm sine body
+          const osc1 = this.ctx.createOscillator();
+          osc1.type = 'sine';
+          osc1.frequency.setValueAtTime(freq, time);
+
+          // 2. Soft triangle harmonic for acoustic fullness
+          const osc2 = this.ctx.createOscillator();
+          osc2.type = 'triangle';
+          osc2.frequency.setValueAtTime(freq, time);
+          osc2.detune.setValueAtTime(3.5, time);
+
+          // 3. Shimmer tine (octave above with fast decay)
+          const osc3 = this.ctx.createOscillator();
+          osc3.type = 'sine';
+          osc3.frequency.setValueAtTime(freq * 2, time);
+
+          const noteGain = this.ctx.createGain();
+          noteGain.gain.setValueAtTime(0.0001, time);
+          noteGain.gain.linearRampToValueAtTime(velocity, time + 0.02);
+          noteGain.gain.exponentialRampToValueAtTime(velocity * 0.45, time + 0.35);
+          noteGain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+
+          const tineGain = this.ctx.createGain();
+          tineGain.gain.setValueAtTime(velocity * 0.25, time);
+          tineGain.gain.exponentialRampToValueAtTime(0.0001, time + 0.25);
+
+          osc1.connect(noteGain);
+          osc2.connect(noteGain);
+          osc3.connect(tineGain);
+          tineGain.connect(noteGain);
+          noteGain.connect(this.filter);
+
+          osc1.start(time);
+          osc2.start(time);
+          osc3.start(time);
+          osc1.stop(time + duration + 0.1);
+          osc2.stop(time + duration + 0.1);
+          osc3.stop(time + duration + 0.1);
+        } catch (e) {}
+      },
+
       async start() {
         try {
           const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -2499,125 +2546,95 @@ npm start
           const now = this.ctx.currentTime;
           this.masterGain = this.ctx.createGain();
           this.masterGain.gain.setValueAtTime(0.001, now);
-          this.masterGain.gain.exponentialRampToValueAtTime(0.48, now + 1.0);
+          this.masterGain.gain.linearRampToValueAtTime(0.55, now + 0.5);
           this.masterGain.connect(this.ctx.destination);
 
-          // Living Lowpass Filter with gentle resonance
-          const filter = this.ctx.createBiquadFilter();
-          filter.type = 'lowpass';
-          filter.frequency.setValueAtTime(650, now);
-          filter.Q.setValueAtTime(1.8, now);
-          filter.connect(this.masterGain);
+          // Vintage warm lowpass filter (Lo-Fi tone)
+          this.filter = this.ctx.createBiquadFilter();
+          this.filter.type = 'lowpass';
+          this.filter.frequency.setValueAtTime(1400, now);
+          this.filter.Q.setValueAtTime(1.2, now);
+          this.filter.connect(this.masterGain);
 
-          // LFO for slow atmospheric breathing wave (6.5s cycle)
-          const lfo = this.ctx.createOscillator();
-          const lfoGain = this.ctx.createGain();
-          lfo.frequency.setValueAtTime(0.15, now);
-          lfoGain.gain.setValueAtTime(320, now);
-          lfo.connect(lfoGain);
-          lfoGain.connect(filter.frequency);
-          lfo.start(now);
-
-          this.nodes = [lfo, lfoGain, filter];
-
-          // Warm harmonic pad voices (432Hz Sacred A-Major Chord)
-          const padVoices = [
-            { freq: 216.00, type: 'sine', gain: 0.38, detune: -4 },
-            { freq: 216.00, type: 'triangle', gain: 0.18, detune: 4 },
-            { freq: 324.00, type: 'sine', gain: 0.32, detune: 2 },
-            { freq: 432.00, type: 'sine', gain: 0.42, detune: 0 },
-            { freq: 540.00, type: 'sine', gain: 0.25, detune: -2 },
-            { freq: 648.00, type: 'triangle', gain: 0.14, detune: 3 }
+          // Soothing Lo-Fi Chord Progression: Fmaj9 -> Dm9 -> Bbmaj7 -> C7sus4
+          const chords = [
+            {
+              bass: 87.31, // F2
+              chord: [174.61, 261.63, 329.63, 392.00], // F3, C4, E4, G4 (Fmaj9)
+              melody: [440.00, 523.25] // A4, C5
+            },
+            {
+              bass: 73.42, // D2
+              chord: [146.83, 220.00, 261.63, 329.63], // D3, A3, C4, E4 (Dm9)
+              melody: [349.23, 329.63] // F4, E4
+            },
+            {
+              bass: 116.54, // Bb2
+              chord: [174.61, 233.08, 293.66, 349.23], // F3, Bb3, D4, F4 (Bbmaj7)
+              melody: [392.00, 440.00] // G4, A4
+            },
+            {
+              bass: 65.41, // C2
+              chord: [196.00, 261.63, 293.66, 349.23], // G3, C4, D4, F4 (C7sus4)
+              melody: [329.63, 261.63] // E4, C4
+            }
           ];
 
-          padVoices.forEach((v) => {
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
-
-            osc.type = v.type;
-            osc.frequency.setValueAtTime(v.freq, now);
-            osc.detune.setValueAtTime(v.detune, now);
-
-            gain.gain.setValueAtTime(v.gain, now);
-
-            osc.connect(gain);
-            gain.connect(filter);
-            osc.start(now);
-
-            this.nodes.push(osc, gain);
-          });
-
-          // Play initial soothing chime harmony
-          this.playChime(432, 0.22);
-          setTimeout(() => { if (this.isPlaying) this.playChime(540, 0.18); }, 850);
-          setTimeout(() => { if (this.isPlaying) this.playChime(648, 0.20); }, 1700);
-
-          // Schedule random celestial chime drops every 2.5 - 4.5 seconds
-          const chimeNotes = [432, 540, 648, 864, 1080];
-          const triggerNextChime = () => {
-            if (!this.isPlaying) return;
-            const note = chimeNotes[Math.floor(Math.random() * chimeNotes.length)];
-            this.playChime(note, 0.15 + Math.random() * 0.10);
-            const nextDelay = 2200 + Math.random() * 2600;
-            this.chimeTimer = setTimeout(triggerNextChime, nextDelay);
-          };
-          this.chimeTimer = setTimeout(triggerNextChime, 3000);
-
+          this.step = 0;
           this.isPlaying = true;
+
+          // 78 BPM Bar sequencer (Each chord is 1 bar = 2.4s)
+          const playBar = () => {
+            if (!this.isPlaying || !this.ctx) return;
+            const current = chords[this.step % chords.length];
+            const t = this.ctx.currentTime;
+
+            // 1. Warm sub bass note on beat 1
+            this.playPianoKey(current.bass, t, 2.3, 0.45);
+
+            // 2. Humanized gentle strummed chord (staggered 38ms)
+            current.chord.forEach((freq, idx) => {
+              this.playPianoKey(freq, t + (idx * 0.04), 2.1, 0.26);
+            });
+
+            // 3. Relaxing piano melody on beat 2 & beat 3
+            if (current.melody[0]) {
+              this.playPianoKey(current.melody[0], t + 0.65, 1.4, 0.28);
+            }
+            if (current.melody[1]) {
+              this.playPianoKey(current.melody[1], t + 1.25, 1.2, 0.24);
+            }
+
+            // Occasional gentle high sparkle note
+            if (Math.random() > 0.4) {
+              const sparkle = [523.25, 659.25, 783.99][Math.floor(Math.random() * 3)];
+              this.playPianoKey(sparkle, t + 1.85, 1.2, 0.16);
+            }
+
+            this.step++;
+            this.timer = setTimeout(playBar, 2400);
+          };
+
+          // Start first bar immediately
+          playBar();
         } catch (e) {
-          console.warn('Audio synthesis not supported or blocked:', e);
+          console.warn('Audio synthesis error:', e);
         }
       },
 
-      playChime(freq, volume = 0.2) {
-        if (!this.ctx || !this.masterGain || this.ctx.state !== 'running') return;
-        try {
-          const now = this.ctx.currentTime;
-          const osc = this.ctx.createOscillator();
-          const overtone = this.ctx.createOscillator();
-          const chimeGain = this.ctx.createGain();
-
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, now);
-
-          overtone.type = 'triangle';
-          overtone.frequency.setValueAtTime(freq * 2, now);
-
-          // Bell envelope: fast subtle attack, long shimmering exponential decay
-          chimeGain.gain.setValueAtTime(0.0001, now);
-          chimeGain.gain.linearRampToValueAtTime(volume, now + 0.04);
-          chimeGain.gain.exponentialRampToValueAtTime(0.0001, now + 2.8);
-
-          osc.connect(chimeGain);
-          overtone.connect(chimeGain);
-          chimeGain.connect(this.masterGain);
-
-          osc.start(now);
-          overtone.start(now);
-          osc.stop(now + 3.0);
-          overtone.stop(now + 3.0);
-        } catch (e) {}
-      },
-
       stop() {
-        if (this.chimeTimer) {
-          clearTimeout(this.chimeTimer);
-          this.chimeTimer = null;
+        if (this.timer) {
+          clearTimeout(this.timer);
+          this.timer = null;
         }
         if (!this.masterGain || !this.ctx) return;
         const now = this.ctx.currentTime;
         this.masterGain.gain.setValueAtTime(Math.max(0.001, this.masterGain.gain.value), now);
-        this.masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
+        this.masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
         setTimeout(() => {
-          this.nodes.forEach(node => {
-            try {
-              if (node.stop) node.stop();
-              if (node.disconnect) node.disconnect();
-            } catch (e) {}
-          });
-          this.nodes = [];
           this.isPlaying = false;
-        }, 650);
+          this.step = 0;
+        }, 550);
       }
     };
     CoreAudioEngine.init();
