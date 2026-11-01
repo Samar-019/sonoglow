@@ -10,7 +10,7 @@ This guide details how your **Apex Domain** (Official Site), **Subdomain Site** 
 | :--- | :--- | :--- |
 | **`sonoglow.io`** (or `www.sonoglow.io`) | `docs/index.html` | **Official Landing Page** (Showcase, Downloads, Features) |
 | **`play.sonoglow.io`** (or `app.sonoglow.io`) | `docs/play/index.html` | **Interactive Web Player Demo** (In-browser atmospheric player) |
-| **`volvotic.github.io/sonoglow/`** | `docs/` | Default GitHub Pages URL |
+| **`samar-019.github.io/sonoglow/`** | `docs/` | Default GitHub Pages URL |
 
 ---
 
@@ -24,7 +24,7 @@ Type: A     Name: @     Value: 185.199.108.153     TTL: Auto
 Type: A     Name: @     Value: 185.199.109.153     TTL: Auto
 Type: A     Name: @     Value: 185.199.110.153     TTL: Auto
 Type: A     Name: @     Value: 185.199.111.153     TTL: Auto
-Type: CNAME Name: www   Value: volvotic.github.io. TTL: Auto
+Type: CNAME Name: www   Value: samar-019.github.io. TTL: Auto
 ```
 
 ### For the Subdomain (`play.sonoglow.io`):
@@ -44,7 +44,7 @@ If you want `play.sonoglow.io` hosted completely separately:
    ```
 3. Add a DNS CNAME record:
    ```dns
-   Type: CNAME Name: play Value: volvotic.github.io.
+   Type: CNAME Name: play Value: samar-019.github.io.
    ```
 
 ---

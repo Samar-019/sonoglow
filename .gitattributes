@@ -1,0 +1,15 @@
+# Auto detect text files and normalize line endings to CRLF on checkout/commit
+* text=auto eol=crlf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.md text eol=crlf
+*.html text eol=crlf
+*.css text eol=crlf
+*.js text eol=crlf
+*.cjs text eol=crlf
+*.json text eol=crlf
+*.png binary
+*.jpg binary
+*.ico binary
+*.ttf binary
+*.bin binary
