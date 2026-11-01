@@ -14,7 +14,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="play.css">
-  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body data-layout="split">
   <!-- Dynamic Ambient Backdrop -->
@@ -34,16 +33,25 @@
     </a>
     <div class="subdomain-nav">
       <div class="view-switchers">
-        <button class="view-btn" data-view="albums" title="Album Carousel View"><i data-lucide="gallery-horizontal-end"></i><span>Albums</span></button>
-        <button class="view-btn active" data-view="split" title="Split Cover + Lyrics View"><i data-lucide="panels-top-left"></i><span>Split</span></button>
-        <button class="view-btn" data-view="cinema" title="Cinema Lyrics View"><i data-lucide="captions"></i><span>Cinema</span></button>
+        <button class="view-btn" data-view="albums" title="Album Carousel View">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7v10"/><path d="M6 5v14"/><rect width="12" height="18" x="10" y="3" rx="2"/></svg>
+          <span>Albums</span>
+        </button>
+        <button class="view-btn active" data-view="split" title="Split Cover + Lyrics View">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          <span>Split</span>
+        </button>
+        <button class="view-btn" data-view="cinema" title="Cinema Lyrics View">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="14" x="3" y="5" rx="2"/><path d="M7 15h4M15 15h2M7 11h2M13 11h4"/></svg>
+          <span>Cinema</span>
+        </button>
       </div>
       <a href="https://github.com/Samar-019/sonoglow" target="_blank" rel="noopener noreferrer" class="github-cta-btn" title="View Sonoglow on GitHub">
-        <i data-lucide="github"></i>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
         <span>GitHub</span>
       </a>
       <a href="../#download" class="download-cta-btn">
-        <i data-lucide="download"></i>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
         <span>Get Desktop App</span>
       </a>
     </div>
@@ -61,8 +69,8 @@
     <section class="stage-scene" id="player-scene">
       <!-- Cover Section -->
       <div class="stage-cover-wrap">
-        <div class="vinyl-disc" id="vinyl-disc"></div>
-        <div class="stage-album-card" id="album-card">
+        <div class="vinyl-disc" id="vinyl-disc" title="Click to Play / Pause"></div>
+        <div class="stage-album-card" id="album-card" title="Click to Play / Pause" style="cursor: pointer;">
           <img id="track-art" src="../images/midnight.jpg" alt="Album Cover">
           <div class="card-caption">
             <strong id="track-title">Midnight Resonance</strong>
@@ -74,7 +82,10 @@
       <!-- Synced Lyrics Section -->
       <div class="stage-lyrics-wrap" id="lyrics-wrap">
         <div class="lyrics-header">
-          <span class="lyrics-tag"><i data-lucide="audio-lines"></i> Synced Lyrics</span>
+          <span class="lyrics-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10v3"/><path d="M6 6v11"/><path d="M10 3v18"/><path d="M14 8v7"/><path d="M18 5v13"/><path d="M22 10v3"/></svg>
+            Synced Lyrics
+          </span>
           <span class="lyrics-timing" id="lyrics-timing">00:45 / 03:42</span>
         </div>
         <div class="lyrics-stream" id="lyrics-stream">
@@ -94,49 +105,65 @@
           <strong id="dock-title">Midnight Resonance</strong>
           <span id="dock-artist">Sonoglow Lo-Fi Mix</span>
         </div>
-        <button class="dock-btn-icon" id="dock-fav-btn" title="Add to Favorites"><i data-lucide="heart"></i></button>
+        <button class="dock-btn-icon" id="dock-fav-btn" title="Add to Favorites">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </button>
       </div>
 
       <div class="dock-center">
         <div class="transport-controls">
-          <button class="transport-btn" id="prev-btn" title="Previous Track"><i data-lucide="skip-back"></i></button>
-          <button class="transport-btn play-btn" id="play-btn" title="Play / Pause"><i data-lucide="play" id="play-icon"></i></button>
-          <button class="transport-btn" id="next-btn" title="Next Track"><i data-lucide="skip-forward"></i></button>
+          <button class="transport-btn" id="prev-btn" title="Previous Track">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" x2="5" y1="19" y2="5"/></svg>
+          </button>
+          <button class="transport-btn play-btn" id="play-btn" title="Play / Pause">
+            <svg id="play-svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </button>
+          <button class="transport-btn" id="next-btn" title="Next Track">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" x2="19" y1="5" y2="19"/></svg>
+          </button>
         </div>
         <div class="progress-bar-wrap">
           <span class="time-label" id="time-current">0:45</span>
-          <div class="seek-track" id="seek-track">
-            <div class="seek-fill" id="seek-fill" style="width: 38%;"></div>
+          <div class="seek-track" id="seek-track" title="Click to seek">
+            <div class="seek-fill" id="seek-fill" style="width: 20%;"></div>
           </div>
-          <span class="time-label" id="time-total">3:42</span>
+          <span class="time-label" id="time-total">03:42</span>
         </div>
       </div>
 
       <div class="dock-right">
         <div class="volume-container">
-          <i data-lucide="volume-2"></i>
-          <input type="range" min="0" max="100" value="75" id="volume-slider">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          <input type="range" min="0" max="100" value="75" id="volume-slider" title="Volume">
         </div>
-        <button class="dock-btn-icon" id="glow-toggle" title="Atmospheric Lighting: ON"><i data-lucide="sparkles"></i></button>
-        <button class="dock-btn-icon" id="fullscreen-btn" title="Toggle Fullscreen"><i data-lucide="maximize"></i></button>
+        <button class="dock-btn-icon" id="glow-toggle" title="Atmospheric Lighting: ON">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+        </button>
+        <button class="dock-btn-icon" id="fullscreen-btn" title="Toggle Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" x2="14" y1="3" y2="10"/><line x1="3" x2="10" y1="21" y2="14"/></svg>
+        </button>
       </div>
     </footer>
   </main>
 
   <script>
-    lucide.createIcons();
-
+    // Clock updates
     function updateClock() {
       const now = new Date();
       const hours = String(now.getHours()).padStart(2, '0');
       const minutes = String(now.getMinutes()).padStart(2, '0');
-      document.getElementById('live-clock').textContent = `${hours}:${minutes}`;
-      const options = { weekday: 'long', month: 'short', day: 'numeric' };
-      document.getElementById('live-date').textContent = now.toLocaleDateString('en-US', options).toUpperCase();
+      const clockEl = document.getElementById('live-clock');
+      const dateEl = document.getElementById('live-date');
+      if (clockEl) clockEl.textContent = `${hours}:${minutes}`;
+      if (dateEl) {
+        const options = { weekday: 'long', month: 'short', day: 'numeric' };
+        dateEl.textContent = now.toLocaleDateString('en-US', options).toUpperCase();
+      }
     }
     updateClock();
     setInterval(updateClock, 1000);
 
+    // View layout switchers (Albums / Split / Cinema)
     const viewButtons = document.querySelectorAll('.view-btn');
     viewButtons.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -146,35 +173,68 @@
       });
     });
 
-    const chords = [
+    // Multi-track demo playlist
+    const demoTracks = [
       {
-        bass: 87.31, // F2
-        chord: [174.61, 261.63, 329.63, 392.00], // F3, C4, E4, G4 (Fmaj9)
-        melody: [440.00, 523.25],
-        lyric: "Floating through neon rain and quiet city lights"
+        title: "Midnight Resonance",
+        artist: "Sonoglow Atmosphere · Lofi Synth",
+        image: "../images/midnight.jpg",
+        lyrics: [
+          "Floating through neon rain and quiet city lights",
+          "Where the sound meets twilight and stays with you",
+          "Lost in the frequency, suspended in the glow",
+          "Every heartbeat in time with the tape delay"
+        ],
+        chords: [
+          { bass: 87.31, chord: [174.61, 261.63, 329.63, 392.00], melody: [440.00, 523.25] },
+          { bass: 73.42, chord: [146.83, 220.00, 261.63, 329.63], melody: [349.23, 329.63] },
+          { bass: 116.54, chord: [174.61, 233.08, 293.66, 349.23], melody: [392.00, 440.00] },
+          { bass: 65.41, chord: [196.00, 261.63, 293.66, 349.23], melody: [329.63, 261.63] }
+        ]
       },
       {
-        bass: 73.42, // D2
-        chord: [146.83, 220.00, 261.63, 329.63], // D3, A3, C4, E4 (Dm9)
-        melody: [349.23, 329.63],
-        lyric: "Where the sound meets twilight and stays with you"
+        title: "Stardust Horizons",
+        artist: "Ambient Odyssey · Tape Delay",
+        image: "../images/albums.jpg",
+        lyrics: [
+          "Gliding through constellations in the midnight sky",
+          "Analog waves reflecting off cold glass surfaces",
+          "Drifting across violet nebulae without a destination",
+          "The melody echoes into infinite stillness"
+        ],
+        chords: [
+          { bass: 98.00, chord: [196.00, 246.94, 293.66, 369.99], melody: [493.88, 587.33] },
+          { bass: 82.41, chord: [164.81, 207.65, 246.94, 329.63], melody: [392.00, 440.00] },
+          { bass: 110.00, chord: [220.00, 261.63, 329.63, 392.00], melody: [440.00, 523.25] },
+          { bass: 73.42, chord: [146.83, 220.00, 261.63, 329.63], melody: [349.23, 392.00] }
+        ]
       },
       {
-        bass: 116.54, // Bb2
-        chord: [174.61, 233.08, 293.66, 349.23], // F3, Bb3, D4, F4 (Bbmaj7)
-        melody: [392.00, 440.00],
-        lyric: "Lost in the frequency, suspended in the glow"
-      },
-      {
-        bass: 65.41, // C2
-        chord: [196.00, 261.63, 293.66, 349.23], // G3, C4, D4, F4 (C7sus4)
-        melody: [329.63, 261.63],
-        lyric: "Every heartbeat in time with the tape delay"
+        title: "Neon Twilight",
+        artist: "Celestial Chill · Vintage Rhodes",
+        image: "../images/split.jpg",
+        lyrics: [
+          "Electric blues fading into warm violet horizon",
+          "Soft keys bouncing across the quiet pavement",
+          "Catching memories wrapped in lowpass velvet",
+          "Music that stays with you long after nightfall"
+        ],
+        chords: [
+          { bass: 65.41, chord: [130.81, 196.00, 261.63, 329.63], melody: [392.00, 523.25] },
+          { bass: 87.31, chord: [174.61, 220.00, 261.63, 349.23], melody: [440.00, 392.00] },
+          { bass: 98.00, chord: [196.00, 246.94, 293.66, 392.00], melody: [493.88, 440.00] },
+          { bass: 73.42, chord: [146.83, 196.00, 246.94, 329.63], melody: [369.99, 293.66] }
+        ]
       }
     ];
 
+    let currentTrackIdx = 0;
+    let isPlaying = false;
+    let progress = 20;
+    const totalDuration = 222; // 3:42
+
     function updateLyricsState(stepIndex) {
-      const activeIdx = stepIndex % chords.length;
+      const activeIdx = stepIndex % 4;
       const lyricPs = document.querySelectorAll('#lyrics-stream .lyric-p');
       lyricPs.forEach((p, idx) => {
         p.classList.remove('passed', 'active', 'upcoming');
@@ -188,6 +248,31 @@
       });
     }
 
+    function loadTrack(idx) {
+      currentTrackIdx = (idx + demoTracks.length) % demoTracks.length;
+      const track = demoTracks[currentTrackIdx];
+
+      document.getElementById('track-title').textContent = track.title;
+      document.getElementById('track-artist').textContent = track.artist;
+      document.getElementById('dock-title').textContent = track.title;
+      document.getElementById('dock-artist').textContent = track.artist;
+      document.getElementById('track-art').src = track.image;
+      document.getElementById('dock-thumb').src = track.image;
+
+      const lyricsContainer = document.getElementById('lyrics-stream');
+      lyricsContainer.innerHTML = '';
+      track.lyrics.forEach((l, i) => {
+        const p = document.createElement('p');
+        p.className = `lyric-p ${i === 0 ? 'active' : 'upcoming'}`;
+        p.textContent = l;
+        lyricsContainer.appendChild(p);
+      });
+
+      progress = 0;
+      updateProgressUI(0);
+      LoFiAudio.step = 0;
+    }
+
     // Procedural Lo-Fi Chill Piano Audio Engine
     const LoFiAudio = {
       ctx: null,
@@ -198,21 +283,25 @@
       step: 0,
       userVolume: 0.75,
 
+      initContext() {
+        if (!this.ctx || this.ctx.state === 'closed') {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) this.ctx = new AudioContextClass();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume().catch(() => {});
+        }
+      },
+
       async start() {
         try {
-          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-          if (!AudioContextClass) return;
-          if (!this.ctx || this.ctx.state === 'closed') {
-            this.ctx = new AudioContextClass();
-          }
-          if (this.ctx.state === 'suspended') {
-            await this.ctx.resume();
-          }
+          this.initContext();
+          if (!this.ctx) return;
 
           const now = this.ctx.currentTime;
           this.masterGain = this.ctx.createGain();
           this.masterGain.gain.setValueAtTime(0.001, now);
-          this.masterGain.gain.linearRampToValueAtTime(0.55 * this.userVolume, now + 0.4);
+          this.masterGain.gain.linearRampToValueAtTime(0.55 * this.userVolume, now + 0.3);
           this.masterGain.connect(this.ctx.destination);
 
           this.filter = this.ctx.createBiquadFilter();
@@ -225,13 +314,13 @@
 
           const playBar = () => {
             if (!this.isPlaying || !this.ctx) return;
+            const chords = demoTracks[currentTrackIdx].chords;
             const current = chords[this.step % chords.length];
             const t = this.ctx.currentTime;
 
-            // Update active lyric dynamically
             updateLyricsState(this.step);
 
-            // Bass note on beat 1
+            // Sub bass
             this.playKey(current.bass, t, 2.3, 0.45);
 
             // Strummed chord
@@ -239,7 +328,7 @@
               this.playKey(freq, t + (idx * 0.04), 2.1, 0.26);
             });
 
-            // Lead melody notes
+            // Melody
             if (current.melody[0]) this.playKey(current.melody[0], t + 0.65, 1.4, 0.28);
             if (current.melody[1]) this.playKey(current.melody[1], t + 1.25, 1.2, 0.24);
 
@@ -254,35 +343,36 @@
 
           playBar();
         } catch (e) {
-          console.warn('Audio error:', e);
+          console.warn('Audio synthesis note:', e);
         }
       },
 
       playKey(freq, time, duration = 1.8, velocity = 0.3) {
-        if (!this.ctx || !this.filter || this.ctx.state !== 'running') return;
+        if (!this.ctx || !this.filter) return;
         try {
+          const startTime = Math.max(time, this.ctx.currentTime + 0.005);
           const osc1 = this.ctx.createOscillator();
           osc1.type = 'sine';
-          osc1.frequency.setValueAtTime(freq, time);
+          osc1.frequency.setValueAtTime(freq, startTime);
 
           const osc2 = this.ctx.createOscillator();
           osc2.type = 'triangle';
-          osc2.frequency.setValueAtTime(freq, time);
-          osc2.detune.setValueAtTime(3.5, time);
+          osc2.frequency.setValueAtTime(freq, startTime);
+          osc2.detune.setValueAtTime(3.5, startTime);
 
           const osc3 = this.ctx.createOscillator();
           osc3.type = 'sine';
-          osc3.frequency.setValueAtTime(freq * 2, time);
+          osc3.frequency.setValueAtTime(freq * 2, startTime);
 
           const noteGain = this.ctx.createGain();
-          noteGain.gain.setValueAtTime(0.0001, time);
-          noteGain.gain.linearRampToValueAtTime(velocity, time + 0.02);
-          noteGain.gain.exponentialRampToValueAtTime(velocity * 0.45, time + 0.35);
-          noteGain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+          noteGain.gain.setValueAtTime(0.0001, startTime);
+          noteGain.gain.linearRampToValueAtTime(velocity, startTime + 0.02);
+          noteGain.gain.exponentialRampToValueAtTime(velocity * 0.45, startTime + 0.35);
+          noteGain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
 
           const tineGain = this.ctx.createGain();
-          tineGain.gain.setValueAtTime(velocity * 0.25, time);
-          tineGain.gain.exponentialRampToValueAtTime(0.0001, time + 0.25);
+          tineGain.gain.setValueAtTime(velocity * 0.25, startTime);
+          tineGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.25);
 
           osc1.connect(noteGain);
           osc2.connect(noteGain);
@@ -290,12 +380,12 @@
           tineGain.connect(noteGain);
           noteGain.connect(this.filter);
 
-          osc1.start(time);
-          osc2.start(time);
-          osc3.start(time);
-          osc1.stop(time + duration + 0.1);
-          osc2.stop(time + duration + 0.1);
-          osc3.stop(time + duration + 0.1);
+          osc1.start(startTime);
+          osc2.start(startTime);
+          osc3.start(startTime);
+          osc1.stop(startTime + duration + 0.1);
+          osc2.stop(startTime + duration + 0.1);
+          osc3.stop(startTime + duration + 0.1);
         } catch (e) {}
       },
 
@@ -307,32 +397,30 @@
       },
 
       stop() {
+        this.isPlaying = false;
         if (this.timer) {
           clearTimeout(this.timer);
           this.timer = null;
         }
         if (!this.masterGain || !this.ctx) return;
-        const now = this.ctx.currentTime;
-        this.masterGain.gain.setValueAtTime(Math.max(0.001, this.masterGain.gain.value), now);
-        this.masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
-        setTimeout(() => {
-          this.isPlaying = false;
-          this.step = 0;
-        }, 550);
+        try {
+          const now = this.ctx.currentTime;
+          this.masterGain.gain.setValueAtTime(Math.max(0.001, this.masterGain.gain.value), now);
+          this.masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
+        } catch (e) {}
       }
     };
 
-    let isPlaying = false;
-    let progress = 38;
     const playBtn = document.getElementById('play-btn');
     const vinyl = document.getElementById('vinyl-disc');
+    const albumCard = document.getElementById('album-card');
     const seekFill = document.getElementById('seek-fill');
     const seekTrack = document.getElementById('seek-track');
 
     function updateProgressUI(pct) {
       progress = Math.max(0, Math.min(100, pct));
       seekFill.style.width = progress + '%';
-      const currentSec = Math.floor((progress / 100) * 222);
+      const currentSec = Math.floor((progress / 100) * totalDuration);
       const mins = Math.floor(currentSec / 60);
       const secs = String(currentSec % 60).padStart(2, '0');
       const timeStr = `${mins}:${secs}`;
@@ -344,22 +432,38 @@
     function setPlayState(playing) {
       isPlaying = playing;
       if (isPlaying) {
-        playBtn.innerHTML = '<i data-lucide="pause"></i>';
+        playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>';
         vinyl.classList.add('spinning');
       } else {
-        playBtn.innerHTML = '<i data-lucide="play"></i>';
+        playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
         vinyl.classList.remove('spinning');
       }
-      lucide.createIcons();
     }
 
-    playBtn.addEventListener('click', async () => {
+    async function togglePlay() {
       if (!isPlaying) {
-        await LoFiAudio.start();
         setPlayState(true);
+        await LoFiAudio.start();
       } else {
-        LoFiAudio.stop();
         setPlayState(false);
+        LoFiAudio.stop();
+      }
+    }
+
+    playBtn.addEventListener('click', togglePlay);
+    if (albumCard) albumCard.addEventListener('click', togglePlay);
+    if (vinyl) vinyl.addEventListener('click', togglePlay);
+
+    // Keyboard shortcut (Space = play/pause, ArrowLeft/Right = seek)
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      if (e.code === 'Space') {
+        e.preventDefault();
+        togglePlay();
+      } else if (e.code === 'ArrowLeft') {
+        updateProgressUI(progress - 5);
+      } else if (e.code === 'ArrowRight') {
+        updateProgressUI(progress + 5);
       }
     });
 
@@ -384,21 +488,31 @@
     const nextBtn = document.getElementById('next-btn');
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
-        updateProgressUI(progress - 15);
+        loadTrack(currentTrackIdx - 1);
+        if (isPlaying) {
+          LoFiAudio.stop();
+          LoFiAudio.start();
+        }
       });
     }
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
-        updateProgressUI(progress + 15);
+        loadTrack(currentTrackIdx + 1);
+        if (isPlaying) {
+          LoFiAudio.stop();
+          LoFiAudio.start();
+        }
       });
     }
 
+    // Live progress ticker
     setInterval(() => {
       if (isPlaying) {
-        updateProgressUI((progress + 0.5) % 100);
+        updateProgressUI((progress + 0.45) % 100);
       }
     }, 1000);
 
+    // Glow toggle
     const glowToggle = document.getElementById('glow-toggle');
     let glowOn = true;
     if (glowToggle) {
@@ -410,6 +524,7 @@
       });
     }
 
+    // Favorite heart button toggle
     const favBtn = document.getElementById('dock-fav-btn');
     let isFavorited = false;
     if (favBtn) {
@@ -420,13 +535,15 @@
       });
     }
 
+    // Fullscreen toggle
     const fsBtn = document.getElementById('fullscreen-btn');
     function updateFullscreenIcon() {
       const isFs = !!document.fullscreenElement;
       if (fsBtn) {
-        fsBtn.innerHTML = `<i data-lucide="${isFs ? 'minimize' : 'maximize'}"></i>`;
+        fsBtn.innerHTML = isFs
+          ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" x2="21" y1="10" y2="3"/><line x1="3" x2="10" y1="21" y2="14"/></svg>'
+          : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" x2="14" y1="3" y2="10"/><line x1="3" x2="10" y1="21" y2="14"/></svg>';
         fsBtn.title = isFs ? 'Exit Fullscreen' : 'Toggle Fullscreen';
-        lucide.createIcons();
       }
     }
     document.addEventListener('fullscreenchange', updateFullscreenIcon);
@@ -440,7 +557,7 @@
       });
     }
 
-    // Initialize initial progress UI and lyrics
+    // Initial setup
     updateProgressUI(progress);
     updateLyricsState(0);
   </script>
