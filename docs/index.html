@@ -2434,11 +2434,12 @@ npm start
       });
     })();
 
-    // 5. Procedural 432Hz Ambient Soundscape Synthesizer
+    // 5. Procedural 432Hz Ambient Soundscape Synthesizer (Lush Pad + Stardust Chimes)
     const CoreAudioEngine = {
       ctx: null,
       isPlaying: false,
-      oscillators: [],
+      nodes: [],
+      chimeTimer: null,
       masterGain: null,
 
       init() {
@@ -2498,21 +2499,38 @@ npm start
           const now = this.ctx.currentTime;
           this.masterGain = this.ctx.createGain();
           this.masterGain.gain.setValueAtTime(0.001, now);
-          this.masterGain.gain.exponentialRampToValueAtTime(0.45, now + 0.6);
+          this.masterGain.gain.exponentialRampToValueAtTime(0.48, now + 1.0);
           this.masterGain.connect(this.ctx.destination);
 
-          // Authentic 432Hz Sacred Geometric Harmonics (A=432Hz, E=324Hz, C#=270Hz/540Hz)
-          const voices = [
-            { freq: 216.00, type: 'sine', gain: 0.35, detune: -3 },
-            { freq: 324.00, type: 'triangle', gain: 0.28, detune: 2 },
-            { freq: 432.00, type: 'sine', gain: 0.40, detune: 0 },
-            { freq: 540.00, type: 'sine', gain: 0.22, detune: 4 },
-            { freq: 864.00, type: 'sine', gain: 0.12, detune: -2 }
+          // Living Lowpass Filter with gentle resonance
+          const filter = this.ctx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(650, now);
+          filter.Q.setValueAtTime(1.8, now);
+          filter.connect(this.masterGain);
+
+          // LFO for slow atmospheric breathing wave (6.5s cycle)
+          const lfo = this.ctx.createOscillator();
+          const lfoGain = this.ctx.createGain();
+          lfo.frequency.setValueAtTime(0.15, now);
+          lfoGain.gain.setValueAtTime(320, now);
+          lfo.connect(lfoGain);
+          lfoGain.connect(filter.frequency);
+          lfo.start(now);
+
+          this.nodes = [lfo, lfoGain, filter];
+
+          // Warm harmonic pad voices (432Hz Sacred A-Major Chord)
+          const padVoices = [
+            { freq: 216.00, type: 'sine', gain: 0.38, detune: -4 },
+            { freq: 216.00, type: 'triangle', gain: 0.18, detune: 4 },
+            { freq: 324.00, type: 'sine', gain: 0.32, detune: 2 },
+            { freq: 432.00, type: 'sine', gain: 0.42, detune: 0 },
+            { freq: 540.00, type: 'sine', gain: 0.25, detune: -2 },
+            { freq: 648.00, type: 'triangle', gain: 0.14, detune: 3 }
           ];
 
-          this.oscillators = [];
-
-          voices.forEach((v) => {
+          padVoices.forEach((v) => {
             const osc = this.ctx.createOscillator();
             const gain = this.ctx.createGain();
 
@@ -2523,11 +2541,27 @@ npm start
             gain.gain.setValueAtTime(v.gain, now);
 
             osc.connect(gain);
-            gain.connect(this.masterGain);
+            gain.connect(filter);
             osc.start(now);
 
-            this.oscillators.push(osc);
+            this.nodes.push(osc, gain);
           });
+
+          // Play initial soothing chime harmony
+          this.playChime(432, 0.22);
+          setTimeout(() => { if (this.isPlaying) this.playChime(540, 0.18); }, 850);
+          setTimeout(() => { if (this.isPlaying) this.playChime(648, 0.20); }, 1700);
+
+          // Schedule random celestial chime drops every 2.5 - 4.5 seconds
+          const chimeNotes = [432, 540, 648, 864, 1080];
+          const triggerNextChime = () => {
+            if (!this.isPlaying) return;
+            const note = chimeNotes[Math.floor(Math.random() * chimeNotes.length)];
+            this.playChime(note, 0.15 + Math.random() * 0.10);
+            const nextDelay = 2200 + Math.random() * 2600;
+            this.chimeTimer = setTimeout(triggerNextChime, nextDelay);
+          };
+          this.chimeTimer = setTimeout(triggerNextChime, 3000);
 
           this.isPlaying = true;
         } catch (e) {
@@ -2535,21 +2569,57 @@ npm start
         }
       },
 
+      playChime(freq, volume = 0.2) {
+        if (!this.ctx || !this.masterGain || this.ctx.state !== 'running') return;
+        try {
+          const now = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const overtone = this.ctx.createOscillator();
+          const chimeGain = this.ctx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now);
+
+          overtone.type = 'triangle';
+          overtone.frequency.setValueAtTime(freq * 2, now);
+
+          // Bell envelope: fast subtle attack, long shimmering exponential decay
+          chimeGain.gain.setValueAtTime(0.0001, now);
+          chimeGain.gain.linearRampToValueAtTime(volume, now + 0.04);
+          chimeGain.gain.exponentialRampToValueAtTime(0.0001, now + 2.8);
+
+          osc.connect(chimeGain);
+          overtone.connect(chimeGain);
+          chimeGain.connect(this.masterGain);
+
+          osc.start(now);
+          overtone.start(now);
+          osc.stop(now + 3.0);
+          overtone.stop(now + 3.0);
+        } catch (e) {}
+      },
+
       stop() {
+        if (this.chimeTimer) {
+          clearTimeout(this.chimeTimer);
+          this.chimeTimer = null;
+        }
         if (!this.masterGain || !this.ctx) return;
         const now = this.ctx.currentTime;
         this.masterGain.gain.setValueAtTime(Math.max(0.001, this.masterGain.gain.value), now);
-        this.masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
+        this.masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
         setTimeout(() => {
-          this.oscillators.forEach(osc => {
-            try { osc.stop(); osc.disconnect(); } catch (e) {}
+          this.nodes.forEach(node => {
+            try {
+              if (node.stop) node.stop();
+              if (node.disconnect) node.disconnect();
+            } catch (e) {}
           });
-          this.oscillators = [];
+          this.nodes = [];
           this.isPlaying = false;
-        }, 450);
+        }, 650);
       }
     };
-
     CoreAudioEngine.init();
 
     // 6. Live Interactive Showcase Player Controller
