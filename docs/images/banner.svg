@@ -1,206 +1,468 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360">
   <defs>
-    <!-- Deep cosmic background gradient -->
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%"   stop-color="#05060e"/>
-      <stop offset="30%"  stop-color="#0c0e1f"/>
-      <stop offset="65%"  stop-color="#1a1035"/>
-      <stop offset="100%" stop-color="#3d1545"/>
+
+    <!-- ░ NEBULA BACKGROUND ░ -->
+    <radialGradient id="bg-c" cx="50%" cy="50%" r="65%">
+      <stop offset="0%"   stop-color="#0d0520"/>
+      <stop offset="100%" stop-color="#020108"/>
+    </radialGradient>
+    <radialGradient id="nb-a" cx="25%" cy="55%" r="52%">
+      <stop offset="0%"   stop-color="#1e0b4e" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#1e0b4e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nb-b" cx="75%" cy="32%" r="40%">
+      <stop offset="0%"   stop-color="#00b4d8" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#00b4d8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nb-c" cx="65%" cy="75%" r="38%">
+      <stop offset="0%"   stop-color="#c026d3" stop-opacity="0.19"/>
+      <stop offset="100%" stop-color="#c026d3" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nb-d" cx="90%" cy="80%" r="30%">
+      <stop offset="0%"   stop-color="#f97316" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nb-e" cx="12%" cy="20%" r="28%">
+      <stop offset="0%"   stop-color="#4338ca" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#4338ca" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- ░ CIRCULAR EQ CORE GLOW ░ -->
+    <radialGradient id="core-g" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="25%"  stop-color="#00e5ff" stop-opacity="0.80"/>
+      <stop offset="60%"  stop-color="#4338ca" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#4338ca" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- ░ AURORA ░ -->
+    <linearGradient id="au1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#4338ca" stop-opacity="0"/>
+      <stop offset="14%"  stop-color="#00e5ff" stop-opacity="0.82"/>
+      <stop offset="44%"  stop-color="#a78bfa" stop-opacity="0.88"/>
+      <stop offset="72%"  stop-color="#e91e8c" stop-opacity="0.70"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="au2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#00e5ff" stop-opacity="0"/>
+      <stop offset="26%"  stop-color="#a78bfa" stop-opacity="0.44"/>
+      <stop offset="65%"  stop-color="#e91e8c" stop-opacity="0.36"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
     </linearGradient>
 
-    <!-- Right warm aurora glow -->
-    <radialGradient id="aurora-right" cx="85%" cy="55%" r="48%">
-      <stop offset="0%"   stop-color="#ff9a6c" stop-opacity="0.42"/>
-      <stop offset="40%"  stop-color="#d4a0f5" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#ff9a6c" stop-opacity="0"/>
-    </radialGradient>
-
-    <!-- Left subtle cool glow -->
-    <radialGradient id="aurora-left" cx="10%" cy="40%" r="38%">
-      <stop offset="0%"   stop-color="#3ecfde" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#3ecfde" stop-opacity="0"/>
-    </radialGradient>
-
-    <!-- Center ambient pulse -->
-    <radialGradient id="center-pulse" cx="50%" cy="50%" r="40%">
-      <stop offset="0%"   stop-color="#7c5cbf" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#7c5cbf" stop-opacity="0"/>
-    </radialGradient>
-
-    <!-- Wordmark gradient fill -->
-    <linearGradient id="wordmark-grad" x1="0" y1="0" x2="1" y2="0">
+    <!-- ░ WORDMARK ░ -->
+    <linearGradient id="wg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%"   stop-color="#ffffff"/>
-      <stop offset="60%"  stop-color="#e8deff"/>
-      <stop offset="100%" stop-color="#c8b8f8"/>
+      <stop offset="38%"  stop-color="#ddd4ff"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
     </linearGradient>
 
-    <!-- Accent line gradient -->
-    <linearGradient id="accent-line" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#ff9a6c"/>
-      <stop offset="60%"  stop-color="#ff6fa3"/>
-      <stop offset="100%" stop-color="#ff6fa3" stop-opacity="0"/>
+    <!-- ░ UNDERLINE ░ -->
+    <linearGradient id="ulg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#00e5ff"/>
+      <stop offset="52%"  stop-color="#e91e8c"/>
+      <stop offset="100%" stop-color="#e91e8c" stop-opacity="0"/>
     </linearGradient>
 
-    <!-- EQ bar glow filter -->
-    <filter id="eq-glow" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <!-- ░ COMET TRAILS ░ -->
+    <linearGradient id="cm1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#00e5ff" stop-opacity="0"/>
+      <stop offset="72%"  stop-color="#00e5ff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffffff"  stop-opacity="0.80"/>
+    </linearGradient>
+    <linearGradient id="cm2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#a78bfa" stop-opacity="0"/>
+      <stop offset="68%"  stop-color="#a78bfa" stop-opacity="0.48"/>
+      <stop offset="100%" stop-color="#ffffff"  stop-opacity="0.72"/>
+    </linearGradient>
+    <linearGradient id="cm3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#e91e8c" stop-opacity="0"/>
+      <stop offset="70%"  stop-color="#e91e8c" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#ffffff"  stop-opacity="0.62"/>
+    </linearGradient>
+
+    <!-- ░ FILTERS ░ -->
+
+    <!-- Chromatic aberration (RGB split) -->
+    <filter id="chroma" x="-5%" y="-15%" width="115%" height="130%">
+      <feOffset in="SourceGraphic" dx="-5" dy="0" result="rs"/>
+      <feColorMatrix in="rs" type="matrix"
+        values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.58 0" result="rc"/>
+      <feOffset in="SourceGraphic" dx="5" dy="0" result="bs"/>
+      <feColorMatrix in="bs" type="matrix"
+        values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 0.58 0" result="bc"/>
+      <feMerge>
+        <feMergeNode in="rc"/>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="bc"/>
+      </feMerge>
     </filter>
 
-    <!-- Star glow filter -->
-    <filter id="star-glow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="1.5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <!-- Purple halo behind wordmark -->
+    <filter id="halo" x="-10%" y="-30%" width="120%" height="160%">
+      <feGaussianBlur stdDeviation="11" result="blur"/>
+      <feFlood flood-color="#6d28d9" flood-opacity="0.48" result="col"/>
+      <feComposite in="col" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
     </filter>
 
-    <!-- Clip to rounded rect -->
-    <clipPath id="round-clip">
+    <!-- Neon bloom for EQ bars -->
+    <filter id="neq" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="5" result="b1"/>
+      <feGaussianBlur stdDeviation="2.2" in="SourceGraphic" result="b2"/>
+      <feMerge>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Deep core glow -->
+    <filter id="core-f" x="-250%" y="-250%" width="600%" height="600%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Aurora soft bloom (blur only, used as under-layer) -->
+    <filter id="abl" x="-8%" y="-90%" width="116%" height="280%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+
+    <!-- Orb deep glow -->
+    <filter id="orb" x="-180%" y="-180%" width="460%" height="460%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Star twinkle -->
+    <filter id="stf" x="-400%" y="-400%" width="900%" height="900%">
+      <feGaussianBlur stdDeviation="1.6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Film grain -->
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4"
+                    stitchTiles="stitch" result="n"/>
+      <feColorMatrix type="saturate" values="0" in="n" result="gn"/>
+      <feBlend in="SourceGraphic" in2="gn" mode="overlay" result="b"/>
+      <feComposite in="b" in2="SourceGraphic" operator="in"/>
+    </filter>
+
+    <!-- Rounded clip -->
+    <clipPath id="rclip">
       <rect width="1280" height="360" rx="22"/>
     </clipPath>
+
   </defs>
 
-  <g clip-path="url(#round-clip)">
+  <g clip-path="url(#rclip)">
 
-    <!-- === BACKGROUND LAYERS === -->
-    <rect width="1280" height="360" fill="url(#bg)"/>
-    <rect width="1280" height="360" fill="url(#aurora-right)"/>
-    <rect width="1280" height="360" fill="url(#aurora-left)"/>
-    <rect width="1280" height="360" fill="url(#center-pulse)"/>
+    <!-- ════════════════════════════════════════════════ -->
+    <!--  LAYER 1 · DEEP SPACE NEBULA BASE               -->
+    <!-- ════════════════════════════════════════════════ -->
+    <rect width="1280" height="360" fill="url(#bg-c)"/>
+    <rect width="1280" height="360" fill="url(#nb-e)"/>
+    <rect width="1280" height="360" fill="url(#nb-a)"/>
+    <rect width="1280" height="360" fill="url(#nb-b)"/>
+    <rect width="1280" height="360" fill="url(#nb-c)"/>
+    <rect width="1280" height="360" fill="url(#nb-d)"/>
+    <!-- Film grain overlay -->
+    <rect width="1280" height="360" fill="#fff" filter="url(#grain)" opacity="0.030"/>
 
-    <!-- === STAR FIELD === -->
-    <g filter="url(#star-glow)" opacity="0.75">
-      <!-- small stars -->
-      <circle cx="420"  cy="32"  r="1.1" fill="#fff" opacity="0.7"/>
-      <circle cx="610"  cy="18"  r="0.9" fill="#fff" opacity="0.6"/>
-      <circle cx="750"  cy="55"  r="1.3" fill="#fff" opacity="0.8"/>
-      <circle cx="870"  cy="28"  r="0.8" fill="#fff" opacity="0.5"/>
-      <circle cx="1020" cy="48"  r="1.2" fill="#fff" opacity="0.7"/>
-      <circle cx="1150" cy="22"  r="1.0" fill="#fff" opacity="0.6"/>
-      <circle cx="1240" cy="70"  r="0.9" fill="#fff" opacity="0.5"/>
-      <circle cx="500"  cy="80"  r="0.7" fill="#d4c8ff" opacity="0.6"/>
-      <circle cx="680"  cy="300" r="0.8" fill="#fff" opacity="0.4"/>
-      <circle cx="820"  cy="320" r="1.0" fill="#fff" opacity="0.5"/>
-      <circle cx="950"  cy="295" r="0.7" fill="#d4c8ff" opacity="0.4"/>
-      <circle cx="1100" cy="310" r="0.9" fill="#fff" opacity="0.5"/>
-      <circle cx="1210" cy="280" r="1.1" fill="#fff" opacity="0.6"/>
-      <circle cx="390"  cy="340" r="0.8" fill="#fff" opacity="0.3"/>
-      <!-- accent coloured stars -->
-      <circle cx="780"  cy="40"  r="1.4" fill="#9bd9dc" opacity="0.65"/>
-      <circle cx="1060" cy="60"  r="1.1" fill="#ffba9b" opacity="0.55"/>
-      <circle cx="460"  cy="330" r="1.2" fill="#c5b1e7" opacity="0.5"/>
+    <!-- ════════════════════════════════════════════════ -->
+    <!--  LAYER 2 · PERSPECTIVE GRID                     -->
+    <!-- ════════════════════════════════════════════════ -->
+    <g opacity="0.052" stroke="#00e5ff" stroke-width="0.5">
+      <line x1="0" y1="360" x2="1280" y2="285"/>
+      <line x1="0" y1="360" x2="1280" y2="302"/>
+      <line x1="0" y1="360" x2="1280" y2="320"/>
+      <line x1="0" y1="360" x2="1280" y2="338"/>
+      <line x1="0" y1="360" x2="1280" y2="354"/>
+    </g>
+    <g opacity="0.042" stroke="#a78bfa" stroke-width="0.4">
+      <line x1="640" y1="0" x2="0"    y2="360"/>
+      <line x1="640" y1="0" x2="160"  y2="360"/>
+      <line x1="640" y1="0" x2="360"  y2="360"/>
+      <line x1="640" y1="0" x2="560"  y2="360"/>
+      <line x1="640" y1="0" x2="720"  y2="360"/>
+      <line x1="640" y1="0" x2="920"  y2="360"/>
+      <line x1="640" y1="0" x2="1120" y2="360"/>
+      <line x1="640" y1="0" x2="1280" y2="360"/>
     </g>
 
-    <!-- === SUBTLE HORIZONTAL SCAN LINES === -->
-    <rect width="1280" height="360" fill="url(#bg)" opacity="0.04"
-          style="background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.02) 3px, rgba(255,255,255,0.02) 4px)"/>
+    <!-- ════════════════════════════════════════════════ -->
+    <!--  LAYER 3 · COMET TRAILS                         -->
+    <!-- ════════════════════════════════════════════════ -->
+    <path d="M 58 52 L 318 86"   stroke="url(#cm1)" stroke-width="1.8" stroke-linecap="round" opacity="0.55"/>
+    <path d="M 378 20 L 586 46"  stroke="url(#cm2)" stroke-width="1.4" stroke-linecap="round" opacity="0.44"/>
+    <path d="M 138 308 L 428 330" stroke="url(#cm3)" stroke-width="1.2" stroke-linecap="round" opacity="0.38"/>
+    <line x1="508" y1="338" x2="568" y2="346" stroke="#a78bfa" stroke-width="0.8" stroke-linecap="round" opacity="0.28"/>
+    <line x1="692" y1="16"  x2="738" y2="28"  stroke="#00e5ff" stroke-width="0.8" stroke-linecap="round" opacity="0.34"/>
 
-    <!-- === RIGHT SIDE: EQ VISUALISER === -->
-    <g filter="url(#eq-glow)">
-      <!-- Glowing EQ bars (varied heights for rhythm feel) -->
-      <g stroke-linecap="round" stroke-width="5.5">
-        <line x1="942" y1="212" x2="942" y2="188" stroke="#c5b1e7" stroke-opacity="0.55"/>
-        <line x1="962" y1="220" x2="962" y2="156" stroke="#c5b1e7" stroke-opacity="0.65"/>
-        <line x1="982" y1="228" x2="982" y2="132" stroke="#d4c0f8" stroke-opacity="0.75"/>
-        <line x1="1002" y1="218" x2="1002" y2="162" stroke="#d4c0f8" stroke-opacity="0.70"/>
-        <line x1="1022" y1="232" x2="1022" y2="108" stroke="#e8d5ff" stroke-opacity="0.80"/>
-        <line x1="1042" y1="222" x2="1042" y2="138" stroke="#e8d5ff" stroke-opacity="0.75"/>
-        <line x1="1062" y1="226" x2="1062" y2="154" stroke="#d4c0f8" stroke-opacity="0.70"/>
-        <line x1="1082" y1="215" x2="1082" y2="175" stroke="#c5b1e7" stroke-opacity="0.60"/>
-        <line x1="1102" y1="220" x2="1102" y2="185" stroke="#c5b1e7" stroke-opacity="0.50"/>
-      </g>
-      <!-- Soft reflection/mirror of EQ bars below (dim) -->
-      <g stroke-linecap="round" stroke-width="5.5" opacity="0.18">
-        <line x1="942" y1="238" x2="942" y2="250" stroke="#c5b1e7"/>
-        <line x1="962" y1="238" x2="962" y2="264" stroke="#c5b1e7"/>
-        <line x1="982" y1="238" x2="982" y2="274" stroke="#d4c0f8"/>
-        <line x1="1002" y1="238" x2="1002" y2="268" stroke="#d4c0f8"/>
-        <line x1="1022" y1="238" x2="1022" y2="282" stroke="#e8d5ff"/>
-        <line x1="1042" y1="238" x2="1042" y2="272" stroke="#e8d5ff"/>
-        <line x1="1062" y1="238" x2="1062" y2="266" stroke="#d4c0f8"/>
-        <line x1="1082" y1="238" x2="1082" y2="254" stroke="#c5b1e7"/>
-        <line x1="1102" y1="238" x2="1102" y2="248" stroke="#c5b1e7"/>
-      </g>
+    <!-- ════════════════════════════════════════════════ -->
+    <!--  LAYER 4 · AURORA RIBBONS                       -->
+    <!-- ════════════════════════════════════════════════ -->
+    <!-- Soft bloom underglow -->
+    <path d="M -32 246 C 142 192, 312 100, 522 138 S 760 74, 920 104 S 1110 50, 1312 82"
+          fill="none" stroke="url(#au1)" stroke-width="26"
+          stroke-linecap="round" filter="url(#abl)" opacity="0.54"/>
+    <!-- Crisp main ribbon -->
+    <path d="M -32 246 C 142 192, 312 100, 522 138 S 760 74, 920 104 S 1110 50, 1312 82"
+          fill="none" stroke="url(#au1)" stroke-width="12"
+          stroke-linecap="round" opacity="0.60"/>
+    <!-- Secondary ribbon -->
+    <path d="M -32 266 C 112 230, 292 132, 502 158 S 746 97, 900 126 S 1092 78, 1312 110"
+          fill="none" stroke="url(#au2)" stroke-width="7"
+          stroke-linecap="round" opacity="0.45"/>
+    <!-- Dashed accent thread -->
+    <path d="M 212 290 C 362 250, 515 175, 665 196 S 866 135, 1016 160 S 1162 120, 1312 132"
+          fill="none" stroke="#00e5ff" stroke-width="1"
+          stroke-linecap="round" opacity="0.20" stroke-dasharray="9 10"/>
+
+    <!-- ════════════════════════════════════════════════ -->
+    <!--  LAYER 5 · SOUND EMISSION RINGS (from EQ core)  -->
+    <!-- ════════════════════════════════════════════════ -->
+    <circle cx="1065" cy="182" r="178" fill="none" stroke="#a78bfa" stroke-width="0.6" stroke-opacity="0.08"/>
+    <circle cx="1065" cy="182" r="210" fill="none" stroke="#00e5ff" stroke-width="0.5" stroke-opacity="0.06"/>
+    <circle cx="1065" cy="182" r="248" fill="none" stroke="#a78bfa" stroke-width="0.4" stroke-opacity="0.04"/>
+    <circle cx="1065" cy="182" r="290" fill="none" stroke="#00e5ff" stroke-width="0.3" stroke-opacity="0.03"/>
+
+    <!-- ════════════════════════════════════════════════ -->
+    <!--  LAYER 6 · FLOATING ORBS                        -->
+    <!-- ════════════════════════════════════════════════ -->
+    <circle cx="1065" cy="182" r="82"  fill="#4338ca" fill-opacity="0.14" filter="url(#orb)"/>
+    <circle cx="1198" cy="80"  r="46"  fill="#e91e8c" fill-opacity="0.16" filter="url(#orb)"/>
+    <circle cx="918"  cy="290" r="30"  fill="#00e5ff" fill-opacity="0.14" filter="url(#orb)"/>
+    <circle cx="758"  cy="44"  r="20"  fill="#a78bfa" fill-opacity="0.13" filter="url(#orb)"/>
+
+    <!-- ════════════════════════════════════════════════ -->
+    <!--  LAYER 7 · CIRCULAR EQ RING VISUALIZER          -->
+    <!--  24 bars, full-spectrum color around the circle  -->
+    <!--  cx=1065  cy=182  R_inner=62  heights vary      -->
+    <!-- ════════════════════════════════════════════════ -->
+    <!-- Guide rings -->
+    <circle cx="1065" cy="182" r="145" fill="none" stroke="#a78bfa"
+            stroke-width="0.5" stroke-opacity="0.12" stroke-dasharray="3 11"/>
+    <circle cx="1065" cy="182" r="62"  fill="none" stroke="#ffffff"
+            stroke-width="0.6" stroke-opacity="0.10"/>
+
+    <!-- 24 colored EQ bars with neon glow filter -->
+    <!-- Heights: [25,40,55,65,60,45,30,55,70,60,45,35,25,40,55,65,60,45,30,55,70,60,45,35] -->
+    <g filter="url(#neq)" stroke-linecap="round" stroke-width="5.2">
+      <!-- i=0  top     #00e5ff  h=25 -->
+      <line x1="1065.0" y1="120.0" x2="1065.0" y2="95.0"   stroke="#00e5ff"/>
+      <!-- i=1          #22d3ee  h=40 -->
+      <line x1="1081.0" y1="122.1" x2="1091.4" y2="83.5"   stroke="#22d3ee"/>
+      <!-- i=2          #818cf8  h=55 -->
+      <line x1="1096.0" y1="128.3" x2="1123.5" y2="80.7"   stroke="#818cf8"/>
+      <!-- i=3          #7c3aed  h=65 -->
+      <line x1="1108.8" y1="138.2" x2="1154.8" y2="92.2"   stroke="#7c3aed"/>
+      <!-- i=4          #9333ea  h=60 -->
+      <line x1="1118.7" y1="151.0" x2="1170.7" y2="121.0"  stroke="#9333ea"/>
+      <!-- i=5          #a855f7  h=45 -->
+      <line x1="1124.9" y1="166.0" x2="1168.3" y2="154.3"  stroke="#a855f7"/>
+      <!-- i=6  right   #a78bfa  h=30 -->
+      <line x1="1127.0" y1="182.0" x2="1157.0" y2="182.0"  stroke="#a78bfa"/>
+      <!-- i=7          #c084fc  h=55 -->
+      <line x1="1124.9" y1="198.0" x2="1178.0" y2="212.3"  stroke="#c084fc"/>
+      <!-- i=8          #d946ef  h=70 -->
+      <line x1="1118.7" y1="213.0" x2="1179.3" y2="248.0"  stroke="#d946ef"/>
+      <!-- i=9          #ec4899  h=60 -->
+      <line x1="1108.8" y1="225.8" x2="1151.3" y2="268.3"  stroke="#ec4899"/>
+      <!-- i=10         #f43f5e  h=45 -->
+      <line x1="1096.0" y1="235.7" x2="1118.5" y2="274.7"  stroke="#f43f5e"/>
+      <!-- i=11         #fb7185  h=35 -->
+      <line x1="1081.0" y1="241.9" x2="1090.1" y2="275.7"  stroke="#fb7185"/>
+      <!-- i=12 bottom  #f472b6  h=25 -->
+      <line x1="1065.0" y1="244.0" x2="1065.0" y2="269.0"  stroke="#f472b6"/>
+      <!-- i=13         #f43f5e  h=40 -->
+      <line x1="1049.0" y1="241.9" x2="1038.6" y2="280.5"  stroke="#f43f5e"/>
+      <!-- i=14         #ec4899  h=55 -->
+      <line x1="1034.0" y1="235.7" x2="1006.5" y2="283.3"  stroke="#ec4899"/>
+      <!-- i=15         #d946ef  h=65 -->
+      <line x1="1021.2" y1="225.8" x2="975.2"  y2="271.8"  stroke="#d946ef"/>
+      <!-- i=16         #a855f7  h=60 -->
+      <line x1="1011.3" y1="213.0" x2="959.3"  y2="243.0"  stroke="#a855f7"/>
+      <!-- i=17         #7c3aed  h=45 -->
+      <line x1="1005.1" y1="198.0" x2="961.7"  y2="209.7"  stroke="#7c3aed"/>
+      <!-- i=18 left    #4338ca  h=30 -->
+      <line x1="1003.0" y1="182.0" x2="973.0"  y2="182.0"  stroke="#4338ca"/>
+      <!-- i=19         #3b82f6  h=55 -->
+      <line x1="1005.1" y1="166.0" x2="952.0"  y2="151.7"  stroke="#3b82f6"/>
+      <!-- i=20         #06b6d4  h=70 -->
+      <line x1="1011.3" y1="151.0" x2="950.7"  y2="116.0"  stroke="#06b6d4"/>
+      <!-- i=21         #0ea5e9  h=60 -->
+      <line x1="1021.2" y1="138.2" x2="978.7"  y2="95.7"   stroke="#0ea5e9"/>
+      <!-- i=22         #38bdf8  h=45 -->
+      <line x1="1034.0" y1="128.3" x2="1011.5" y2="89.3"   stroke="#38bdf8"/>
+      <!-- i=23         #00e5ff  h=35 -->
+      <line x1="1049.0" y1="122.1" x2="1039.9" y2="88.3"   stroke="#00e5ff"/>
     </g>
 
-    <!-- === DECORATIVE RING ARC (right side) === -->
-    <circle cx="1130" cy="180" r="108"
-            fill="none"
-            stroke="#c5b1e7"
-            stroke-width="0.8"
-            stroke-opacity="0.18"
-            stroke-dasharray="6 10"/>
-    <circle cx="1130" cy="180" r="148"
-            fill="none"
-            stroke="#ffba9b"
-            stroke-width="0.6"
-            stroke-opacity="0.10"
-            stroke-dasharray="3 16"/>
+    <!-- Outer tip glow decay (very faint extensions beyond bar tips) -->
+    <g stroke-linecap="round" stroke-width="5.2" opacity="0.09">
+      <line x1="1065.0" y1="95.0"  x2="1065.0" y2="78.0"  stroke="#00e5ff"/>
+      <line x1="1091.4" y1="83.5"  x2="1097.0" y2="70.0"  stroke="#22d3ee"/>
+      <line x1="1123.5" y1="80.7"  x2="1135.0" y2="64.0"  stroke="#818cf8"/>
+      <line x1="1154.8" y1="92.2"  x2="1171.0" y2="74.0"  stroke="#7c3aed"/>
+      <line x1="1170.7" y1="121.0" x2="1186.0" y2="102.0" stroke="#9333ea"/>
+      <line x1="1168.3" y1="154.3" x2="1178.0" y2="147.0" stroke="#a855f7"/>
+      <line x1="1157.0" y1="182.0" x2="1168.0" y2="182.0" stroke="#a78bfa"/>
+      <line x1="1178.0" y1="212.3" x2="1188.0" y2="218.0" stroke="#c084fc"/>
+      <line x1="1179.3" y1="248.0" x2="1192.0" y2="265.0" stroke="#d946ef"/>
+      <line x1="1151.3" y1="268.3" x2="1162.0" y2="286.0" stroke="#ec4899"/>
+      <line x1="1118.5" y1="274.7" x2="1125.0" y2="291.0" stroke="#f43f5e"/>
+      <line x1="1090.1" y1="275.7" x2="1094.0" y2="291.0" stroke="#fb7185"/>
+      <line x1="1065.0" y1="269.0" x2="1065.0" y2="286.0" stroke="#f472b6"/>
+      <line x1="1038.6" y1="280.5" x2="1034.0" y2="297.0" stroke="#f43f5e"/>
+      <line x1="1006.5" y1="283.3" x2="998.0"  y2="299.0" stroke="#ec4899"/>
+      <line x1="975.2"  y1="271.8" x2="963.0"  y2="289.0" stroke="#d946ef"/>
+      <line x1="959.3"  y1="243.0" x2="948.0"  y2="261.0" stroke="#a855f7"/>
+      <line x1="961.7"  y1="209.7" x2="952.0"  y2="219.0" stroke="#7c3aed"/>
+      <line x1="973.0"  y1="182.0" x2="963.0"  y2="182.0" stroke="#4338ca"/>
+      <line x1="952.0"  y1="151.7" x2="942.0"  y2="147.0" stroke="#3b82f6"/>
+      <line x1="950.7"  y1="116.0" x2="940.0"  y2="100.0" stroke="#06b6d4"/>
+      <line x1="978.7"  y1="95.7"  x2="966.0"  y2="79.0"  stroke="#0ea5e9"/>
+      <line x1="1011.5" y1="89.3"  x2="1004.0" y2="72.0"  stroke="#38bdf8"/>
+      <line x1="1039.9" y1="88.3"  x2="1035.0" y2="73.0"  stroke="#00e5ff"/>
+    </g>
 
-    <!-- === VERTICAL DIVIDER LINE === -->
-    <line x1="880" y1="95" x2="880" y2="265"
-          stroke="#ffffff" stroke-opacity="0.07" stroke-width="1"/>
+    <!-- ── EQ CENTRAL GLOWING CORE ── -->
+    <circle cx="1065" cy="182" r="32" fill="url(#core-g)" filter="url(#core-f)"/>
+    <circle cx="1065" cy="182" r="15" fill="url(#core-g)"/>
+    <circle cx="1065" cy="182" r="5"  fill="#ffffff" filter="url(#stf)" opacity="0.96"/>
 
-    <!-- === LEFT SIDE: BRANDING === -->
-    <g transform="translate(78, 0)">
+    <!-- ════════════════════════════════════════════════ -->
+    <!--  LAYER 8 · STAR FIELD                           -->
+    <!-- ════════════════════════════════════════════════ -->
+    <g filter="url(#stf)" opacity="0.80">
+      <circle cx="68"  cy="26"  r="0.9" fill="#fff"    opacity="0.55"/>
+      <circle cx="182" cy="46"  r="0.8" fill="#fff"    opacity="0.40"/>
+      <circle cx="292" cy="20"  r="1.1" fill="#00e5ff" opacity="0.58"/>
+      <circle cx="350" cy="68"  r="0.7" fill="#fff"    opacity="0.44"/>
+      <circle cx="492" cy="34"  r="0.9" fill="#fff"    opacity="0.52"/>
+      <circle cx="560" cy="15"  r="0.8" fill="#a78bfa" opacity="0.50"/>
+      <circle cx="630" cy="52"  r="0.7" fill="#fff"    opacity="0.38"/>
+      <circle cx="712" cy="30"  r="1.0" fill="#fff"    opacity="0.48"/>
+      <circle cx="56"  cy="318" r="0.8" fill="#fff"    opacity="0.30"/>
+      <circle cx="170" cy="338" r="0.9" fill="#a78bfa" opacity="0.37"/>
+      <circle cx="330" cy="326" r="0.7" fill="#fff"    opacity="0.31"/>
+      <circle cx="510" cy="308" r="0.8" fill="#00e5ff" opacity="0.36"/>
+      <circle cx="666" cy="340" r="0.7" fill="#fff"    opacity="0.28"/>
+      <circle cx="774" cy="316" r="1.0" fill="#fff"    opacity="0.36"/>
+      <!-- Bright named stars -->
+      <circle cx="240" cy="36"  r="1.7" fill="#fff"    opacity="0.72"/>
+      <circle cx="614" cy="25"  r="1.5" fill="#00e5ff" opacity="0.68"/>
+      <circle cx="147" cy="304" r="1.3" fill="#e91e8c" opacity="0.55"/>
+      <circle cx="460" cy="22"  r="1.2" fill="#a78bfa" opacity="0.60"/>
+    </g>
 
-      <!-- Tagline pill background -->
-      <rect x="-2" y="84" width="262" height="26" rx="13"
-            fill="#9bd9dc" fill-opacity="0.10"/>
+    <!-- ════════════════════════════════════════════════ -->
+    <!--  LAYER 9 · LEFT SIDE BRANDING                   -->
+    <!-- ════════════════════════════════════════════════ -->
+    <g transform="translate(72, 0)">
 
-      <!-- Tagline text -->
-      <text x="10" y="102"
+      <!-- Subtle ambient card behind wordmark -->
+      <rect x="-10" y="134" width="548" height="112" rx="18"
+            fill="#7c3aed" fill-opacity="0.055"/>
+
+      <!-- Tagline -->
+      <text x="0" y="107"
             font-family="'Segoe UI', -apple-system, sans-serif"
-            font-size="12.5" font-weight="700" letter-spacing="3.5"
-            fill="#9bd9dc">YOUR MUSIC. YOUR ATMOSPHERE.</text>
+            font-size="11.5" font-weight="700" letter-spacing="4.5"
+            fill="#00e5ff" opacity="0.92">YOUR MUSIC. YOUR ATMOSPHERE.</text>
 
-      <!-- Wordmark "Sonoglow" -->
-      <text x="-5" y="214"
-            font-family="'Segoe UI', Georgia, -apple-system, sans-serif"
-            font-size="106" font-weight="200" letter-spacing="-4"
-            fill="url(#wordmark-grad)">Sonoglow</text>
+      <!-- Wordmark: purple halo glow layer -->
+      <text x="-5" y="216"
+            font-family="'Segoe UI', Georgia, serif"
+            font-size="108" font-weight="200" letter-spacing="-5"
+            fill="#8b5cf6" opacity="0.28"
+            filter="url(#halo)">Sonoglow</text>
+      <!-- Wordmark: chromatic aberration layer -->
+      <text x="-5" y="216"
+            font-family="'Segoe UI', Georgia, serif"
+            font-size="108" font-weight="200" letter-spacing="-5"
+            fill="url(#wg)"
+            filter="url(#chroma)">Sonoglow</text>
 
       <!-- Subtitle -->
-      <text x="2" y="272"
+      <text x="1" y="270"
             font-family="'Segoe UI', -apple-system, sans-serif"
-            font-size="21" font-weight="400" letter-spacing="0.3"
-            fill="#c5b1e7" opacity="0.90">An immersive music player for Windows.</text>
+            font-size="20.5" font-weight="400" letter-spacing="0.2"
+            fill="#a78bfa" opacity="0.88">An immersive music player for Windows.</text>
 
-      <!-- Accent underline (gradient) -->
-      <path d="M2 300 h160"
-            stroke="url(#accent-line)"
-            stroke-width="3" stroke-linecap="round"/>
+      <!-- Gradient underline -->
+      <path d="M 1 296 h 218" stroke="url(#ulg)" stroke-width="2.5" stroke-linecap="round"/>
 
-      <!-- Badge: Open Source -->
-      <g transform="translate(0, 318)">
-        <rect width="108" height="22" rx="11" fill="#ffffff" fill-opacity="0.07"/>
-        <text x="12" y="15.5"
-              font-family="'Segoe UI', -apple-system, sans-serif"
-              font-size="11" font-weight="600" letter-spacing="0.5"
-              fill="#9bd9dc">⚡ Open Source</text>
-      </g>
-      <g transform="translate(120, 318)">
-        <rect width="114" height="22" rx="11" fill="#ffffff" fill-opacity="0.07"/>
-        <text x="12" y="15.5"
-              font-family="'Segoe UI', -apple-system, sans-serif"
-              font-size="11" font-weight="600" letter-spacing="0.5"
-              fill="#ffba9b">🎵 YouTube Music</text>
-      </g>
-      <g transform="translate(246, 318)">
-        <rect width="100" height="22" rx="11" fill="#ffffff" fill-opacity="0.07"/>
-        <text x="12" y="15.5"
-              font-family="'Segoe UI', -apple-system, sans-serif"
-              font-size="11" font-weight="600" letter-spacing="0.5"
-              fill="#e8d5ff">🖥 Windows 10/11</text>
-      </g>
+      <!-- ── Feature badge pills ── -->
+      <rect x="0"   y="312" width="106" height="22" rx="11"
+            fill="#00e5ff" fill-opacity="0.08"
+            stroke="#00e5ff" stroke-width="0.6" stroke-opacity="0.38"/>
+      <text x="11" y="327" font-family="'Segoe UI', sans-serif"
+            font-size="10.5" font-weight="600" letter-spacing="0.3"
+            fill="#00e5ff">⚡ Open Source</text>
 
+      <rect x="118" y="312" width="122" height="22" rx="11"
+            fill="#e91e8c" fill-opacity="0.08"
+            stroke="#e91e8c" stroke-width="0.6" stroke-opacity="0.38"/>
+      <text x="129" y="327" font-family="'Segoe UI', sans-serif"
+            font-size="10.5" font-weight="600" letter-spacing="0.3"
+            fill="#e91e8c">🎵 YouTube Music</text>
+
+      <rect x="252" y="312" width="110" height="22" rx="11"
+            fill="#a78bfa" fill-opacity="0.08"
+            stroke="#a78bfa" stroke-width="0.6" stroke-opacity="0.38"/>
+      <text x="263" y="327" font-family="'Segoe UI', sans-serif"
+            font-size="10.5" font-weight="600" letter-spacing="0.3"
+            fill="#a78bfa">🖥 Win 10 / 11</text>
     </g>
 
-    <!-- === BORDER GLOW (inner stroke) === -->
-    <rect width="1280" height="360" rx="22"
-          fill="none"
-          stroke="url(#wordmark-grad)"
-          stroke-width="1"
-          stroke-opacity="0.14"/>
+    <!-- ════════════════════════════════════════════════ -->
+    <!--  LAYER 10 · BORDER + CORNER ACCENTS             -->
+    <!-- ════════════════════════════════════════════════ -->
+    <!-- Subtle border glow -->
+    <rect width="1280" height="360" rx="22" fill="none"
+          stroke="#a78bfa" stroke-width="1" stroke-opacity="0.16"/>
+
+    <!-- TL corner — cyan double bracket -->
+    <path d="M 0 66 L 0 22 Q 0 0 22 0 L 66 0"
+          fill="none" stroke="#00e5ff" stroke-width="2.2"
+          stroke-opacity="0.54" stroke-linecap="round"/>
+    <path d="M 0 50 L 0 22 Q 0 0 22 0 L 50 0"
+          fill="none" stroke="#00e5ff" stroke-width="0.8"
+          stroke-opacity="0.26" stroke-linecap="round"/>
+
+    <!-- BR corner — magenta double bracket -->
+    <path d="M 1280 294 L 1280 338 Q 1280 360 1258 360 L 1214 360"
+          fill="none" stroke="#e91e8c" stroke-width="2.2"
+          stroke-opacity="0.54" stroke-linecap="round"/>
+    <path d="M 1280 310 L 1280 338 Q 1280 360 1258 360 L 1230 360"
+          fill="none" stroke="#e91e8c" stroke-width="0.8"
+          stroke-opacity="0.26" stroke-linecap="round"/>
+
+    <!-- TR corner — purple subtle -->
+    <path d="M 1214 0 L 1258 0 Q 1280 0 1280 22 L 1280 60"
+          fill="none" stroke="#a78bfa" stroke-width="1.2"
+          stroke-opacity="0.30" stroke-linecap="round"/>
+
+    <!-- BL corner — cyan subtle -->
+    <path d="M 66 360 L 22 360 Q 0 360 0 338 L 0 294"
+          fill="none" stroke="#00e5ff" stroke-width="1.2"
+          stroke-opacity="0.26" stroke-linecap="round"/>
 
   </g>
 </svg>
