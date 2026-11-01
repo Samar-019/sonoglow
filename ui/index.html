@@ -4,10 +4,16 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="color-scheme" content="dark"><title>Sonoglow</title>
   <link rel="icon" href="assets/icon.png"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="scene.css"><link rel="stylesheet" href="modes.css"><link rel="stylesheet" href="readability.css"><link rel="stylesheet" href="reference.css"><link rel="stylesheet" href="celestial.css">
-  <script src="assets/lucide.min.js" defer></script><script src="timing.js" defer></script><script src="gestures.js" defer></script><script src="carousel.js" defer></script><script src="app.js" defer></script><script src="celestial.js" defer></script>
+  <script src="assets/lucide.min.js" defer></script><script src="timing.js" defer></script><script src="gestures.js" defer></script><script src="carousel.js" defer></script><script src="app.js" defer></script><script src="celestial.js" defer></script><script src="visualizer.js" defer></script>
 </head>
 <body>
   <div id="backdrop" aria-hidden="true"><div class="landscape"></div><div id="art-backdrop"></div><img id="custom-image" alt=""><video id="custom-video" muted loop playsinline></video><div class="backdrop-tint"></div><div class="grain"></div></div>
+  <!-- ░ Cosmic Stardust – full-screen floating particles -->
+  <canvas id="main-stardust" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;opacity:0.6;"></canvas>
+
+  <!-- ░ Soundwave + EQ Visualizer – above player dock -->
+  <canvas id="main-soundwave" aria-hidden="true" style="position:fixed;bottom:90px;left:50%;transform:translateX(-50%);width:min(920px,90vw);height:110px;pointer-events:none;z-index:3;opacity:0.8;mask-image:linear-gradient(to right,transparent,black 15%,black 85%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,black 15%,black 85%,transparent);"></canvas>
+
   <div id="edge-light" aria-hidden="true"></div>
   <header class="topbar interactive">
     <button class="wordmark" id="home-button" aria-label="Sonoglow home"><img src="assets/icon.png" class="brand-avatar" alt="Sonoglow"><span>Sonoglow</span></button>
