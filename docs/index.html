@@ -2449,9 +2449,13 @@ npm start
 
         if (!btn || !card) return;
 
-        const toggle = () => {
+        const toggle = async (e) => {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
           if (!this.isPlaying) {
-            this.start();
+            await this.start();
             card.classList.add('playing');
             if (badge) {
               badge.textContent = 'Playing 432Hz Ambient';
@@ -2473,42 +2477,54 @@ npm start
           }
         };
 
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          toggle();
+        btn.addEventListener('click', toggle);
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('#core-orb-btn')) return;
+          toggle(e);
         });
-        card.addEventListener('click', toggle);
       },
 
-      start() {
+      async start() {
         try {
           const AudioContextClass = window.AudioContext || window.webkitAudioContext;
           if (!AudioContextClass) return;
-          if (!this.ctx) this.ctx = new AudioContextClass();
-          if (this.ctx.state === 'suspended') this.ctx.resume();
+          if (!this.ctx || this.ctx.state === 'closed') {
+            this.ctx = new AudioContextClass();
+          }
+          if (this.ctx.state === 'suspended') {
+            await this.ctx.resume();
+          }
 
+          const now = this.ctx.currentTime;
           this.masterGain = this.ctx.createGain();
-          this.masterGain.gain.setValueAtTime(0.0001, this.ctx.currentTime);
-          this.masterGain.gain.exponentialRampToValueAtTime(0.18, this.ctx.currentTime + 1.5);
+          this.masterGain.gain.setValueAtTime(0.001, now);
+          this.masterGain.gain.exponentialRampToValueAtTime(0.45, now + 0.6);
           this.masterGain.connect(this.ctx.destination);
 
-          // Ethereal chord frequencies: F3, Ab3, C4, Eb4 (Atmospheric F minor 7th)
-          const frequencies = [174.61, 207.65, 261.63, 311.13];
+          // Authentic 432Hz Sacred Geometric Harmonics (A=432Hz, E=324Hz, C#=270Hz/540Hz)
+          const voices = [
+            { freq: 216.00, type: 'sine', gain: 0.35, detune: -3 },
+            { freq: 324.00, type: 'triangle', gain: 0.28, detune: 2 },
+            { freq: 432.00, type: 'sine', gain: 0.40, detune: 0 },
+            { freq: 540.00, type: 'sine', gain: 0.22, detune: 4 },
+            { freq: 864.00, type: 'sine', gain: 0.12, detune: -2 }
+          ];
+
           this.oscillators = [];
 
-          frequencies.forEach((freq, idx) => {
+          voices.forEach((v) => {
             const osc = this.ctx.createOscillator();
             const gain = this.ctx.createGain();
 
-            osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
-            osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-            osc.detune.setValueAtTime((idx - 1.5) * 4.2, this.ctx.currentTime);
+            osc.type = v.type;
+            osc.frequency.setValueAtTime(v.freq, now);
+            osc.detune.setValueAtTime(v.detune, now);
 
-            gain.gain.setValueAtTime(0.25 / frequencies.length, this.ctx.currentTime);
+            gain.gain.setValueAtTime(v.gain, now);
 
             osc.connect(gain);
             gain.connect(this.masterGain);
-            osc.start();
+            osc.start(now);
 
             this.oscillators.push(osc);
           });
@@ -2521,15 +2537,16 @@ npm start
 
       stop() {
         if (!this.masterGain || !this.ctx) return;
-        this.masterGain.gain.setValueAtTime(this.masterGain.gain.value, this.ctx.currentTime);
-        this.masterGain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.7);
+        const now = this.ctx.currentTime;
+        this.masterGain.gain.setValueAtTime(Math.max(0.001, this.masterGain.gain.value), now);
+        this.masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
         setTimeout(() => {
           this.oscillators.forEach(osc => {
             try { osc.stop(); osc.disconnect(); } catch (e) {}
           });
           this.oscillators = [];
           this.isPlaying = false;
-        }, 750);
+        }, 450);
       }
     };
 
