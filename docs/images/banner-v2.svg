@@ -1,206 +1,313 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360">
   <defs>
-    <!-- Deep cosmic background gradient -->
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%"   stop-color="#05060e"/>
-      <stop offset="30%"  stop-color="#0c0e1f"/>
-      <stop offset="65%"  stop-color="#1a1035"/>
-      <stop offset="100%" stop-color="#3d1545"/>
+    <!-- Sky gradient -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#0e1420"/>
+      <stop offset="55%" stop-color="#0a0f1a"/>
+      <stop offset="100%" stop-color="#060a10"/>
     </linearGradient>
 
-    <!-- Right warm aurora glow -->
-    <radialGradient id="aurora-right" cx="85%" cy="55%" r="48%">
-      <stop offset="0%"   stop-color="#ff9a6c" stop-opacity="0.42"/>
-      <stop offset="40%"  stop-color="#d4a0f5" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#ff9a6c" stop-opacity="0"/>
+    <!-- Atmospheric mist glow -->
+    <radialGradient id="mist" cx="58%" cy="38%" r="52%">
+      <stop offset="0%"  stop-color="#2a3d60" stop-opacity="0.45"/>
+      <stop offset="60%" stop-color="#1a2a45" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#0a0f1a" stop-opacity="0"/>
     </radialGradient>
 
-    <!-- Left subtle cool glow -->
-    <radialGradient id="aurora-left" cx="10%" cy="40%" r="38%">
-      <stop offset="0%"   stop-color="#3ecfde" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#3ecfde" stop-opacity="0"/>
+    <!-- Warm glow right -->
+    <radialGradient id="warm-right" cx="92%" cy="60%" r="35%">
+      <stop offset="0%"  stop-color="#3b2060" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#3b2060" stop-opacity="0"/>
     </radialGradient>
 
-    <!-- Center ambient pulse -->
-    <radialGradient id="center-pulse" cx="50%" cy="50%" r="40%">
-      <stop offset="0%"   stop-color="#7c5cbf" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#7c5cbf" stop-opacity="0"/>
+    <!-- Album art: cosmic orb bg -->
+    <radialGradient id="orb-bg" cx="42%" cy="38%" r="60%">
+      <stop offset="0%"  stop-color="#1c1c50"/>
+      <stop offset="60%" stop-color="#0d0d28"/>
+      <stop offset="100%" stop-color="#060612"/>
     </radialGradient>
 
-    <!-- Wordmark gradient fill -->
-    <linearGradient id="wordmark-grad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#ffffff"/>
-      <stop offset="60%"  stop-color="#e8deff"/>
-      <stop offset="100%" stop-color="#c8b8f8"/>
+    <!-- Play button -->
+    <radialGradient id="play-btn" cx="40%" cy="35%" r="65%">
+      <stop offset="0%"  stop-color="#9d6ff7"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </radialGradient>
+
+    <!-- Progress fill -->
+    <linearGradient id="prog" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"  stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
     </linearGradient>
 
-    <!-- Accent line gradient -->
-    <linearGradient id="accent-line" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#ff9a6c"/>
-      <stop offset="60%"  stop-color="#ff6fa3"/>
-      <stop offset="100%" stop-color="#ff6fa3" stop-opacity="0"/>
+    <!-- Topbar gradient -->
+    <linearGradient id="topbar-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#161824" stop-opacity="0.97"/>
+      <stop offset="100%" stop-color="#12141f" stop-opacity="0.97"/>
     </linearGradient>
 
-    <!-- EQ bar glow filter -->
-    <filter id="eq-glow" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <!-- Controls bar -->
+    <linearGradient id="ctrl-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#1c1f30" stop-opacity="0.93"/>
+      <stop offset="100%" stop-color="#151727" stop-opacity="0.93"/>
+    </linearGradient>
+
+    <!-- Star glow -->
+    <filter id="sglow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="1.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
 
-    <!-- Star glow filter -->
-    <filter id="star-glow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="1.5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <!-- Orb soft glow -->
+    <filter id="orb-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
 
-    <!-- Clip to rounded rect -->
-    <clipPath id="round-clip">
-      <rect width="1280" height="360" rx="22"/>
+    <!-- Clip: rounded banner -->
+    <clipPath id="banner-clip">
+      <rect width="1280" height="360" rx="14"/>
     </clipPath>
   </defs>
 
-  <g clip-path="url(#round-clip)">
+  <g clip-path="url(#banner-clip)">
 
-    <!-- === BACKGROUND LAYERS === -->
-    <rect width="1280" height="360" fill="url(#bg)"/>
-    <rect width="1280" height="360" fill="url(#aurora-right)"/>
-    <rect width="1280" height="360" fill="url(#aurora-left)"/>
-    <rect width="1280" height="360" fill="url(#center-pulse)"/>
+    <!-- ═══════════════════════════════════════ -->
+    <!-- BACKGROUND: Atmospheric Mountain Scene  -->
+    <!-- ═══════════════════════════════════════ -->
+    <rect width="1280" height="360" fill="url(#sky)"/>
 
-    <!-- === STAR FIELD === -->
-    <g filter="url(#star-glow)" opacity="0.75">
-      <!-- small stars -->
-      <circle cx="420"  cy="32"  r="1.1" fill="#fff" opacity="0.7"/>
-      <circle cx="610"  cy="18"  r="0.9" fill="#fff" opacity="0.6"/>
-      <circle cx="750"  cy="55"  r="1.3" fill="#fff" opacity="0.8"/>
-      <circle cx="870"  cy="28"  r="0.8" fill="#fff" opacity="0.5"/>
-      <circle cx="1020" cy="48"  r="1.2" fill="#fff" opacity="0.7"/>
-      <circle cx="1150" cy="22"  r="1.0" fill="#fff" opacity="0.6"/>
-      <circle cx="1240" cy="70"  r="0.9" fill="#fff" opacity="0.5"/>
-      <circle cx="500"  cy="80"  r="0.7" fill="#d4c8ff" opacity="0.6"/>
-      <circle cx="680"  cy="300" r="0.8" fill="#fff" opacity="0.4"/>
-      <circle cx="820"  cy="320" r="1.0" fill="#fff" opacity="0.5"/>
-      <circle cx="950"  cy="295" r="0.7" fill="#d4c8ff" opacity="0.4"/>
-      <circle cx="1100" cy="310" r="0.9" fill="#fff" opacity="0.5"/>
-      <circle cx="1210" cy="280" r="1.1" fill="#fff" opacity="0.6"/>
-      <circle cx="390"  cy="340" r="0.8" fill="#fff" opacity="0.3"/>
-      <!-- accent coloured stars -->
-      <circle cx="780"  cy="40"  r="1.4" fill="#9bd9dc" opacity="0.65"/>
-      <circle cx="1060" cy="60"  r="1.1" fill="#ffba9b" opacity="0.55"/>
-      <circle cx="460"  cy="330" r="1.2" fill="#c5b1e7" opacity="0.5"/>
+    <!-- Far mountains -->
+    <path d="M0,260 L90,195 L170,230 L270,162 L370,208 L450,148 L540,192 L620,155 L710,198 L800,155 L890,195 L980,162 L1070,200 L1160,170 L1250,198 L1280,185 L1280,360 L0,360Z"
+          fill="#1c2236" opacity="0.7"/>
+    <!-- Mid mountains -->
+    <path d="M0,295 L120,245 L230,278 L330,228 L450,265 L530,218 L640,258 L740,225 L840,262 L940,232 L1040,268 L1140,240 L1240,272 L1280,255 L1280,360 L0,360Z"
+          fill="#111827" opacity="0.85"/>
+    <!-- Forest treeline -->
+    <path d="M0,318 L80,305 L160,312 L240,300 L360,310 L480,298 L600,308 L720,296 L840,307 L960,295 L1080,308 L1200,298 L1280,306 L1280,360 L0,360Z"
+          fill="#0a0d14"/>
+    <!-- Ground -->
+    <rect x="0" y="338" width="1280" height="22" fill="#070a10"/>
+
+    <!-- Atmospheric glow overlays -->
+    <rect width="1280" height="360" fill="url(#mist)"/>
+    <rect width="1280" height="360" fill="url(#warm-right)"/>
+
+    <!-- Stars -->
+    <g filter="url(#sglow)">
+      <circle cx="95"  cy="28"  r="1.0" fill="#fff" opacity="0.70"/>
+      <circle cx="188" cy="48"  r="0.8" fill="#fff" opacity="0.55"/>
+      <circle cx="310" cy="22"  r="1.1" fill="#fff" opacity="0.65"/>
+      <circle cx="445" cy="38"  r="0.9" fill="#fff" opacity="0.60"/>
+      <circle cx="560" cy="18"  r="1.2" fill="#9bd9dc" opacity="0.60"/>
+      <circle cx="680" cy="42"  r="0.8" fill="#fff" opacity="0.55"/>
+      <circle cx="820" cy="24"  r="1.0" fill="#fff" opacity="0.70"/>
+      <circle cx="940" cy="50"  r="0.9" fill="#c5b1e7" opacity="0.60"/>
+      <circle cx="1060" cy="28" r="1.1" fill="#fff" opacity="0.65"/>
+      <circle cx="1180" cy="44" r="0.8" fill="#fff" opacity="0.55"/>
+      <circle cx="1245" cy="20" r="1.0" fill="#fff" opacity="0.65"/>
+      <circle cx="760"  cy="62" r="0.7" fill="#fff" opacity="0.45"/>
+      <circle cx="1120" cy="60" r="0.9" fill="#fff" opacity="0.50"/>
     </g>
 
-    <!-- === SUBTLE HORIZONTAL SCAN LINES === -->
-    <rect width="1280" height="360" fill="url(#bg)" opacity="0.04"
-          style="background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.02) 3px, rgba(255,255,255,0.02) 4px)"/>
+    <!-- Dark readability veil -->
+    <rect width="1280" height="360" fill="#000000" opacity="0.30"/>
 
-    <!-- === RIGHT SIDE: EQ VISUALISER === -->
-    <g filter="url(#eq-glow)">
-      <!-- Glowing EQ bars (varied heights for rhythm feel) -->
-      <g stroke-linecap="round" stroke-width="5.5">
-        <line x1="942" y1="212" x2="942" y2="188" stroke="#c5b1e7" stroke-opacity="0.55"/>
-        <line x1="962" y1="220" x2="962" y2="156" stroke="#c5b1e7" stroke-opacity="0.65"/>
-        <line x1="982" y1="228" x2="982" y2="132" stroke="#d4c0f8" stroke-opacity="0.75"/>
-        <line x1="1002" y1="218" x2="1002" y2="162" stroke="#d4c0f8" stroke-opacity="0.70"/>
-        <line x1="1022" y1="232" x2="1022" y2="108" stroke="#e8d5ff" stroke-opacity="0.80"/>
-        <line x1="1042" y1="222" x2="1042" y2="138" stroke="#e8d5ff" stroke-opacity="0.75"/>
-        <line x1="1062" y1="226" x2="1062" y2="154" stroke="#d4c0f8" stroke-opacity="0.70"/>
-        <line x1="1082" y1="215" x2="1082" y2="175" stroke="#c5b1e7" stroke-opacity="0.60"/>
-        <line x1="1102" y1="220" x2="1102" y2="185" stroke="#c5b1e7" stroke-opacity="0.50"/>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAB BAR                                 -->
+    <!-- ═══════════════════════════════════════ -->
+    <rect width="1280" height="48" fill="url(#topbar-bg)"/>
+    <rect x="0" y="47" width="1280" height="1" fill="#ffffff" fill-opacity="0.07"/>
+
+    <!-- Traffic lights -->
+    <circle cx="22" cy="24" r="6.5" fill="#ff5f57"/>
+    <circle cx="42" cy="24" r="6.5" fill="#febc2e"/>
+    <circle cx="62" cy="24" r="6.5" fill="#28c840"/>
+
+    <!-- Active tab pill -->
+    <rect x="90" y="11" width="192" height="26" rx="13" fill="#252737"/>
+    <!-- Active dot -->
+    <circle cx="106" cy="24" r="4" fill="#4ade80"/>
+    <text x="118" y="28.5"
+          font-family="'Segoe UI', system-ui, sans-serif"
+          font-size="12.5" font-weight="600" fill="#ffffff">Live Interactive Player</text>
+
+    <!-- Inactive tabs -->
+    <text x="296" y="28.5" font-family="'Segoe UI', system-ui, sans-serif" font-size="12.5" fill="#6b7280">Album Carousel</text>
+    <text x="426" y="28.5" font-family="'Segoe UI', system-ui, sans-serif" font-size="12.5" fill="#6b7280">Cinema Lyrics</text>
+    <text x="544" y="28.5" font-family="'Segoe UI', system-ui, sans-serif" font-size="12.5" fill="#6b7280">Cover + Lyrics</text>
+    <text x="662" y="28.5" font-family="'Segoe UI', system-ui, sans-serif" font-size="12.5" fill="#6b7280">Music Discovery</text>
+
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- IN-APP TOPBAR (brand + badge + time)    -->
+    <!-- ═══════════════════════════════════════ -->
+    <!-- Brand mark -->
+    <text x="20" y="76" font-family="'Segoe UI', system-ui, sans-serif"
+          font-size="13" font-weight="700" fill="#c5b1e7">a</text>
+    <text x="33" y="76" font-family="'Segoe UI', system-ui, sans-serif"
+          font-size="13" font-weight="600" fill="#ffffff">Sonoglow</text>
+
+    <!-- YouTube Music pill (centered) -->
+    <rect x="548" y="58" width="184" height="24" rx="12"
+          fill="#ffffff" fill-opacity="0.07"
+          stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
+    <text x="568" y="75" font-family="'Segoe UI', system-ui, sans-serif"
+          font-size="11.5" fill="#d1d5db">YouTube Music · Lossless Stream</text>
+
+    <!-- Clock -->
+    <text x="1215" y="76" font-family="'Segoe UI', system-ui, sans-serif"
+          font-size="12.5" font-weight="500" fill="#9ca3af" text-anchor="end">09:18 AM</text>
+
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- ALBUM ART                               -->
+    <!-- ═══════════════════════════════════════ -->
+    <g transform="translate(20, 92)">
+      <!-- Art box shadow -->
+      <rect x="2" y="2" width="154" height="154" rx="11" fill="#000000" opacity="0.5"/>
+      <!-- Art bg -->
+      <rect width="154" height="154" rx="11" fill="url(#orb-bg)"/>
+
+      <!-- Planet body -->
+      <circle cx="77" cy="74" r="44" fill="#08082a"/>
+      <!-- Planet shading -->
+      <circle cx="77" cy="74" r="40" fill="#0d0d30"/>
+      <ellipse cx="70" cy="64" rx="22" ry="16" fill="#1a1a50" opacity="0.5"/>
+      <!-- Inner star specks on planet -->
+      <circle cx="60" cy="58" r="0.9" fill="#fff" opacity="0.7"/>
+      <circle cx="92" cy="50" r="0.8" fill="#fff" opacity="0.5"/>
+      <circle cx="102" cy="82" r="1"   fill="#fff" opacity="0.6"/>
+      <circle cx="58" cy="88" r="0.7"  fill="#fff" opacity="0.4"/>
+
+      <!-- Orbital rings (with filter glow) -->
+      <g filter="url(#orb-glow)">
+        <!-- Cyan ring -->
+        <ellipse cx="77" cy="76" rx="60" ry="21"
+                 fill="none" stroke="#00e5ff" stroke-width="2.2"
+                 stroke-opacity="0.88" transform="rotate(-22,77,76)"/>
+        <!-- Purple ring -->
+        <ellipse cx="77" cy="76" rx="52" ry="19"
+                 fill="none" stroke="#a855f7" stroke-width="2.2"
+                 stroke-opacity="0.88" transform="rotate(28,77,76)"/>
+        <!-- Pink ring -->
+        <ellipse cx="77" cy="76" rx="42" ry="14"
+                 fill="none" stroke="#ec4899" stroke-width="1.8"
+                 stroke-opacity="0.75" transform="rotate(-12,77,76)"/>
       </g>
-      <!-- Soft reflection/mirror of EQ bars below (dim) -->
-      <g stroke-linecap="round" stroke-width="5.5" opacity="0.18">
-        <line x1="942" y1="238" x2="942" y2="250" stroke="#c5b1e7"/>
-        <line x1="962" y1="238" x2="962" y2="264" stroke="#c5b1e7"/>
-        <line x1="982" y1="238" x2="982" y2="274" stroke="#d4c0f8"/>
-        <line x1="1002" y1="238" x2="1002" y2="268" stroke="#d4c0f8"/>
-        <line x1="1022" y1="238" x2="1022" y2="282" stroke="#e8d5ff"/>
-        <line x1="1042" y1="238" x2="1042" y2="272" stroke="#e8d5ff"/>
-        <line x1="1062" y1="238" x2="1062" y2="266" stroke="#d4c0f8"/>
-        <line x1="1082" y1="238" x2="1082" y2="254" stroke="#c5b1e7"/>
-        <line x1="1102" y1="238" x2="1102" y2="248" stroke="#c5b1e7"/>
-      </g>
+
+      <!-- Track info below art -->
+      <text x="0" y="172" font-family="'Segoe UI', system-ui, sans-serif"
+            font-size="12.5" font-weight="700" fill="#ffffff">Sonoglow (Celestial Atm...</text>
+      <text x="0" y="188" font-family="'Segoe UI', system-ui, sans-serif"
+            font-size="11" fill="#9ca3af">Chvrches · Spatial Audio</text>
     </g>
 
-    <!-- === DECORATIVE RING ARC (right side) === -->
-    <circle cx="1130" cy="180" r="108"
-            fill="none"
-            stroke="#c5b1e7"
-            stroke-width="0.8"
-            stroke-opacity="0.18"
-            stroke-dasharray="6 10"/>
-    <circle cx="1130" cy="180" r="148"
-            fill="none"
-            stroke="#ffba9b"
-            stroke-width="0.6"
-            stroke-opacity="0.10"
-            stroke-dasharray="3 16"/>
 
-    <!-- === VERTICAL DIVIDER LINE === -->
-    <line x1="880" y1="95" x2="880" y2="265"
-          stroke="#ffffff" stroke-opacity="0.07" stroke-width="1"/>
+    <!-- ═══════════════════════════════════════ -->
+    <!-- LYRICS SECTION                          -->
+    <!-- ═══════════════════════════════════════ -->
+    <g transform="translate(200, 90)">
+      <!-- Previous lyric -->
+      <text x="0" y="50" font-family="'Segoe UI', system-ui, sans-serif"
+            font-size="15.5" fill="#4b5563">Held in the gravity of forgotten skies...</text>
 
-    <!-- === LEFT SIDE: BRANDING === -->
-    <g transform="translate(78, 0)">
+      <!-- Current lyric (active, bright) -->
+      <text x="0" y="88" font-family="'Segoe UI', system-ui, sans-serif"
+            font-size="23" font-weight="700" fill="#ffffff">We chase the Sonoglow into the deep</text>
+      <text x="0" y="118" font-family="'Segoe UI', system-ui, sans-serif"
+            font-size="23" font-weight="700" fill="#ffffff">night...</text>
 
-      <!-- Tagline pill background -->
-      <rect x="-2" y="84" width="262" height="26" rx="13"
-            fill="#9bd9dc" fill-opacity="0.10"/>
+      <!-- Next lyric -->
+      <text x="0" y="152" font-family="'Segoe UI', system-ui, sans-serif"
+            font-size="15.5" fill="#4b5563">Echoes of soundwaves resonating forever...</text>
 
-      <!-- Tagline text -->
-      <text x="10" y="102"
-            font-family="'Segoe UI', -apple-system, sans-serif"
-            font-size="12.5" font-weight="700" letter-spacing="3.5"
-            fill="#9bd9dc">YOUR MUSIC. YOUR ATMOSPHERE.</text>
-
-      <!-- Wordmark "Sonoglow" -->
-      <text x="-5" y="214"
-            font-family="'Segoe UI', Georgia, -apple-system, sans-serif"
-            font-size="106" font-weight="200" letter-spacing="-4"
-            fill="url(#wordmark-grad)">Sonoglow</text>
-
-      <!-- Subtitle -->
-      <text x="2" y="272"
-            font-family="'Segoe UI', -apple-system, sans-serif"
-            font-size="21" font-weight="400" letter-spacing="0.3"
-            fill="#c5b1e7" opacity="0.90">An immersive music player for Windows.</text>
-
-      <!-- Accent underline (gradient) -->
-      <path d="M2 300 h160"
-            stroke="url(#accent-line)"
-            stroke-width="3" stroke-linecap="round"/>
-
-      <!-- Badge: Open Source -->
-      <g transform="translate(0, 318)">
-        <rect width="108" height="22" rx="11" fill="#ffffff" fill-opacity="0.07"/>
-        <text x="12" y="15.5"
-              font-family="'Segoe UI', -apple-system, sans-serif"
-              font-size="11" font-weight="600" letter-spacing="0.5"
-              fill="#9bd9dc">⚡ Open Source</text>
-      </g>
-      <g transform="translate(120, 318)">
-        <rect width="114" height="22" rx="11" fill="#ffffff" fill-opacity="0.07"/>
-        <text x="12" y="15.5"
-              font-family="'Segoe UI', -apple-system, sans-serif"
-              font-size="11" font-weight="600" letter-spacing="0.5"
-              fill="#ffba9b">🎵 YouTube Music</text>
-      </g>
-      <g transform="translate(246, 318)">
-        <rect width="100" height="22" rx="11" fill="#ffffff" fill-opacity="0.07"/>
-        <text x="12" y="15.5"
-              font-family="'Segoe UI', -apple-system, sans-serif"
-              font-size="11" font-weight="600" letter-spacing="0.5"
-              fill="#e8d5ff">🖥 Windows 10/11</text>
-      </g>
-
+      <!-- Live synced badge -->
+      <text x="0" y="178" font-family="'Segoe UI', system-ui, sans-serif"
+            font-size="12" fill="#4ade80">♪ Live Synced</text>
+      <text x="90" y="178" font-family="'Segoe UI', system-ui, sans-serif"
+            font-size="12" fill="#6b7280">  LRCLIB Stream</text>
     </g>
 
-    <!-- === BORDER GLOW (inner stroke) === -->
-    <rect width="1280" height="360" rx="22"
-          fill="none"
-          stroke="url(#wordmark-grad)"
-          stroke-width="1"
-          stroke-opacity="0.14"/>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- PLAYER CONTROLS BAR                     -->
+    <!-- ═══════════════════════════════════════ -->
+    <!-- Bar background -->
+    <rect x="20" y="289" width="1240" height="54" rx="27"
+          fill="url(#ctrl-bg)"
+          stroke="#ffffff" stroke-opacity="0.09" stroke-width="1"/>
+
+    <!-- Skip back -->
+    <g transform="translate(48, 305)">
+      <polygon points="18,11 4,0 4,22" fill="#6b7280"/>
+      <rect x="0" y="0" width="3" height="22" rx="1.5" fill="#6b7280"/>
+    </g>
+
+    <!-- Play button -->
+    <circle cx="98" cy="316" r="19" fill="url(#play-btn)"/>
+    <polygon points="93,308 93,324 109,316" fill="#ffffff"/>
+
+    <!-- Skip forward -->
+    <g transform="translate(118, 305)">
+      <polygon points="0,11 14,0 14,22" fill="#6b7280"/>
+      <rect x="15" y="0" width="3" height="22" rx="1.5" fill="#6b7280"/>
+    </g>
+
+    <!-- Spinning album mini disc -->
+    <circle cx="162" cy="316" r="15" fill="#0d0d28" stroke="#7c3aed" stroke-width="1.5"/>
+    <ellipse cx="162" cy="316" rx="11" ry="4"
+             fill="none" stroke="#00e5ff" stroke-width="1.2" stroke-opacity="0.8"
+             transform="rotate(-18,162,316)"/>
+    <circle cx="162" cy="316" r="3.5" fill="#7c3aed" opacity="0.6"/>
+
+    <!-- Track name + source -->
+    <text x="184" y="312" font-family="'Segoe UI', system-ui, sans-serif"
+          font-size="13" font-weight="600" fill="#ffffff">Sonoglow</text>
+    <text x="184" y="327" font-family="'Segoe UI', system-ui, sans-serif"
+          font-size="11.5" fill="#6b7280">YouTube Music</text>
+
+    <!-- Heart icon -->
+    <text x="296" y="321" font-family="'Segoe UI', system-ui, sans-serif"
+          font-size="15" fill="#4b5563">♡</text>
+
+    <!-- Time elapsed -->
+    <text x="324" y="321" font-family="'Segoe UI', system-ui, sans-serif"
+          font-size="12" fill="#9ca3af">1:12</text>
+
+    <!-- Progress bar track -->
+    <rect x="360" y="312" width="740" height="5" rx="2.5" fill="#2d3148"/>
+    <!-- Progress fill -->
+    <rect x="360" y="312" width="222" height="5" rx="2.5" fill="url(#prog)"/>
+    <!-- Thumb dot -->
+    <circle cx="582" cy="314.5" r="7" fill="#a78bfa"/>
+    <circle cx="582" cy="314.5" r="4" fill="#ffffff"/>
+
+    <!-- Duration -->
+    <text x="1112" y="321" font-family="'Segoe UI', system-ui, sans-serif"
+          font-size="12" fill="#9ca3af">3:45</text>
+
+    <!-- Waveform icon -->
+    <g transform="translate(1150, 306)" stroke="#6b7280" stroke-width="1.8" stroke-linecap="round">
+      <line x1="0"  y1="9"  x2="0"  y2="13"/>
+      <line x1="5"  y1="5"  x2="5"  y2="17"/>
+      <line x1="10" y1="7"  x2="10" y2="15"/>
+      <line x1="15" y1="10" x2="15" y2="12"/>
+      <line x1="20" y1="6"  x2="20" y2="16"/>
+    </g>
+
+    <!-- Fullscreen icon -->
+    <g transform="translate(1188, 307)" stroke="#6b7280" stroke-width="1.8"
+       stroke-linecap="round" fill="none">
+      <polyline points="0,5 0,0 5,0"/>
+      <polyline points="16,5 16,0 11,0"/>
+      <polyline points="0,16 0,21 5,21"/>
+      <polyline points="16,16 16,21 11,21"/>
+    </g>
+
+    <!-- ═══ BORDER GLOW ═══ -->
+    <rect width="1280" height="360" rx="14" fill="none"
+          stroke="#7c3aed" stroke-width="1" stroke-opacity="0.20"/>
 
   </g>
 </svg>
